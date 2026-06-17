@@ -36,22 +36,25 @@ const slides = [
   { src: hero16.src, project: "Asia Cup Doha",          client: "Roland Greil" },
 ];
 
-// testimonials (short pull-quotes) — name · role · organisation
+// testimonials, full original wording from Site assets/testimonials.rtf — name · role · organisation
+// `short` is the collapsed teaser shown by default; omitted when the full text is already short enough
 const quotes = [
-  { text: "You were a joy to work with, and a machine. Not many people could have stayed this focused for that long.", name: "Terry Cook", role: "Principal Designer", org: "Woodroffe Basset Design" },
-  { text: "A remarkable level of professionalism and dedication — and for persevering whenever challenges arose.", name: "Mahmoud Hamaky", role: "Executive Producer", org: "Katara Studios" },
-  { text: "Thank you so much for the beautiful lighting, as well as for your exceptional durability!", name: "Malte Joergens", role: "Creative Director", org: "adhoc engineering" },
-  { text: "Truly amazing lights, you did an awesome job!", name: "Kurt Pongratz", role: "TV Director", org: "ORF" },
-  { text: "Thank you for your ambition, your professionalism, and the calm sovereignty you exude throughout the production.", name: "Thomas Stammberger", role: "Director", org: "BR" },
-  { text: "An essential partner at every stage of the process — from the first designs through detailing and development, to on-site direction and delivery.", name: "Adam Scott", role: "Founder", org: "Freestate London" },
-  { text: "Wow, we would never have expected that. Simply amazing — your expertise and commitment made it all possible.", name: "M. Flossmann", role: "Marketing Communication", org: "OCÉ Printing Systems" },
-  { text: "Really crazy on the MA desk, and you have a hugely cool way of working!", name: "Florian Ploder", role: "CEO", org: "PS Eventconsulting" },
-  { text: "The lighting design delivered was amazing — a delight to work with, super professional, friendly, and very reliable.", name: "Anna Rank", role: "Project Manager", org: "Hassell London" },
-  { text: "A great eye for the whole, time and again earning the role of lighting director and programmer — always to everybody's content.", name: "Jogi Foerg", role: "Senior Key Account Manager", org: "PRG Germany" },
-  { text: "Professional, touching, beautiful — despite the short time, an excellent job reaching people on-site and at home.", name: "Felix Finkbeiner", role: "CEO", org: "Plant-for-the-Planet" },
-  { text: "It has always been a pleasure to work with such a refreshing approach to the entertainment design process.", name: "Patrick Dierson", role: "President", org: "Dierson Design Group" },
-  { text: "Deeply grateful for the knowledge shared in an entertaining and professionally unique manner — work we can only recommend.", name: "Hudson Barnes", role: "President", org: "JSAV Mexico & the Caribbean" },
+  { text: "Thanks you! You were a joy to work with and a machine. Not many people could have stayed as focused as you did for that long and it was fun to get to know you. I've had wonderful comments and a lot of that is down to you so congrats and get some rest. Look forward to doing more in the future.", short: "You were a joy to work with, and a machine. Not many people could have stayed this focused for that long.", name: "Terry Cook", role: "Partner / Principal Designer", org: "Woodroffe Basset Design" },
+  { text: "On behalf of Katara Studios Management and myself, I want to express our deepest appreciation and gratitude to each and every one of you. Thank you for believing in our vision, for showcasing a remarkable level of professionalism and dedication, and for persevering when challenges arose.", short: "A remarkable level of professionalism and dedication — and for persevering whenever challenges arose.", name: "Mahmoud Hamaky", role: "Executive Producer / Project Director", org: "Katara Studios" },
+  { text: "Thank you so much for the beautiful lighting as well as for your exceptional durability!", name: "Malte Joergens", role: "Creative Director", org: "adhoc engineering" },
+  { text: "Truly amazing lights, you did an awesome job! Thank you!", name: "Kurt Pongratz", role: "TV Director", org: "ORF" },
+  { text: "Thank you for your ambition, your professionalism and your calm and sovereignty that you exude throughout the production. Thank you so very much, it is so nice that we got to know each other!", short: "Thank you for your ambition, your professionalism, and the calm sovereignty you exude throughout the production.", name: "Thomas Stammberger", role: "Director", org: "BR" },
+  { text: "Michael is an essential partner at all stages of our process, from the first designs, through detailing and development, to on-site direction and delivery.", short: "An essential partner at every stage of the process.", name: "Adam Scott", role: "", org: "Freestate London" },
+  { text: "The unanimous opinion — both from customers and the internal staff — after the event is short and concise: a \"Wow, we would never have expected that. Simply amazing.\" Your expertise and commitment has made this all possible — thanks again!", short: "Wow, we would never have expected that. Simply amazing — your expertise and commitment made it all possible.", name: "M. Flossmann", role: "Marketing Communication", org: "OCÉ Printing Systems" },
+  { text: "Thank you Michi. Was awesome from your side. You're really crazy on the MA Desk and you have a hugely cool way of working! Thank you!", short: "Really crazy on the MA desk, and you have a hugely cool way of working!", name: "Florian Ploder", role: "CEO", org: "PS Eventconsulting" },
+  { text: "The lighting design he delivered was amazing! He was a delight to work with – super professional and friendly and very reliable.", short: "The lighting design delivered was amazing — a delight to work with, super professional, friendly, and very reliable.", name: "Anna Rank", role: "Project Manager", org: "Hassell London" },
+  { text: "His great eye for the whole qualified him many times to the role of a lighting director and programmer which he fulfilled always to everybody's content.", short: "A great eye for the whole, time and again earning the role of lighting director and programmer.", name: "Jogi Foerg", role: "Senior Key Account Manager", org: "PRG Germany" },
+  { text: "Professional, touching, beautiful. Despite the short time, you have done an excellent job reaching out to people - whether on-site or at home before the live event. We thank you very much for your great effort. Thank you for your professionalism. We will recommend you with full conviction!", short: "Professional, touching, beautiful — despite the short time, an excellent job reaching people on-site and at home.", name: "Felix Finkbeiner", role: "CEO", org: "Plant-for-the-Planet Foundation" },
+  { text: "It has always been a pleasure to work with Mr. Kuehbandner's refreshing approach to the entertainment design process.", short: "It has always been a pleasure to work with such a refreshing approach to the entertainment design process.", name: "Patrick Dierson", role: "President", org: "Dierson Design Group" },
+  { text: "We are deeply grateful for the knowledge shared in an equally entertaining and professionally unique manner and can only recommend Michael Kuehbandner and his work to other companies.", short: "Deeply grateful for the knowledge shared in an entertaining and professionally unique manner.", name: "Hudson Barnes", role: "President", org: "JSAV Mexico and the Caribbean" },
 ];
+
+const metaOf = (role, org) => (role ? `${role} · ${org}` : org);
 ---
 
 <section class="hero" id="top">
@@ -64,10 +67,11 @@ const quotes = [
 
   <div class="wrap hero-bottom">
     <figure class="quote" id="quote">
-      <blockquote id="qText">{quotes[0].text}</blockquote>
+      <blockquote id="qText">{quotes[0].short ?? quotes[0].text}</blockquote>
+      {quotes[0].short && <button class="q-more" id="qMore" type="button">Read more</button>}
       <figcaption id="qAttr">
         <span class="q-name">{quotes[0].name}</span>
-        <span class="q-meta">{quotes[0].role} · {quotes[0].org}</span>
+        <span class="q-meta">{metaOf(quotes[0].role, quotes[0].org)}</span>
       </figcaption>
     </figure>
     <p class="credit" id="credit">
@@ -89,9 +93,32 @@ const quotes = [
   const qText = document.getElementById("qText");
   const qAttr = document.getElementById("qAttr");
   const quoteEl = document.getElementById("quote");
+  let qMore = document.getElementById("qMore");
   let si = 0;
   let qi = 0;
+  let expanded = false;
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function renderQuoteBody(q) {
+    qText.textContent = expanded || !q.short ? q.text : q.short;
+    if (q.short) {
+      if (!qMore) {
+        qMore = document.createElement("button");
+        qMore.id = "qMore";
+        qMore.type = "button";
+        qMore.className = "q-more";
+        qText.insertAdjacentElement("afterend", qMore);
+        qMore.addEventListener("click", () => {
+          expanded = !expanded;
+          renderQuoteBody(quotes[qi]);
+        });
+      }
+      qMore.hidden = false;
+      qMore.textContent = expanded ? "Show less" : "Read more";
+    } else if (qMore) {
+      qMore.hidden = true;
+    }
+  }
 
   // match the quote column's width to the header logo lockup, so the
   // text block's left/right edges line up with where the logo starts and ends
@@ -128,21 +155,28 @@ const quotes = [
   }
   function showQuote(n) {
     qi = (n + quotes.length) % quotes.length;
+    expanded = false;
     quoteEl.classList.add("fade");
     setTimeout(() => {
       const q = quotes[qi];
-      qText.textContent = q.text;
-      qAttr.innerHTML = `<span class="q-name">${q.name}</span><span class="q-meta">${q.role} · ${q.org}</span>`;
+      renderQuoteBody(q);
+      const meta = q.role ? `${q.role} · ${q.org}` : q.org;
+      qAttr.innerHTML = `<span class="q-name">${q.name}</span><span class="q-meta">${meta}</span>`;
       quoteEl.classList.remove("fade");
     }, 1200);
   }
+
+  if (qMore) qMore.addEventListener("click", () => {
+    expanded = !expanded;
+    renderQuoteBody(quotes[qi]);
+  });
 
   if (!reduce) {
     // wait for every slide to be decoded so the very first cycle never shows a half-loaded frame
     Promise.allSettled(imgs.map((im) => im.decode ? im.decode() : Promise.resolve())).then(() => {
       setInterval(() => showSlide(si + 1), 8500);
     });
-    setInterval(() => showQuote(qi + 1), 10000);
+    setInterval(() => { if (!expanded) showQuote(qi + 1); }, 10000);
   }
 </script>
 
@@ -196,6 +230,14 @@ const quotes = [
   }
   .quote blockquote::before { content: "“"; color: var(--muted-2); margin-right: 0.05em; }
   .quote blockquote::after { content: "”"; color: var(--muted-2); }
+  .q-more {
+    display: block; margin: 0.6rem 0 0; padding: 0;
+    background: none; border: 0; cursor: pointer;
+    font-size: 0.78rem; font-weight: 600; letter-spacing: 0.04em;
+    color: var(--muted-2); text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .q-more:hover { color: var(--text); }
   .quote figcaption {
     display: flex; flex-direction: column; gap: 0.1rem;
     margin-top: 1.2rem;
@@ -207,12 +249,11 @@ const quotes = [
 
   .credit {
     margin: 0; flex: none;
-    display: flex; flex-direction: column; gap: 0.25rem;
-    font-size: 0.8rem; color: var(--muted);
+    display: flex; flex-direction: column; gap: 0.1rem;
     letter-spacing: 0.03em; text-align: right;
   }
-  .credit-project { color: var(--text); font-weight: 600; }
-  .credit-client { color: var(--muted); }
+  .credit-project { color: var(--text); font-weight: 600; font-size: 0.98rem; }
+  .credit-client { color: var(--muted-2); font-size: 0.85rem; letter-spacing: 0.02em; }
 
   .scroll-cue {
     position: absolute; left: 50%; bottom: 1.5rem; z-index: 2;
