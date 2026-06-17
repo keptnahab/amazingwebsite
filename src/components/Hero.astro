@@ -36,22 +36,23 @@ const slides = [
   { src: hero16.src, project: "Asia Cup Doha",          client: "Roland Greil" },
 ];
 
-// testimonials — full wording from Site assets/testimonials.rtf, short teaser
-// from the curated Site assets/testimonials short.rtf — name · role · organisation
+// testimonials — `teaser` is the short pull-quote shown by default; `text` is
+// the curated short version from Site assets/testimonials short.rtf, revealed
+// on "Read more" — name · role · organisation
 const quotes = [
-  { text: "Thanks you! You were a joy to work with and a machine. Not many people could have stayed as focused as you did for that long and it was fun to get to know you. I've had wonderful comments and a lot of that is down to you so congrats and get some rest. Look forward to doing more in the future.", short: "Thank you! You were a joy to work with and a machine. Not many people could have stayed as focused as you did for that long and it was fun to get to know you.", name: "Terry Cook", role: "Partner / Principal Designer", org: "Woodroffe Basset Design" },
-  { text: "On behalf of Katara Studios Management and myself, I want to express our deepest appreciation and gratitude to each and every one of you. Thank you for believing in our vision, for showcasing a remarkable level of professionalism and dedication, and for persevering when challenges arose.", short: "I want to express our deepest appreciation and gratitude to each and every one of you. Thank you for believing in our vision, for showcasing a remarkable level of professionalism and dedication.", name: "Mahmoud Hamaky", role: "Executive Producer / Project Director", org: "Katara Studios" },
-  { text: "Thank you so much for the beautiful lighting as well as for your exceptional durability!", name: "Malte Joergens", role: "Creative Director", org: "adhoc engineering" },
-  { text: "Truly amazing lights, you did an awesome job! Thank you!", name: "Kurt Pongratz", role: "TV Director", org: "ORF" },
-  { text: "Thank you for your ambition, your professionalism and your calm and sovereignty that you exude throughout the production. Thank you so very much, it is so nice that we got to know each other!", short: "Thank you for your ambition, your professionalism and your calm and sovereignty that you exude throughout the production.", name: "Thomas Stammberger", role: "Director", org: "BR" },
-  { text: "Michael is an essential partner at all stages of our process, from the first designs, through detailing and development, to on-site direction and delivery.", name: "Adam Scott", role: "Founder", org: "Freestate London" },
-  { text: "The unanimous opinion — both from customers and the internal staff — after the event is short and concise: a \"Wow, we would never have expected that. Simply amazing.\" Your expertise and commitment has made this all possible — thanks again!", short: "Wow, we would never have expected that. Simply amazing. Your expertise and commitment has made this all possible.", name: "M. Flossmann", role: "Marketing Communication", org: "OCÉ Printing Systems" },
-  { text: "Thank you Michi. Was awesome from your side. You're really crazy on the MA Desk and you have a hugely cool way of working! Thank you!", short: "Thank you, this was awesome from your side. You're really crazy on the MA and you have a hugely cool way of working!", name: "Florian Ploder", role: "CEO", org: "PS Eventconsulting" },
-  { text: "The lighting design he delivered was amazing! He was a delight to work with – super professional and friendly and very reliable.", short: "The lighting design you delivered was amazing! It was a delight to work with you – super professional, friendly and very reliable.", name: "Anna Rank", role: "Project Manager", org: "Hassell London" },
-  { text: "His great eye for the whole qualified him many times to the role of a lighting director and programmer which he fulfilled always to everybody's content.", name: "Jogi Foerg", role: "Senior Key Account Manager", org: "PRG Germany" },
-  { text: "Professional, touching, beautiful. Despite the short time, you have done an excellent job reaching out to people - whether on-site or at home before the live event. We thank you very much for your great effort. Thank you for your professionalism. We will recommend you with full conviction!", short: "Professional, touching, beautiful. We thank you very much for your great effort. Thank you for your professionalism. We will recommend you with full conviction!", name: "Felix Finkbeiner", role: "CEO", org: "Plant-for-the-Planet Foundation" },
-  { text: "It has always been a pleasure to work with Mr. Kuehbandner's refreshing approach to the entertainment design process.", name: "Patrick Dierson", role: "President", org: "Dierson Design Group" },
-  { text: "We are deeply grateful for the knowledge shared in an equally entertaining and professionally unique manner and can only recommend Michael Kuehbandner and his work to other companies.", short: "We are deeply grateful for the knowledge you shared in an equally entertaining and professionally unique manner and can only recommend Michael and his work to other companies.", name: "Hudson Barnes", role: "President", org: "JSAV Mexico and the Caribbean" },
+  { teaser: "You were a joy to work with, and a machine. Not many people could have stayed this focused for that long.", text: "Thank you! You were a joy to work with and a machine. Not many people could have stayed as focused as you did for that long and it was fun to get to know you.", name: "Terry Cook", role: "Partner / Principal Designer", org: "Woodroffe Basset Design" },
+  { teaser: "A remarkable level of professionalism and dedication — and for persevering whenever challenges arose.", text: "I want to express our deepest appreciation and gratitude to each and every one of you. Thank you for believing in our vision, for showcasing a remarkable level of professionalism and dedication.", name: "Mahmoud Hamaky", role: "Executive Producer / Project Director", org: "Katara Studios" },
+  { teaser: "Thank you so much for the beautiful lighting, as well as for your exceptional durability!", text: "Thank you so much for the beautiful lighting as well as for your exceptional durability!", name: "Malte Joergens", role: "Creative Director", org: "adhoc engineering" },
+  { teaser: "Truly amazing lights, you did an awesome job!", text: "Truly amazing lights, you did an awesome job! Thank you!", name: "Kurt Pongratz", role: "TV Director", org: "ORF" },
+  { teaser: "Thank you for your ambition, your professionalism, and the calm sovereignty you exude throughout the production.", text: "Thank you for your ambition, your professionalism and your calm and sovereignty that you exude throughout the production.", name: "Thomas Stammberger", role: "Director", org: "BR" },
+  { teaser: "An essential partner at every stage of the process.", text: "Michael is an essential partner at all stages of our process, from the first designs, through detailing and development, to on-site direction and delivery.", name: "Adam Scott", role: "Founder", org: "Freestate London" },
+  { teaser: "Wow, we would never have expected that. Simply amazing — your expertise and commitment made it all possible.", text: "Wow, we would never have expected that. Simply amazing. Your expertise and commitment has made this all possible.", name: "M. Flossmann", role: "Marketing Communication", org: "OCÉ Printing Systems" },
+  { teaser: "Really crazy on the MA desk, and you have a hugely cool way of working!", text: "Thank you, this was awesome from your side. You're really crazy on the MA and you have a hugely cool way of working!", name: "Florian Ploder", role: "CEO", org: "PS Eventconsulting" },
+  { teaser: "The lighting design delivered was amazing — a delight to work with, super professional, friendly, and very reliable.", text: "The lighting design you delivered was amazing! It was a delight to work with you – super professional, friendly and very reliable.", name: "Anna Rank", role: "Project Manager", org: "Hassell London" },
+  { teaser: "A great eye for the whole, time and again earning the role of lighting director and programmer.", text: "His great eye for the whole qualified him many times to the role of a lighting director and programmer which he fulfilled always to everybody's content.", name: "Jogi Foerg", role: "Senior Key Account Manager", org: "PRG Germany" },
+  { teaser: "Professional, touching, beautiful — despite the short time, an excellent job reaching people on-site and at home.", text: "Professional, touching, beautiful. We thank you very much for your great effort. Thank you for your professionalism. We will recommend you with full conviction!", name: "Felix Finkbeiner", role: "CEO", org: "Plant-for-the-Planet Foundation" },
+  { teaser: "It has always been a pleasure to work with such a refreshing approach to the entertainment design process.", text: "It has always been a pleasure to work with Mr. Kuehbandner's refreshing approach to the entertainment design process.", name: "Patrick Dierson", role: "President", org: "Dierson Design Group" },
+  { teaser: "Deeply grateful for the knowledge shared in an entertaining and professionally unique manner.", text: "We are deeply grateful for the knowledge you shared in an equally entertaining and professionally unique manner and can only recommend Michael and his work to other companies.", name: "Hudson Barnes", role: "President", org: "JSAV Mexico and the Caribbean" },
 ];
 
 const metaOf = (role, org) => (role ? `${role} · ${org}` : org);
@@ -67,8 +68,8 @@ const metaOf = (role, org) => (role ? `${role} · ${org}` : org);
 
   <div class="wrap hero-bottom">
     <figure class="quote" id="quote">
-      <blockquote id="qText">{quotes[0].short ?? quotes[0].text}</blockquote>
-      {quotes[0].short && <button class="q-more" id="qMore" type="button">Read more</button>}
+      <blockquote id="qText">{quotes[0].teaser}</blockquote>
+      <button class="q-more" id="qMore" type="button">Read more</button>
       <figcaption id="qAttr">
         <span class="q-name">{quotes[0].name}</span>
         <span class="q-meta">{metaOf(quotes[0].role, quotes[0].org)}</span>
@@ -100,24 +101,8 @@ const metaOf = (role, org) => (role ? `${role} · ${org}` : org);
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   function renderQuoteBody(q) {
-    qText.textContent = expanded || !q.short ? q.text : q.short;
-    if (q.short) {
-      if (!qMore) {
-        qMore = document.createElement("button");
-        qMore.id = "qMore";
-        qMore.type = "button";
-        qMore.className = "q-more";
-        qText.insertAdjacentElement("afterend", qMore);
-        qMore.addEventListener("click", () => {
-          expanded = !expanded;
-          renderQuoteBody(quotes[qi]);
-        });
-      }
-      qMore.hidden = false;
-      qMore.textContent = expanded ? "Show less" : "Read more";
-    } else if (qMore) {
-      qMore.hidden = true;
-    }
+    qText.textContent = expanded ? q.text : q.teaser;
+    qMore.textContent = expanded ? "Show less" : "Read more";
   }
 
   // match the quote column's width to the header logo lockup, so the
