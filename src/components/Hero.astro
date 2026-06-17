@@ -130,7 +130,7 @@ const quotes = [
   if (!reduce) {
     // wait for every slide to be decoded so the very first cycle never shows a half-loaded frame
     Promise.allSettled(imgs.map((im) => im.decode ? im.decode() : Promise.resolve())).then(() => {
-      setInterval(() => showSlide(si + 1), 7000);
+      setInterval(() => showSlide(si + 1), 8500);
     });
     setInterval(() => showQuote(qi + 1), 10000);
   }
@@ -152,11 +152,11 @@ const quotes = [
     object-fit: cover;
     opacity: 0;
     transform: scale(1.06);
-    transition: opacity 3s var(--ease), transform 3s var(--ease);
+    transition: opacity 4.5s ease-in-out, transform 4.5s ease-in-out;
   }
   .slide.active {
     opacity: 1;
-    animation: kenburns 24s linear forwards;
+    animation: kenburns 26s linear forwards;
   }
   @keyframes kenburns {
     from { transform: scale(1.06); }
