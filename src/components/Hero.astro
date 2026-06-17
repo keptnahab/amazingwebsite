@@ -36,9 +36,6 @@ const quotes = [
       <img src={s.src} alt="" class:list={["slide", { active: i === 0 }]} data-i={i} loading={i === 0 ? "eager" : "lazy"} />
     ))}
     <div class="scrim"></div>
-    <div class="img-dots" id="imgDots">
-      {slides.map((_, i) => <button class:list={["img-dot", { on: i === 0 }]} data-imgdot={i} aria-label={`Slide ${i + 1}`}></button>)}
-    </div>
   </div>
 
   <div class="wrap hero-inner">
@@ -49,9 +46,6 @@ const quotes = [
         <span class="q-meta">{quotes[0].role} · {quotes[0].org}</span>
       </figcaption>
     </figure>
-    <div class="q-dots" id="qDots">
-      {quotes.map((_, i) => <button class:list={["q-dot", { on: i === 0 }]} data-qdot={i} aria-label={`Testimonial ${i + 1}`}></button>)}
-    </div>
   </div>
 
   <div class="wrap hero-foot">
@@ -67,8 +61,6 @@ const quotes = [
   define:vars={{ slides, quotes }}
 >
   const imgs = [...document.querySelectorAll(".slide")];
-  const imgDots = [...document.querySelectorAll(".img-dot")];
-  const qDots = [...document.querySelectorAll(".q-dot")];
   const credit = document.getElementById("credit");
   const qText = document.getElementById("qText");
   const qAttr = document.getElementById("qAttr");
@@ -80,28 +72,23 @@ const quotes = [
   function showSlide(n) {
     si = (n + slides.length) % slides.length;
     imgs.forEach((im, i) => im.classList.toggle("active", i === si));
-    imgDots.forEach((d, i) => d.classList.toggle("on", i === si));
     const s = slides[si];
     credit.innerHTML = `<span>${s.project}</span> · ${s.client}`;
   }
   function showQuote(n) {
     qi = (n + quotes.length) % quotes.length;
     quoteEl.classList.add("fade");
-    qDots.forEach((d, i) => d.classList.toggle("on", i === qi));
     setTimeout(() => {
       const q = quotes[qi];
       qText.textContent = q.text;
       qAttr.innerHTML = `<span class="q-name">${q.name}</span><span class="q-meta">${q.role} · ${q.org}</span>`;
       quoteEl.classList.remove("fade");
-    }, 420);
+    }, 900);
   }
 
-  imgDots.forEach((d) => d.addEventListener("click", () => showSlide(+d.dataset.imgdot)));
-  qDots.forEach((d) => d.addEventListener("click", () => showQuote(+d.dataset.qdot)));
-
   if (!reduce) {
-    setInterval(() => showSlide(si + 1), 6000);
-    setInterval(() => showQuote(qi + 1), 7500);
+    setInterval(() => showSlide(si + 1), 6500);
+    setInterval(() => showQuote(qi + 1), 9500);
   }
 </script>
 
@@ -121,11 +108,11 @@ const quotes = [
     object-fit: cover;
     opacity: 0;
     transform: scale(1.06);
-    transition: opacity 1.6s var(--ease);
+    transition: opacity 2.4s var(--ease), transform 2.4s var(--ease);
   }
   .slide.active {
     opacity: 1;
-    animation: kenburns 16s ease-out forwards;
+    animation: kenburns 22s linear forwards;
   }
   @keyframes kenburns {
     from { transform: scale(1.06); }
@@ -137,17 +124,6 @@ const quotes = [
       linear-gradient(180deg, rgba(10,10,12,0.6) 0%, rgba(10,10,12,0) 26%),
       linear-gradient(0deg, rgba(10,10,12,0.96) 0%, rgba(10,10,12,0.78) 26%, rgba(10,10,12,0.32) 52%, rgba(10,10,12,0) 78%);
   }
-  .img-dots {
-    position: absolute; left: 50%; top: 50%; z-index: 1;
-    transform: translate(-50%, -50%);
-    display: flex; gap: 0.5rem;
-  }
-  .img-dot {
-    width: 22px; height: 3px; border: 0; padding: 0; cursor: pointer;
-    background: rgba(255,255,255,0.35); border-radius: 2px;
-    transition: background 0.3s var(--ease), width 0.3s var(--ease);
-  }
-  .img-dot.on { background: #fff; width: 34px; }
 
   .hero-inner { position: relative; z-index: 2; padding-bottom: 1.6rem; }
   .quote { margin: 0; max-width: 13em; }
@@ -167,16 +143,8 @@ const quotes = [
   }
   .q-name { font-weight: 600; font-size: 0.98rem; }
   .q-meta { color: var(--muted-2); font-size: 0.85rem; letter-spacing: 0.02em; }
-  .quote { transition: opacity 0.42s var(--ease), transform 0.42s var(--ease); }
-  .quote.fade { opacity: 0; transform: translateY(8px); }
-
-  .q-dots { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.1rem; max-width: 16em; }
-  .q-dot {
-    width: 10px; height: 3px; border: 0; padding: 0; cursor: pointer;
-    background: rgba(255,255,255,0.25); border-radius: 2px;
-    transition: background 0.3s var(--ease), width 0.3s var(--ease);
-  }
-  .q-dot.on { background: var(--text); width: 18px; }
+  .quote { transition: opacity 0.85s var(--ease), transform 0.85s var(--ease); }
+  .quote.fade { opacity: 0; transform: translateY(6px); }
 
   .hero-foot {
     position: relative; z-index: 2;
