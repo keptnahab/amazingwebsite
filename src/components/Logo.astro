@@ -1,0 +1,63 @@
+---
+/**
+ * Brand signet: hexagon-pinwheel RGB mark, final pick "variant 4"
+ * (spin 20° · pinwheel 20° · d20 R29) from the /logo lab — additive
+ * screen-blend mix on dark, white/cyan-magenta-yellow mix zone at centre.
+ * + lowercase Manrope wordmark. No 3D, no gloss.
+ */
+interface Props {
+  size?: number;        // signet height in px
+  wordmark?: boolean;   // show the wordmark
+  domain?: "en" | "de"; // amazinglighting.design | tolleslicht.de
+  class?: string;
+}
+const { size = 30, wordmark = true, domain = "en", class: cls = "" } = Astro.props;
+
+// pre-computed hexagon-pinwheel points — variant 4 (spin 20, rot 20, d20, R29)
+const RED   = "84.09,41.12 61.88,59.77 34.63,49.85 29.59,21.29 51.80,2.65 79.06,12.57";
+const GREEN = "57.55,63.39 35.34,82.03 8.09,72.11 3.05,43.55 25.27,24.91 52.52,34.83";
+const BLUE  = "90.11,75.24 67.89,93.88 40.64,83.96 35.60,55.40 57.82,36.76 85.07,46.68";
+---
+
+<a href="/" class={`brand ${cls}`} aria-label="amazinglighting.design — home">
+  <svg class="signet" width={size} height={size} viewBox="0 0 100 100" role="img" aria-hidden="true">
+    <g style="isolation:isolate">
+      <polygon points={RED} fill="#ff1f1f" style="mix-blend-mode:screen" />
+      <polygon points={GREEN} fill="#16d23a" style="mix-blend-mode:screen" />
+      <polygon points={BLUE} fill="#1f49ff" style="mix-blend-mode:screen" />
+    </g>
+  </svg>
+
+  {wordmark && (
+    <span class="wordmark">
+      {domain === "de" ? (
+        <><b>tolleslicht</b><i>.de</i></>
+      ) : (
+        <><b>amazinglighting</b><i>.design</i></>
+      )}
+    </span>
+  )}
+</a>
+
+<style>
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    line-height: 1;
+  }
+  .signet {
+    flex: none;
+    filter: saturate(1.05);
+  }
+  .wordmark {
+    font-size: 1.06rem;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+    font-feature-settings: "ss01";
+  }
+  .wordmark b { font-weight: 700; color: var(--text); }
+  .wordmark i { font-style: normal; font-weight: 500; color: var(--muted-2); }
+  .brand:hover .signet { filter: saturate(1.25) brightness(1.08); }
+  .signet { transition: filter 0.4s var(--ease); }
+</style>

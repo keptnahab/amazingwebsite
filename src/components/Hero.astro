@@ -1,0 +1,210 @@
+---
+import hero1 from "../assets/hero/01-romeo-and-juliet.jpg";
+import hero2 from "../assets/hero/02-apache-tour.jpg";
+import hero3 from "../assets/hero/03-circle-of-light.jpg";
+import hero4 from "../assets/hero/04-klangwolke-linz.jpg";
+
+// project · client come straight from the IntroSlider filenames
+const slides = [
+  { src: hero1.src, project: "Romeo and Juliet", client: "Roland Greil" },
+  { src: hero2.src, project: "Apache Tour",      client: "Roland Greil" },
+  { src: hero3.src, project: "Circle of Light",  client: "Jerry Appelt" },
+  { src: hero4.src, project: "Klangwolke Linz",  client: "Roland Greil" },
+];
+
+// testimonials (short pull-quotes) — name · role · organisation
+const quotes = [
+  { text: "A joy to work with, and a machine.", name: "Terry Cook", role: "Principal Designer", org: "Woodroffe Basset Design" },
+  { text: "A remarkable level of professionalism and dedication.", name: "Mahmoud Hamaky", role: "Executive Producer", org: "Katara Studios" },
+  { text: "Beautiful lighting, exceptional durability.", name: "Malte Joergens", role: "Creative Director", org: "adhoc engineering" },
+  { text: "Truly amazing lights — an awesome job.", name: "Kurt Pongratz", role: "TV Director", org: "ORF" },
+  { text: "Ambition, professionalism, and calm sovereignty throughout.", name: "Thomas Stammberger", role: "Director", org: "BR" },
+  { text: "An essential partner at every stage of the process.", name: "Adam Scott", role: "Founder", org: "Freestate London" },
+  { text: "Wow, we would never have expected that. Simply amazing.", name: "M. Flossmann", role: "Marketing Communication", org: "OCÉ Printing Systems" },
+  { text: "A hugely cool way of working.", name: "Florian Ploder", role: "CEO", org: "PS Eventconsulting" },
+  { text: "Super professional, friendly, and very reliable.", name: "Anna Rank", role: "Project Manager", org: "Hassell London" },
+  { text: "A great eye for the whole production.", name: "Jogi Foerg", role: "Senior Key Account Manager", org: "PRG Germany" },
+  { text: "Professional, touching, beautiful.", name: "Felix Finkbeiner", role: "CEO", org: "Plant-for-the-Planet" },
+  { text: "A refreshing approach to the entertainment design process.", name: "Patrick Dierson", role: "President", org: "Dierson Design Group" },
+  { text: "Knowledge shared in an entertaining and professionally unique manner.", name: "Hudson Barnes", role: "President", org: "JSAV Mexico & the Caribbean" },
+];
+---
+
+<section class="hero" id="top">
+  <div class="stage" aria-hidden="true">
+    {slides.map((s, i) => (
+      <img src={s.src} alt="" class:list={["slide", { active: i === 0 }]} data-i={i} loading={i === 0 ? "eager" : "lazy"} />
+    ))}
+    <div class="scrim"></div>
+    <div class="img-dots" id="imgDots">
+      {slides.map((_, i) => <button class:list={["img-dot", { on: i === 0 }]} data-imgdot={i} aria-label={`Slide ${i + 1}`}></button>)}
+    </div>
+  </div>
+
+  <div class="wrap hero-inner">
+    <figure class="quote" id="quote">
+      <blockquote id="qText">{quotes[0].text}</blockquote>
+      <figcaption id="qAttr">
+        <span class="q-name">{quotes[0].name}</span>
+        <span class="q-meta">{quotes[0].role} · {quotes[0].org}</span>
+      </figcaption>
+    </figure>
+    <div class="q-dots" id="qDots">
+      {quotes.map((_, i) => <button class:list={["q-dot", { on: i === 0 }]} data-qdot={i} aria-label={`Testimonial ${i + 1}`}></button>)}
+    </div>
+  </div>
+
+  <div class="wrap hero-foot">
+    <p class="credit" id="credit"><span>{slides[0].project}</span> · {slides[0].client}</p>
+  </div>
+
+  <a href="/#about" class="scroll-cue" aria-label="Scroll down">
+    <span></span>
+  </a>
+</section>
+
+<script
+  define:vars={{ slides, quotes }}
+>
+  const imgs = [...document.querySelectorAll(".slide")];
+  const imgDots = [...document.querySelectorAll(".img-dot")];
+  const qDots = [...document.querySelectorAll(".q-dot")];
+  const credit = document.getElementById("credit");
+  const qText = document.getElementById("qText");
+  const qAttr = document.getElementById("qAttr");
+  const quoteEl = document.getElementById("quote");
+  let si = 0;
+  let qi = 0;
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function showSlide(n) {
+    si = (n + slides.length) % slides.length;
+    imgs.forEach((im, i) => im.classList.toggle("active", i === si));
+    imgDots.forEach((d, i) => d.classList.toggle("on", i === si));
+    const s = slides[si];
+    credit.innerHTML = `<span>${s.project}</span> · ${s.client}`;
+  }
+  function showQuote(n) {
+    qi = (n + quotes.length) % quotes.length;
+    quoteEl.classList.add("fade");
+    qDots.forEach((d, i) => d.classList.toggle("on", i === qi));
+    setTimeout(() => {
+      const q = quotes[qi];
+      qText.textContent = q.text;
+      qAttr.innerHTML = `<span class="q-name">${q.name}</span><span class="q-meta">${q.role} · ${q.org}</span>`;
+      quoteEl.classList.remove("fade");
+    }, 420);
+  }
+
+  imgDots.forEach((d) => d.addEventListener("click", () => showSlide(+d.dataset.imgdot)));
+  qDots.forEach((d) => d.addEventListener("click", () => showQuote(+d.dataset.qdot)));
+
+  if (!reduce) {
+    setInterval(() => showSlide(si + 1), 6000);
+    setInterval(() => showQuote(qi + 1), 7500);
+  }
+</script>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow: hidden;
+  }
+  .stage { position: absolute; inset: 0; z-index: 0; background: #000; }
+  .slide {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transform: scale(1.06);
+    transition: opacity 1.6s var(--ease);
+  }
+  .slide.active {
+    opacity: 1;
+    animation: kenburns 16s ease-out forwards;
+  }
+  @keyframes kenburns {
+    from { transform: scale(1.06); }
+    to   { transform: scale(1.14); }
+  }
+  .scrim {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(180deg, rgba(10,10,12,0.6) 0%, rgba(10,10,12,0) 26%),
+      linear-gradient(0deg, rgba(10,10,12,0.96) 0%, rgba(10,10,12,0.78) 26%, rgba(10,10,12,0.32) 52%, rgba(10,10,12,0) 78%);
+  }
+  .img-dots {
+    position: absolute; left: 50%; top: 50%; z-index: 1;
+    transform: translate(-50%, -50%);
+    display: flex; gap: 0.5rem;
+  }
+  .img-dot {
+    width: 22px; height: 3px; border: 0; padding: 0; cursor: pointer;
+    background: rgba(255,255,255,0.35); border-radius: 2px;
+    transition: background 0.3s var(--ease), width 0.3s var(--ease);
+  }
+  .img-dot.on { background: #fff; width: 34px; }
+
+  .hero-inner { position: relative; z-index: 2; padding-bottom: 1.6rem; }
+  .quote { margin: 0; max-width: 13em; }
+  .quote blockquote {
+    margin: 0;
+    font-size: clamp(1.52rem, 2.9vw, 2.4rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+  }
+  .quote blockquote::before { content: "“"; color: var(--muted-2); margin-right: 0.05em; }
+  .quote blockquote::after { content: "”"; color: var(--muted-2); }
+  .quote figcaption {
+    display: flex; flex-direction: column; gap: 0.1rem;
+    margin-top: 1.2rem;
+  }
+  .q-name { font-weight: 600; font-size: 0.98rem; }
+  .q-meta { color: var(--muted-2); font-size: 0.85rem; letter-spacing: 0.02em; }
+  .quote { transition: opacity 0.42s var(--ease), transform 0.42s var(--ease); }
+  .quote.fade { opacity: 0; transform: translateY(8px); }
+
+  .q-dots { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.1rem; max-width: 16em; }
+  .q-dot {
+    width: 10px; height: 3px; border: 0; padding: 0; cursor: pointer;
+    background: rgba(255,255,255,0.25); border-radius: 2px;
+    transition: background 0.3s var(--ease), width 0.3s var(--ease);
+  }
+  .q-dot.on { background: var(--text); width: 18px; }
+
+  .hero-foot {
+    position: relative; z-index: 2;
+    display: flex; align-items: center; justify-content: flex-end;
+    padding-bottom: 1.8rem; margin-top: 2.4rem;
+  }
+  .credit {
+    margin: 0; font-size: 0.8rem; color: var(--muted);
+    letter-spacing: 0.03em; text-align: right;
+  }
+  .credit span { color: var(--text); font-weight: 600; }
+
+  .scroll-cue {
+    position: absolute; left: 50%; bottom: 1.5rem; z-index: 2;
+    transform: translateX(-50%);
+    width: 22px; height: 34px; border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 12px; display: none;
+  }
+  .scroll-cue span {
+    position: absolute; left: 50%; top: 7px; width: 3px; height: 7px;
+    background: #fff; border-radius: 2px; transform: translateX(-50%);
+    animation: cue 1.8s var(--ease) infinite;
+  }
+  @keyframes cue { 0%{opacity:0;transform:translate(-50%,0)} 30%{opacity:1} 100%{opacity:0;transform:translate(-50%,10px)} }
+
+  @media (min-width: 900px) { .scroll-cue { display: block; } }
+  @media (prefers-reduced-motion: reduce) {
+    .slide.active { animation: none; }
+    .scroll-cue span { animation: none; }
+  }
+</style>

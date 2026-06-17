@@ -1,0 +1,23 @@
+---
+import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<Base title="Privacy — amazinglighting.design">
+  <Header />
+  <main class="section">
+    <div class="wrap legal">
+      <p class="eyebrow">Legal</p>
+      <h1 class="section-title">Privacy</h1>
+      <hr class="rule" />
+      <p>Placeholder — the privacy policy (Datenschutzerklärung) will be added before launch. The site ships as a static page with no tracking by default.</p>
+    </div>
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  .legal { max-width: 70ch; }
+  .legal p { color: var(--muted); margin: 1rem 0; }
+</style>

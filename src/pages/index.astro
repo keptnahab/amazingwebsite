@@ -1,0 +1,38 @@
+---
+import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
+import Hero from "../components/Hero.astro";
+import About from "../components/About.astro";
+import Services from "../components/Services.astro";
+import WorkGrid from "../components/WorkGrid.astro";
+import Contact from "../components/Contact.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<Base>
+  <Header />
+  <main>
+    <Hero />
+    <About />
+    <Services />
+    <WorkGrid eyebrow="Selected Work" title="A few recent projects." limit={3} />
+    <div class="wrap viewall">
+      <a href="/work" class="viewall-link">View all projects <span>→</span></a>
+    </div>
+    <Contact />
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  .viewall { margin-top: -2.5rem; padding-bottom: 1rem; }
+  .viewall-link {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    font-weight: 600; font-size: 1.02rem;
+    border-bottom: 1px solid var(--line); padding-bottom: 0.4rem;
+    transition: gap 0.3s var(--ease), border-color 0.3s var(--ease);
+  }
+  .viewall-link span { transition: transform 0.3s var(--ease); }
+  .viewall-link:hover { border-color: var(--text); }
+  .viewall-link:hover span { transform: translateX(5px); }
+</style>

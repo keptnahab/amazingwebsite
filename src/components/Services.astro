@@ -1,0 +1,136 @@
+---
+const oct =
+  "59.72,43.49 43.49,59.72 20.51,59.72 4.28,43.49 4.28,20.51 20.51,4.28 43.49,4.28 59.72,20.51";
+
+const cards = [
+  {
+    key: "visual",
+    color: "var(--r)",
+    title: "Visual Design",
+    sub: "Lights · Video · CGI",
+    text: "Unconventional creativity and a trained eye, turning an idea into images that communicate.",
+  },
+  {
+    key: "programming",
+    color: "var(--g)",
+    title: "Programming",
+    sub: "Consoles · Media Servers",
+    text: "Lighting desk and media-server programming, plus interactive and generative real-time content.",
+  },
+  {
+    key: "preproduction",
+    color: "var(--b)",
+    title: "Preproduction",
+    sub: "CAD · 3D Previz",
+    text: "Technical drawings and photoreal 3D pre-visualization — the show is solved before load-in.",
+  },
+];
+---
+
+<section class="section services" id="services">
+  <div class="wrap">
+    <p class="eyebrow reveal">Services</p>
+    <h2 class="section-title reveal">Three disciplines, one show.</h2>
+    <hr class="rule reveal" />
+
+    <div class="cards">
+      {cards.map((c) => (
+        <article class="card reveal" data-key={c.key} style={`--c:${c.color}`}>
+          <div class="icon">
+            <svg viewBox="0 0 64 64" width="56" height="56" aria-hidden="true">
+              <polygon points={oct} fill="var(--c)" class="oct" />
+              <g class="glyph" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none">
+                {c.key === "visual" && (
+                  <>
+                    <circle cx="32" cy="32" r="6" fill="#fff" stroke="none" />
+                    <line x1="32" y1="12" x2="32" y2="19" />
+                    <line x1="32" y1="45" x2="32" y2="52" />
+                    <line x1="12" y1="32" x2="19" y2="32" />
+                    <line x1="45" y1="32" x2="52" y2="32" />
+                    <line x1="18" y1="18" x2="23" y2="23" />
+                    <line x1="41" y1="41" x2="46" y2="46" />
+                    <line x1="46" y1="18" x2="41" y2="23" />
+                    <line x1="23" y1="41" x2="18" y2="46" />
+                  </>
+                )}
+                {c.key === "programming" && (
+                  <>
+                    <polyline points="26,24 16,32 26,40" />
+                    <polyline points="38,24 48,32 38,40" />
+                  </>
+                )}
+                {c.key === "preproduction" && (
+                  <>
+                    <path d="M32 14 L48 23 L48 41 L32 50 L16 41 L16 23 Z" />
+                    <path d="M16 23 L32 32 L48 23" />
+                    <line x1="32" y1="32" x2="32" y2="50" />
+                  </>
+                )}
+              </g>
+            </svg>
+          </div>
+          <h3 class="card-title">{c.title}</h3>
+          <p class="card-sub">{c.sub}</p>
+          <p class="card-text">{c.text}</p>
+        </article>
+      ))}
+    </div>
+
+    <p class="services-note reveal">
+      Three connected disciplines — available as one seamless package or as standalone
+      modules, tailored to each project.
+    </p>
+  </div>
+</section>
+
+<style>
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.1rem;
+    margin-top: clamp(2rem, 5vw, 3.2rem);
+  }
+  .card {
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 2.2rem 1.8rem;
+    transition: transform 0.5s var(--ease), border-color 0.5s var(--ease), background 0.5s var(--ease);
+  }
+  .card:hover {
+    transform: translateY(-6px);
+    border-color: color-mix(in srgb, var(--c) 55%, var(--line));
+    background: var(--bg-3);
+  }
+
+  .icon { margin-bottom: 1.5rem; }
+  .oct {
+    transform-origin: 32px 32px;
+    transition: transform 0.6s var(--ease), filter 0.6s var(--ease);
+  }
+  .glyph { transform-origin: 32px 32px; transition: transform 0.6s var(--ease); }
+  .card:hover .oct {
+    transform: rotate(22.5deg);
+    filter: drop-shadow(0 0 14px color-mix(in srgb, var(--c) 70%, transparent));
+  }
+  .card:hover .glyph { transform: scale(1.08); }
+
+  .card-title { font-size: 1.4rem; font-weight: 700; }
+  .card-sub {
+    margin: 0.4rem 0 1rem;
+    font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--muted-2);
+  }
+  .card-text { color: var(--muted); margin: 0; font-size: 0.98rem; }
+
+  .services-note {
+    margin: clamp(2.4rem, 5vw, 3.4rem) 0 0;
+    color: var(--muted-2);
+    max-width: 60ch;
+    font-size: 1.02rem;
+  }
+
+  @media (max-width: 820px) {
+    .cards { grid-template-columns: 1fr; }
+  }
+</style>

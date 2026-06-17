@@ -1,0 +1,50 @@
+---
+import "../styles/global.css";
+interface Props {
+  title?: string;
+  description?: string;
+}
+const {
+  title = "amazinglighting.design — Michael Kühbandner · Lighting Design",
+  description = "Lighting design, programming and previsualization for broadcast, concerts, ceremonies, corporate and theatre. 30+ years, worldwide.",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#0a0a0c" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Prototype: Manrope via Google Fonts. Production → self-hosted (@fontsource). -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <slot />
+
+    <script>
+      // reveal-on-scroll
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const e of entries) {
+            if (e.isIntersecting) {
+              e.target.classList.add("in");
+              io.unobserve(e.target);
+            }
+          }
+        },
+        { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
+      );
+      document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,120 @@
+---
+import Base from "../layouts/Base.astro";
+
+// regular hexagon points: centre, circumradius, rotation(deg)
+function hex(cx: number, cy: number, R: number, rot: number) {
+  const p: string[] = [];
+  for (let k = 0; k < 6; k++) {
+    const a = ((rot + 60 * k) * Math.PI) / 180;
+    p.push(`${(cx + R * Math.cos(a)).toFixed(2)},${(cy + R * Math.sin(a)).toFixed(2)}`);
+  }
+  return p.join(" ");
+}
+
+// three hexagons placed 120° apart (base: red top, green lower-left, blue lower-right),
+// whole arrangement rotated by `spin`, each hex self-rotated by `rot`.
+function tri(spin: number, rot: number, d: number, R: number) {
+  const deg = Math.PI / 180;
+  const at = (baseAngle: number) => {
+    const a = (baseAngle + spin) * deg;
+    return [50 + d * Math.cos(a), 50 + d * Math.sin(a)] as [number, number];
+  };
+  const [rx, ry] = at(-90);
+  const [gx, gy] = at(150);
+  const [bx, by] = at(30);
+  return {
+    r: hex(rx, ry, R, rot),
+    g: hex(gx, gy, R, rot),
+    b: hex(bx, by, R, rot),
+  };
+}
+
+const candidates = [
+  { id: "1", note: "spin 15° · pinwheel 18° · d18 R27", spin: 15, rot: 18, d: 18, R: 27 },
+  { id: "2", note: "spin 15° · pinwheel 25° · d19 R28", spin: 15, rot: 25, d: 19, R: 28 },
+  { id: "3", note: "spin 15° · flat (kein pinwheel) · d18 R27", spin: 15, rot: 0, d: 18, R: 27 },
+  { id: "4", note: "spin 20° · pinwheel 20° · d20 R29", spin: 20, rot: 20, d: 20, R: 29 },
+  { id: "5", note: "spin 0° · pinwheel 18° · d18 R27", spin: 0, rot: 18, d: 18, R: 27 },
+  { id: "6", note: "spin 15° · pinwheel 30° · d18 R28", spin: 15, rot: 30, d: 18, R: 28 },
+];
+
+const C = { r: "#ff1f1f", g: "#16d23a", b: "#1f49ff" };
+const sizes = [120, 44, 28, 16];
+---
+
+<Base title="Logo lab — hex">
+  <main class="lab">
+    <h1>Signet — Hexagon-Pinwheel (Basis: 230512 Logo SOLO)</h1>
+    <p class="sub">Reine additive RGB-Mischung (screen) auf Dunkel. Kandidaten gegen die Referenz.</p>
+
+    <div class="refrow">
+      <div class="refcard">
+        <img src="/ref-solo.png" alt="Referenz" width="150" height="150" />
+        <span>Referenz (auf Weiß)</span>
+      </div>
+      <div class="refcard dark">
+        <img src="/ref-solo.png" alt="Referenz dunkel" width="150" height="150" />
+        <span>Referenz (auf Dunkel)</span>
+      </div>
+    </div>
+
+    <div class="rows">
+      {candidates.map((c) => {
+        const t = tri(c.spin, c.rot, c.d, c.R);
+        return (
+          <section class="row">
+            <div class="meta"><span class="badge">{c.id}</span><p>{c.note}</p></div>
+            <div class="samples">
+              {sizes.map((s) => (
+                <div class="sample">
+                  <svg width={s} height={s} viewBox="0 0 100 100" aria-hidden="true">
+                    <g style="isolation:isolate">
+                      <polygon points={t.r} fill={C.r} style="mix-blend-mode:screen" />
+                      <polygon points={t.g} fill={C.g} style="mix-blend-mode:screen" />
+                      <polygon points={t.b} fill={C.b} style="mix-blend-mode:screen" />
+                    </g>
+                  </svg>
+                  <span class="size">{s}px</span>
+                </div>
+              ))}
+              <div class="sample">
+                <span class="lk">
+                  <svg width="30" height="30" viewBox="0 0 100 100" aria-hidden="true">
+                    <g style="isolation:isolate">
+                      <polygon points={t.r} fill={C.r} style="mix-blend-mode:screen" />
+                      <polygon points={t.g} fill={C.g} style="mix-blend-mode:screen" />
+                      <polygon points={t.b} fill={C.b} style="mix-blend-mode:screen" />
+                    </g>
+                  </svg>
+                  <b>amazinglighting</b><i>.design</i>
+                </span>
+                <span class="size">lockup</span>
+              </div>
+            </div>
+          </section>
+        );
+      })}
+    </div>
+  </main>
+</Base>
+
+<style>
+  .lab { max-width: 1100px; margin: 0 auto; padding: clamp(2rem, 6vw, 5rem) var(--pad) 6rem; }
+  .lab h1 { font-size: 1.7rem; }
+  .sub { color: var(--muted); margin: 0.5rem 0 2rem; }
+  .refrow { display: flex; gap: 1px; margin-bottom: 2.5rem; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; width: max-content; background: var(--line); }
+  .refcard { background: #fff; padding: 1.5rem 2rem; display: flex; flex-direction: column; align-items: center; gap: 0.7rem; }
+  .refcard.dark { background: var(--bg); }
+  .refcard span { font-size: 0.72rem; color: #888; letter-spacing: 0.08em; }
+  .refcard.dark span { color: var(--muted-2); }
+
+  .rows { display: flex; flex-direction: column; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+  .row { display: grid; grid-template-columns: 230px 1fr; gap: 2rem; background: var(--bg-1); padding: 1.6rem 2rem; align-items: center; }
+  .meta .badge { display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 6px; background: var(--bg-3); border: 1px solid var(--line); font-size: 0.8rem; font-weight: 700; margin-bottom: 0.6rem; }
+  .meta p { color: var(--muted-2); font-size: 0.82rem; margin: 0; }
+  .samples { display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; }
+  .sample { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+  .sample .size { font-size: 0.66rem; color: var(--muted-2); letter-spacing: 0.1em; }
+  .lk { display: inline-flex; align-items: center; gap: 0.55rem; font-size: 1.05rem; }
+  .lk b { font-weight: 700; } .lk i { font-style: normal; font-weight: 500; color: var(--muted-2); }
+</style>
