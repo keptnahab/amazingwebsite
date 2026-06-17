@@ -57,7 +57,7 @@ const quotes = [
 <section class="hero" id="top">
   <div class="stage" aria-hidden="true">
     {slides.map((s, i) => (
-      <img src={s.src} alt="" class:list={["slide", { active: i === 0 }]} data-i={i} loading={i === 0 ? "eager" : "lazy"} />
+      <img src={s.src} alt="" class:list={["slide", { active: i === 0 }]} data-i={i} loading="eager" decoding="async" fetchpriority={i === 0 ? "high" : "low"} />
     ))}
     <div class="scrim"></div>
   </div>
@@ -107,12 +107,15 @@ const quotes = [
       qText.textContent = q.text;
       qAttr.innerHTML = `<span class="q-name">${q.name}</span><span class="q-meta">${q.role} · ${q.org}</span>`;
       quoteEl.classList.remove("fade");
-    }, 900);
+    }, 1200);
   }
 
   if (!reduce) {
-    setInterval(() => showSlide(si + 1), 6500);
-    setInterval(() => showQuote(qi + 1), 9500);
+    // wait for every slide to be decoded so the very first cycle never shows a half-loaded frame
+    Promise.allSettled(imgs.map((im) => im.decode ? im.decode() : Promise.resolve())).then(() => {
+      setInterval(() => showSlide(si + 1), 7000);
+    });
+    setInterval(() => showQuote(qi + 1), 10000);
   }
 </script>
 
@@ -132,11 +135,11 @@ const quotes = [
     object-fit: cover;
     opacity: 0;
     transform: scale(1.06);
-    transition: opacity 2.4s var(--ease), transform 2.4s var(--ease);
+    transition: opacity 3s var(--ease), transform 3s var(--ease);
   }
   .slide.active {
     opacity: 1;
-    animation: kenburns 22s linear forwards;
+    animation: kenburns 24s linear forwards;
   }
   @keyframes kenburns {
     from { transform: scale(1.06); }
@@ -167,8 +170,8 @@ const quotes = [
   }
   .q-name { font-weight: 600; font-size: 0.98rem; }
   .q-meta { color: var(--muted-2); font-size: 0.85rem; letter-spacing: 0.02em; }
-  .quote { transition: opacity 0.85s var(--ease), transform 0.85s var(--ease); }
-  .quote.fade { opacity: 0; transform: translateY(6px); }
+  .quote { transition: opacity 1.3s ease-in-out; }
+  .quote.fade { opacity: 0; }
 
   .hero-foot {
     position: relative; z-index: 2;
