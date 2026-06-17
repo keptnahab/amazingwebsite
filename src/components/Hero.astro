@@ -62,7 +62,7 @@ const quotes = [
     <div class="scrim"></div>
   </div>
 
-  <div class="wrap hero-inner">
+  <div class="wrap hero-bottom">
     <figure class="quote" id="quote">
       <blockquote id="qText">{quotes[0].text}</blockquote>
       <figcaption id="qAttr">
@@ -70,10 +70,10 @@ const quotes = [
         <span class="q-meta">{quotes[0].role} · {quotes[0].org}</span>
       </figcaption>
     </figure>
-  </div>
-
-  <div class="wrap hero-foot">
-    <p class="credit" id="credit"><span>{slides[0].project}</span> · {slides[0].client}</p>
+    <p class="credit" id="credit">
+      <span class="credit-project">{slides[0].project}</span>
+      <span class="credit-client">Client: {slides[0].client}</span>
+    </p>
   </div>
 
   <a href="/#about" class="scroll-cue" aria-label="Scroll down">
@@ -92,6 +92,16 @@ const quotes = [
   let si = 0;
   let qi = 0;
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // match the quote column's width to the header logo lockup, so the
+  // text block's left/right edges line up with where the logo starts and ends
+  function syncQuoteWidth() {
+    const brand = document.querySelector(".site-header .brand");
+    if (brand && quoteEl) quoteEl.style.width = `${brand.getBoundingClientRect().width}px`;
+  }
+  syncQuoteWidth();
+  window.addEventListener("resize", syncQuoteWidth);
+  window.addEventListener("load", syncQuoteWidth);
 
   function showSlide(n) {
     const prev = si;
@@ -114,7 +124,7 @@ const quotes = [
     }
     imgs[si].classList.add("active");
     const s = slides[si];
-    credit.innerHTML = `<span>${s.project}</span> · ${s.client}`;
+    credit.innerHTML = `<span class="credit-project">${s.project}</span><span class="credit-client">Client: ${s.client}</span>`;
   }
   function showQuote(n) {
     qi = (n + quotes.length) % quotes.length;
@@ -169,13 +179,18 @@ const quotes = [
       linear-gradient(0deg, rgba(10,10,12,0.96) 0%, rgba(10,10,12,0.78) 26%, rgba(10,10,12,0.32) 52%, rgba(10,10,12,0) 78%);
   }
 
-  .hero-inner { position: relative; z-index: 2; padding-bottom: 1.6rem; }
-  .quote { margin: 0; max-width: 24em; }
+  .hero-bottom {
+    position: relative; z-index: 2;
+    display: flex; align-items: flex-end; justify-content: space-between;
+    gap: 2rem;
+    padding-bottom: 1.8rem;
+  }
+  .quote { margin: 0; width: 16em; max-width: 60vw; flex: none; }
   .quote blockquote {
     margin: 0;
-    font-size: clamp(1.2rem, 2.1vw, 1.8rem);
+    font-size: clamp(1.4rem, 2.6vw, 2.15rem);
     font-weight: 600;
-    line-height: 1.25;
+    line-height: 1.18;
     letter-spacing: -0.03em;
     text-wrap: balance;
   }
@@ -190,16 +205,14 @@ const quotes = [
   .quote { transition: opacity 1.3s ease-in-out; }
   .quote.fade { opacity: 0; }
 
-  .hero-foot {
-    position: relative; z-index: 2;
-    display: flex; align-items: center; justify-content: flex-end;
-    padding-bottom: 1.8rem; margin-top: 2.4rem;
-  }
   .credit {
-    margin: 0; font-size: 0.8rem; color: var(--muted);
+    margin: 0; flex: none;
+    display: flex; flex-direction: column; gap: 0.25rem;
+    font-size: 0.8rem; color: var(--muted);
     letter-spacing: 0.03em; text-align: right;
   }
-  .credit span { color: var(--text); font-weight: 600; }
+  .credit-project { color: var(--text); font-weight: 600; }
+  .credit-client { color: var(--muted); }
 
   .scroll-cue {
     position: absolute; left: 50%; bottom: 1.5rem; z-index: 2;
