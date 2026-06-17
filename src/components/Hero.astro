@@ -94,8 +94,25 @@ const quotes = [
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   function showSlide(n) {
+    const prev = si;
     si = (n + slides.length) % slides.length;
-    imgs.forEach((im, i) => im.classList.toggle("active", i === si));
+    if (prev !== si) {
+      // removing .active cancels the kenburns animation, which snaps the
+      // transform back to the base value with no transition (animations
+      // don't hand off to transitions on removal). Freeze the current
+      // mid-zoom value as an inline style first, then release it a frame
+      // later so the existing transform transition eases it back down.
+      const prevEl = imgs[prev];
+      const frozen = getComputedStyle(prevEl).transform;
+      prevEl.classList.remove("active");
+      prevEl.style.transform = frozen;
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          prevEl.style.transform = "";
+        });
+      });
+    }
+    imgs[si].classList.add("active");
     const s = slides[si];
     credit.innerHTML = `<span>${s.project}</span> · ${s.client}`;
   }
