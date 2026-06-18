@@ -35,7 +35,7 @@ const cards = [
 
     <div class="cards">
       {cards.map((c) => (
-        <article class="card reveal" data-key={c.key} style={`--c:${c.color}`}>
+        <article class="card reveal press" data-key={c.key} data-spotlight style={`--c:${c.color}`}>
           <div class="icon">
             <svg viewBox="0 0 64 64" width="56" height="56" aria-hidden="true">
               <polygon points={oct} fill="var(--c)" class="oct" />
@@ -132,5 +132,14 @@ const cards = [
 
   @media (max-width: 820px) {
     .cards { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 760px) {
+    .card { padding: clamp(1.6rem, 6vw, 2.2rem) 1.4rem; }
+    /* scroll-wake spotlight replaces :hover — the octagon ignites and the
+       card lifts as it crosses screen-center, one at a time down the stack */
+    .card.live { transform: translateY(-6px); border-color: color-mix(in srgb, var(--c) 55%, var(--line)); background: var(--bg-3); }
+    .card.live .oct { transform: rotate(22.5deg); filter: drop-shadow(0 0 14px color-mix(in srgb, var(--c) 70%, transparent)); }
+    .card.live .glyph { transform: scale(1.08); }
   }
 </style>

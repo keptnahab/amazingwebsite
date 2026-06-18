@@ -121,9 +121,21 @@ h1, h2, h3 {
 }
 .reveal.in { opacity: 1; transform: none; }
 
+/* shared tactile press feedback for touch — opt in via class="press" on
+   any tappable surface (cards, pills, detail rows, …); harmless where
+   the device has real hover since it's gated to (hover: none) */
+.press { transition: transform 0.4s var(--ease); }
+@media (hover: none) {
+  .press:active { transform: scale(0.97); transition: transform 0.12s var(--ease); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; transition: none; }
+  .press:active { transform: none; transition: none; }
+  /* scroll-wake "spotlight" (see Base.astro) still applies its .live end
+     state, just without the transition — richer look, no animation */
+  .live, [data-spotlight] { transition: none !important; }
 }
 
 ::selection { background: rgba(255,255,255,0.16); }

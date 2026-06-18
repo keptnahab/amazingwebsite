@@ -18,10 +18,10 @@ const links = [
       <span></span><span></span>
     </button>
   </div>
-  <nav class="mobile-nav" id="mobileNav" aria-label="Mobile">
-    {links.map((l) => <a href={l.href}>{l.label}</a>)}
-  </nav>
 </header>
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile">
+  {links.map((l, i) => <a href={l.href} style={`--i:${i}`}>{l.label}</a>)}
+</nav>
 
 <style>
   .site-header {
@@ -63,8 +63,9 @@ const links = [
   .burger {
     display: none;
     background: none; border: 0; cursor: pointer;
-    width: 34px; height: 34px; padding: 0;
+    width: 44px; height: 44px; padding: 0;
     flex-direction: column; gap: 6px; justify-content: center; align-items: center;
+    margin-right: -11px; /* visually re-center the bigger hit area against the wrap padding */
   }
   .burger span {
     width: 22px; height: 1.5px; background: var(--text);
@@ -75,23 +76,37 @@ const links = [
 
   .mobile-nav {
     display: none;
-    flex-direction: column;
-    padding: 0.5rem var(--pad) 1.4rem;
-    background: rgba(10, 10, 12, 0.96);
-    backdrop-filter: blur(14px);
-    border-bottom: 1px solid var(--line);
+    position: fixed; inset: 0; z-index: 101;
+    flex-direction: column; justify-content: center; align-items: center;
+    gap: 0.4rem;
+    background: rgba(10, 10, 12, 0.97);
+    backdrop-filter: blur(18px);
+    padding-top: env(safe-area-inset-top);
   }
   .mobile-nav.open { display: flex; }
   .mobile-nav a {
-    padding: 0.85rem 0;
-    border-top: 1px solid var(--line-soft);
+    padding: 0.6rem 0;
     color: var(--muted);
-    font-size: 1.05rem;
+    font-size: clamp(1.6rem, 7vw, 2.2rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.4s var(--ease), transform 0.4s var(--ease), color 0.25s var(--ease);
   }
+  .mobile-nav.open a {
+    opacity: 1;
+    transform: none;
+    transition-delay: calc(var(--i, 0) * 0.06s);
+  }
+  .mobile-nav a:active { color: var(--text); }
 
   @media (max-width: 760px) {
     .nav { display: none; }
     .burger { display: flex; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .mobile-nav a { transition: none; transition-delay: 0s; }
   }
 </style>
 
@@ -106,11 +121,13 @@ const links = [
   burger?.addEventListener("click", () => {
     const open = mobile?.classList.toggle("open");
     burger.setAttribute("aria-expanded", String(!!open));
+    document.body.style.overflow = open ? "hidden" : "";
   });
   mobile?.querySelectorAll("a").forEach((a) =>
     a.addEventListener("click", () => {
       mobile.classList.remove("open");
       burger?.setAttribute("aria-expanded", "false");
+      document.body.style.overflow = "";
     })
   );
 </script>

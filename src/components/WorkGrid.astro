@@ -48,7 +48,7 @@ const payload = list.map((p: Project) => ({
         </div>
         <div class="filters" id="workFilters" role="tablist">
           {categories.map((c, i) => (
-            <button class:list={["pill", { on: i === 0 }]} data-filter={c} role="tab" aria-selected={i === 0}>
+            <button class:list={["pill", "press", { on: i === 0 }]} data-filter={c} role="tab" aria-selected={i === 0}>
               {c === "ALL" ? "All Projects" : c.charAt(0) + c.slice(1).toLowerCase()}
             </button>
           ))}
@@ -58,8 +58,8 @@ const payload = list.map((p: Project) => ({
 
     <div class="grid" id="workGrid">
       {list.map((p) => (
-        <article class="wcard reveal" data-cat={p.category} data-q={`${p.title} ${p.location} ${p.year} ${p.category}`.toLowerCase()}>
-          <button class="wcard-btn" data-open={p.slug} aria-label={`Open ${p.title}`}>
+        <article class="wcard reveal" data-cat={p.category} data-spotlight data-q={`${p.title} ${p.location} ${p.year} ${p.category}`.toLowerCase()}>
+          <button class="wcard-btn press" data-open={p.slug} aria-label={`Open ${p.title}`}>
             <span class="wcard-media">
               <Image src={p.cover} alt={p.title} widths={[420, 720]} sizes="(max-width: 820px) 90vw, 30vw" />
               <span class="wcard-cat">{p.category}</span>
@@ -185,6 +185,8 @@ const payload = list.map((p: Project) => ({
   function close() {
     modal.classList.remove("show");
     clearInterval(timer);
+    const panelEl = modal.querySelector(".modal-panel") as HTMLElement | null;
+    if (panelEl) panelEl.style.transform = "";
     setTimeout(() => { modal.hidden = true; document.body.style.overflow = ""; lastFocus?.focus(); }, 280);
   }
 
@@ -206,6 +208,45 @@ const payload = list.map((p: Project) => ({
     if (e.key === "ArrowLeft") { goTo(gi - 1); autoplay(); }
     if (e.key === "ArrowRight") { goTo(gi + 1); autoplay(); }
   });
+
+  /* ---- mobile gestures: swipe the gallery, swipe-down to dismiss ---- */
+  const panel = modal.querySelector(".modal-panel") as HTMLElement;
+  let tStartX = 0, tStartY = 0, tDX = 0, tDY = 0, tracking = false;
+
+  track.addEventListener("touchstart", (e) => {
+    const t = e.touches[0];
+    tStartX = t.clientX; tStartY = t.clientY; tDX = 0; tDY = 0; tracking = true;
+    clearInterval(timer);
+  }, { passive: true });
+  track.addEventListener("touchmove", (e) => {
+    if (!tracking) return;
+    const t = e.touches[0];
+    tDX = t.clientX - tStartX; tDY = t.clientY - tStartY;
+  }, { passive: true });
+  track.addEventListener("touchend", () => {
+    if (!tracking) return;
+    tracking = false;
+    const threshold = track.clientWidth * 0.18;
+    if (Math.abs(tDX) > threshold && Math.abs(tDX) > Math.abs(tDY)) goTo(tDX < 0 ? gi + 1 : gi - 1);
+    autoplay();
+  }, { passive: true });
+
+  let pStartY = 0, pDY = 0, pDragging = false;
+  panel?.addEventListener("touchstart", (e) => {
+    if ((e.target as HTMLElement).closest("#mgTrack")) return; // gallery handles its own swipe
+    pStartY = e.touches[0].clientY; pDY = 0; pDragging = true;
+  }, { passive: true });
+  panel?.addEventListener("touchmove", (e) => {
+    if (!pDragging) return;
+    pDY = e.touches[0].clientY - pStartY;
+    if (pDY > 0) panel.style.transform = `translateY(${pDY}px)`;
+  }, { passive: true });
+  panel?.addEventListener("touchend", () => {
+    if (!pDragging) return;
+    pDragging = false;
+    if (pDY > 100) close();
+    panel.style.transform = "";
+  }, { passive: true });
 </script>
 
 <style>
@@ -335,8 +376,40 @@ const payload = list.map((p: Project) => ({
   :global(.modal-credits dd) { margin: 0; font-size: 0.95rem; color: var(--text); }
 
   @media (max-width: 900px) { .grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 600px) {
+  @media (max-width: 760px) {
+    /* one big cinematic cover per row — photos as the hero, per owner direction */
     .grid { grid-template-columns: 1fr; }
     .modal-credits { grid-template-columns: 1fr; }
+
+    /* scroll-wake spotlight replaces :hover */
+    .wcard.live .wcard-btn { transform: translateY(-4px); border-color: rgba(255,255,255,0.2); }
+    .wcard.live .wcard-media :global(img) { transform: scale(1.05); filter: brightness(1.06); }
+    .wcard.live .wcard-glow { opacity: 0.6; }
+
+    /* filters: horizontal scroll-snap chip rail instead of wrapping */
+    .filters {
+      flex-wrap: nowrap; overflow-x: auto; scroll-snap-type: x proximity;
+      -webkit-overflow-scrolling: touch; scrollbar-width: none;
+      margin-inline: calc(var(--pad) * -1); padding-inline: var(--pad);
+      padding-bottom: 0.2rem;
+      mask-image: linear-gradient(90deg, #000 calc(100% - 28px), transparent 100%);
+    }
+    .filters::-webkit-scrollbar { display: none; }
+    .pill { flex: 0 0 auto; scroll-snap-align: start; }
+    .search input { font-size: 16px; } /* stops iOS zoom-on-focus */
+
+    /* modal: near-full-screen native sheet */
+    .modal-panel {
+      width: 100vw; height: 100svh; max-height: none; border-radius: 0;
+      overscroll-behavior: contain;
+      transform: translateY(100%); opacity: 1;
+      transition: transform 0.34s var(--ease);
+    }
+    .modal.show .modal-panel { transform: translateY(0); }
+    .modal-close { top: max(0.8rem, env(safe-area-inset-top)); right: max(0.8rem, env(safe-area-inset-right)); width: 44px; height: 44px; }
+
+    /* gallery matches the source stage-photo ratio — no re-crop — and is swipeable */
+    .modal-gallery { aspect-ratio: 3 / 2; }
+    .mg-arrow { display: none; }
   }
 </style>

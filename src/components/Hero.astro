@@ -64,7 +64,16 @@ quotes.forEach((q) => { q.hasMore = q.text.length > q.teaser.length * 1.35; });
 <section class="hero" id="top">
   <div class="stage" aria-hidden="true">
     {slides.map((s, i) => (
-      <img src={s.src} alt="" class:list={["slide", { active: i === 0 }]} data-i={i} loading="eager" decoding="async" fetchpriority={i === 0 ? "high" : "low"} />
+      <img
+        src={s.src}
+        alt=""
+        class:list={["slide", { active: i === 0 }]}
+        data-i={i}
+        style={`--focal:${s.focal ?? 50}%`}
+        loading={i < 2 ? "eager" : "lazy"}
+        decoding="async"
+        fetchpriority={i === 0 ? "high" : "low"}
+      />
     ))}
     <div class="scrim"></div>
   </div>
@@ -97,21 +106,29 @@ quotes.forEach((q) => { q.hasMore = q.text.length > q.teaser.length * 1.35; });
   const qText = document.getElementById("qText");
   const qAttr = document.getElementById("qAttr");
   const quoteEl = document.getElementById("quote");
+  const cue = document.querySelector(".scroll-cue");
   let qMore = document.getElementById("qMore");
   let si = 0;
   let qi = 0;
   let expanded = false;
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const isMobile = () => window.matchMedia("(max-width: 760px)").matches;
 
   function renderQuoteBody(q) {
-    qText.textContent = expanded && q.hasMore ? q.text : q.teaser;
+    // mobile only ever shows the short teaser — no read-more there
+    qText.textContent = expanded && q.hasMore && !isMobile() ? q.text : q.teaser;
     qMore.hidden = !q.hasMore;
     qMore.textContent = expanded ? "Show less" : "Read more";
   }
 
-  // match the quote column's width to the header logo lockup, so the
-  // text block's left/right edges line up with where the logo starts and ends
+  // match the quote column's width to the header logo lockup (desktop only) —
+  // on mobile the quote stacks full-width above/below the credit instead
   function syncQuoteWidth() {
+    if (isMobile()) {
+      if (quoteEl) quoteEl.style.width = "";
+      if (expanded) { expanded = false; renderQuoteBody(quotes[qi]); }
+      return;
+    }
     const brand = document.querySelector(".site-header .brand");
     if (brand && quoteEl) quoteEl.style.width = `${brand.getBoundingClientRect().width}px`;
   }
@@ -123,18 +140,23 @@ quotes.forEach((q) => { q.hasMore = q.text.length > q.teaser.length * 1.35; });
     const prev = si;
     si = (n + slides.length) % slides.length;
     if (prev !== si) {
-      // removing .active cancels the kenburns animation, which snaps the
-      // transform back to the base value with no transition (animations
-      // don't hand off to transitions on removal). Freeze the current
-      // mid-zoom value as an inline style first, then release it a frame
-      // later so the existing transform transition eases it back down.
+      // removing .active cancels the running animation (kenburns on desktop,
+      // heropan on mobile), which snaps transform/object-position back to
+      // their base values with no transition (animations don't hand off to
+      // transitions on removal). Freeze the current mid-animation values as
+      // inline styles first, then release them a frame later so the existing
+      // transitions ease back down instead of jumping.
       const prevEl = imgs[prev];
-      const frozen = getComputedStyle(prevEl).transform;
+      const cs = getComputedStyle(prevEl);
+      const frozenTransform = cs.transform;
+      const frozenObjectPosition = cs.objectPosition;
       prevEl.classList.remove("active");
-      prevEl.style.transform = frozen;
+      prevEl.style.transform = frozenTransform;
+      prevEl.style.objectPosition = frozenObjectPosition;
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           prevEl.style.transform = "";
+          prevEl.style.objectPosition = "";
         });
       });
     }
@@ -156,15 +178,30 @@ quotes.forEach((q) => { q.hasMore = q.text.length > q.teaser.length * 1.35; });
   }
 
   if (qMore) qMore.addEventListener("click", () => {
+    if (isMobile()) return; // no read-more interaction on mobile
     expanded = !expanded;
     renderQuoteBody(quotes[qi]);
   });
 
+  if (cue) {
+    window.addEventListener("scroll", () => {
+      if (!isMobile()) return;
+      cue.style.opacity = window.scrollY > 40 ? "0" : "1";
+    }, { passive: true });
+  }
+
   if (!reduce) {
-    // wait for every slide to be decoded so the very first cycle never shows a half-loaded frame
-    Promise.allSettled(imgs.map((im) => im.decode ? im.decode() : Promise.resolve())).then(() => {
+    if (isMobile()) {
+      // mobile: most slides load lazily anyway, don't gate the whole
+      // rotation on decoding all 16 up front — start right away
       setInterval(() => showSlide(si + 1), 8500);
-    });
+    } else {
+      // desktop: wait for every (eager-loaded) slide to decode so the very
+      // first cycle never shows a half-loaded frame
+      Promise.allSettled(imgs.map((im) => im.decode ? im.decode() : Promise.resolve())).then(() => {
+        setInterval(() => showSlide(si + 1), 8500);
+      });
+    }
     setInterval(() => showQuote(qi + 1), 10000);
   }
 </script>
@@ -182,7 +219,8 @@ quotes.forEach((q) => { q.hasMore = q.text.length > q.teaser.length * 1.35; });
     object-fit: cover;
     opacity: 0;
     transform: scale(1.06);
-    transition: opacity 4.5s ease-in-out, transform 4.5s ease-in-out;
+    object-position: 50% center;
+    transition: opacity 4.5s ease-in-out, transform 4.5s ease-in-out, object-position 4.5s ease-in-out;
   }
   .slide.active {
     opacity: 1;
@@ -228,8 +266,11 @@ quotes.forEach((q) => { q.hasMore = q.text.length > q.teaser.length * 1.35; });
     display: flex; flex-direction: column; gap: 0.1rem;
     margin-top: 1.2rem;
   }
-  .q-name { font-weight: 600; font-size: 0.98rem; }
-  .q-meta { color: var(--muted-2); font-size: 0.85rem; letter-spacing: 0.02em; }
+  /* :global — q-name/q-meta are rewritten via innerHTML on every quote
+     rotation, so they never carry Astro's scoped data-cid attribute; a
+     plain scoped rule would only style the first (SSR-rendered) quote */
+  :global(.q-name) { font-weight: 600; font-size: 0.98rem; }
+  :global(.q-meta) { color: var(--muted-2); font-size: 0.85rem; letter-spacing: 0.02em; }
   .quote { transition: opacity 1.3s ease-in-out; }
   .quote.fade { opacity: 0; }
 
@@ -238,14 +279,17 @@ quotes.forEach((q) => { q.hasMore = q.text.length > q.teaser.length * 1.35; });
     display: flex; flex-direction: column; gap: 0.1rem;
     letter-spacing: 0.03em; text-align: right;
   }
-  .credit-project { color: var(--text); font-weight: 600; font-size: 0.98rem; }
-  .credit-client { color: var(--muted-2); font-size: 0.85rem; letter-spacing: 0.02em; }
+  /* :global — same reason: credit-project/-client are rewritten via
+     innerHTML on every slide change */
+  :global(.credit-project) { color: var(--text); font-weight: 600; font-size: 0.98rem; }
+  :global(.credit-client) { color: var(--muted-2); font-size: 0.85rem; letter-spacing: 0.02em; }
 
   .scroll-cue {
     position: absolute; left: 50%; bottom: 1.5rem; z-index: 2;
     transform: translateX(-50%);
     width: 22px; height: 34px; border: 1px solid rgba(255,255,255,0.4);
     border-radius: 12px; display: none;
+    transition: opacity 0.3s var(--ease);
   }
   .scroll-cue span {
     position: absolute; left: 50%; top: 7px; width: 3px; height: 7px;
@@ -258,5 +302,52 @@ quotes.forEach((q) => { q.hasMore = q.text.length > q.teaser.length * 1.35; });
   @media (prefers-reduced-motion: reduce) {
     .slide.active { animation: none; }
     .scroll-cue span { animation: none; }
+  }
+
+  /* ---- mobile (<=760px): full-bleed focal pan instead of Ken Burns,
+     credit stacked above a shorter teaser-only quote, deeper scrim ---- */
+  @media (max-width: 760px) {
+    .scrim {
+      background:
+        linear-gradient(180deg, rgba(10,10,12,0.7) 0%, rgba(10,10,12,0) 22%),
+        linear-gradient(0deg, rgba(10,10,12,0.98) 0%, rgba(10,10,12,0.86) 30%, rgba(10,10,12,0.42) 58%, rgba(10,10,12,0) 80%);
+    }
+
+    .slide.active {
+      animation: heropan 8.5s ease-in-out infinite alternate;
+    }
+    @keyframes heropan {
+      from { object-position: calc(var(--focal, 50%) - 7%) center; transform: scale(1.04); }
+      to   { object-position: calc(var(--focal, 50%) + 7%) center; transform: scale(1.04); }
+    }
+
+    .hero-bottom {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.9rem;
+    }
+    .quote { order: 2; width: auto; max-width: 100%; }
+    .credit {
+      order: 1;
+      flex-direction: row; flex-wrap: wrap;
+      column-gap: 0.5rem;
+      text-align: left;
+    }
+    /* :global — the credit spans are rewritten via innerHTML on every slide
+       change, so they never carry Astro's scoped data-cid attribute and a
+       plain scoped ::before would silently stop matching after rotation 1 */
+    :global(.credit-client)::before { content: "· "; }
+    .q-more { display: none !important; }
+
+    .quote blockquote { font-size: clamp(1.1rem, 4.8vw, 1.4rem); line-height: 1.26; }
+    :global(.q-name) { font-size: 0.9rem; }
+    :global(.q-meta) { font-size: 0.78rem; }
+    :global(.credit-project) { font-size: 0.9rem; }
+    :global(.credit-client) { font-size: 0.78rem; }
+
+    .scroll-cue { display: block; bottom: 1.2rem; }
+  }
+  @media (max-width: 760px) and (prefers-reduced-motion: reduce) {
+    .slide.active { animation: none; }
   }
 </style>

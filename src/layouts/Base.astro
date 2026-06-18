@@ -45,6 +45,20 @@ const {
         { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
       );
       document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+
+      // scroll-wake "spotlight" — touch devices have no :hover, so the
+      // element nearest the screen's vertical center auto-gets the same
+      // payoff a desktop hover would give it (image zoom, octagon rotate,
+      // portrait desaturate, etc.), one at a time as you scroll. Harmless
+      // on desktop since the .live styling only applies under mobile
+      // media queries in each component's CSS.
+      const spotlight = new IntersectionObserver(
+        (entries) => {
+          for (const e of entries) e.target.classList.toggle("live", e.isIntersecting);
+        },
+        { rootMargin: "-40% 0px -40% 0px" }
+      );
+      document.querySelectorAll("[data-spotlight]").forEach((el) => spotlight.observe(el));
     </script>
   </body>
 </html>
