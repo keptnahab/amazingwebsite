@@ -333,20 +333,20 @@ quotes.forEach((q) => { q.hasMore = q.text.length > q.teaser.length * 1.35; });
     /* vertical caption, right edge, vertically centered — a quiet film/
        photo-credit treatment, deliberately separate from the quote */
     .credit {
-      top: 50%; right: 0.4rem; bottom: auto;
+      top: 50%; right: 0.5rem; bottom: auto;
       transform: translateY(-50%);
       writing-mode: vertical-rl;
       text-orientation: sideways;
       flex-direction: row;
-      gap: 0.5rem;
-      opacity: 0.8;
+      gap: 0.6rem;
+      opacity: 0.92;
     }
     /* :global — the credit spans are rewritten via innerHTML on every slide
        change, so they never carry Astro's scoped data-cid attribute and a
        plain scoped ::before would silently stop matching after rotation 1 */
     :global(.credit-client)::before { content: "· "; }
-    :global(.credit-project) { font-size: 0.68rem; }
-    :global(.credit-client) { font-size: 0.62rem; }
+    :global(.credit-project) { font-size: 0.8rem; }
+    :global(.credit-client) { font-size: 0.76rem; color: var(--muted); }
 
     .scroll-cue { display: block; bottom: 1.2rem; }
   }
