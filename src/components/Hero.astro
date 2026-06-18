@@ -87,11 +87,12 @@ quotes.forEach((q) => { q.hasMore = q.text.length > q.teaser.length * 1.35; });
         <span class="q-meta">{metaOf(quotes[0].role, quotes[0].org)}</span>
       </figcaption>
     </figure>
-    <p class="credit" id="credit">
-      <span class="credit-project">{slides[0].project}</span>
-      <span class="credit-client">Client: {slides[0].client}</span>
-    </p>
   </div>
+
+  <p class="credit" id="credit">
+    <span class="credit-project">{slides[0].project}</span>
+    <span class="credit-client">Client: {slides[0].client}</span>
+  </p>
 
   <a href="/#about" class="scroll-cue" aria-label="Scroll down">
     <span></span>
@@ -239,11 +240,9 @@ quotes.forEach((q) => { q.hasMore = q.text.length > q.teaser.length * 1.35; });
 
   .hero-bottom {
     position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
-    display: flex; align-items: flex-end; justify-content: space-between;
-    gap: 2rem;
     padding-bottom: 1.8rem;
   }
-  .quote { margin: 0; width: 16em; max-width: 60vw; flex: none; }
+  .quote { margin: 0; width: 16em; max-width: 60vw; }
   .quote blockquote {
     margin: 0;
     font-size: clamp(1.4rem, 2.6vw, 2.15rem);
@@ -275,7 +274,9 @@ quotes.forEach((q) => { q.hasMore = q.text.length > q.teaser.length * 1.35; });
   .quote.fade { opacity: 0; }
 
   .credit {
-    margin: 0; flex: none;
+    position: absolute; z-index: 2;
+    right: var(--pad); bottom: 1.8rem;
+    margin: 0;
     display: flex; flex-direction: column; gap: 0.1rem;
     letter-spacing: 0.03em; text-align: right;
   }
@@ -305,7 +306,9 @@ quotes.forEach((q) => { q.hasMore = q.text.length > q.teaser.length * 1.35; });
   }
 
   /* ---- mobile (<=760px): full-bleed focal pan instead of Ken Burns,
-     credit stacked above a shorter teaser-only quote, deeper scrim ---- */
+     credit becomes a small vertical caption on the right edge (decoupled
+     from the quote — they're unrelated content and shouldn't read as one
+     block), deeper scrim ---- */
   @media (max-width: 760px) {
     .scrim {
       background:
@@ -321,29 +324,29 @@ quotes.forEach((q) => { q.hasMore = q.text.length > q.teaser.length * 1.35; });
       to   { object-position: calc(var(--focal, 50%) + 7%) center; transform: scale(1.04); }
     }
 
-    .hero-bottom {
-      flex-direction: column;
-      align-items: stretch;
-      gap: 0.9rem;
-    }
-    .quote { order: 2; width: auto; max-width: 100%; }
+    .quote { width: auto; max-width: 100%; }
+    .q-more { display: none !important; }
+    .quote blockquote { font-size: clamp(1.1rem, 4.8vw, 1.4rem); line-height: 1.26; }
+    :global(.q-name) { font-size: 0.9rem; }
+    :global(.q-meta) { font-size: 0.78rem; }
+
+    /* vertical caption, right edge, vertically centered — a quiet film/
+       photo-credit treatment, deliberately separate from the quote */
     .credit {
-      order: 1;
-      flex-direction: row; flex-wrap: wrap;
-      column-gap: 0.5rem;
-      text-align: left;
+      top: 50%; right: 0.4rem; bottom: auto;
+      transform: translateY(-50%);
+      writing-mode: vertical-rl;
+      text-orientation: sideways;
+      flex-direction: row;
+      gap: 0.5rem;
+      opacity: 0.8;
     }
     /* :global — the credit spans are rewritten via innerHTML on every slide
        change, so they never carry Astro's scoped data-cid attribute and a
        plain scoped ::before would silently stop matching after rotation 1 */
     :global(.credit-client)::before { content: "· "; }
-    .q-more { display: none !important; }
-
-    .quote blockquote { font-size: clamp(1.1rem, 4.8vw, 1.4rem); line-height: 1.26; }
-    :global(.q-name) { font-size: 0.9rem; }
-    :global(.q-meta) { font-size: 0.78rem; }
-    :global(.credit-project) { font-size: 0.9rem; }
-    :global(.credit-client) { font-size: 0.78rem; }
+    :global(.credit-project) { font-size: 0.68rem; }
+    :global(.credit-client) { font-size: 0.62rem; }
 
     .scroll-cue { display: block; bottom: 1.2rem; }
   }
