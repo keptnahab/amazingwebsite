@@ -15,6 +15,13 @@ const {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>
+      // stop the browser from restoring the previous scroll position on
+      // reload — without this, reloading mid-scroll re-lands you wherever
+      // you last were (e.g. "About") instead of the top. URL-hash anchors
+      // (e.g. /#about from a nav link) still scroll there as expected.
+      if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    </script>
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="theme-color" content="#0a0a0c" />
