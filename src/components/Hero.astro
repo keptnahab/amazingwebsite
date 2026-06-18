@@ -165,7 +165,7 @@ quotes.forEach((q) => { q.hasMore = q.text.length > q.teaser.length * 1.35; });
     Promise.allSettled(imgs.map((im) => im.decode ? im.decode() : Promise.resolve())).then(() => {
       setInterval(() => showSlide(si + 1), 8500);
     });
-    setInterval(() => { if (!expanded) showQuote(qi + 1); }, 10000);
+    setInterval(() => showQuote(qi + 1), 10000);
   }
 </script>
 
