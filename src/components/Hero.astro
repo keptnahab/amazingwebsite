@@ -175,6 +175,7 @@ quotes.forEach((q) => { q.hasMore = q.text.length > q.teaser.length * 1.35; });
       const meta = q.role ? `${q.role} · ${q.org}` : q.org;
       qAttr.innerHTML = `<span class="q-name">${q.name}</span><span class="q-meta">${meta}</span>`;
       quoteEl.classList.remove("fade");
+      positionCue();
     }, 1200);
   }
 
@@ -183,6 +184,20 @@ quotes.forEach((q) => { q.hasMore = q.text.length > q.teaser.length * 1.35; });
     expanded = !expanded;
     renderQuoteBody(quotes[qi]);
   });
+
+  // the quote's height varies a lot by testimonial — pin the scroll cue a
+  // fixed gap above its current top edge so it never overlaps the text,
+  // instead of a fixed bottom offset that only works for short quotes
+  function positionCue() {
+    if (!cue || !isMobile()) return;
+    const hero = document.querySelector(".hero");
+    const heroBottom = hero.getBoundingClientRect().bottom;
+    const quoteTop = quoteEl.getBoundingClientRect().top;
+    cue.style.bottom = `${heroBottom - quoteTop + 24}px`;
+  }
+  positionCue();
+  window.addEventListener("resize", positionCue);
+  window.addEventListener("load", positionCue);
 
   if (cue) {
     window.addEventListener("scroll", () => {
@@ -348,7 +363,12 @@ quotes.forEach((q) => { q.hasMore = q.text.length > q.teaser.length * 1.35; });
     :global(.credit-project) { font-size: 0.8rem; }
     :global(.credit-client) { font-size: 0.76rem; color: var(--muted); }
 
-    .scroll-cue { display: block; bottom: 1.2rem; }
+    .scroll-cue {
+      display: block; bottom: 1.2rem;
+      width: 18px; height: 28px;
+      border-color: rgba(255,255,255,0.28);
+    }
+    .scroll-cue span { background: rgba(255,255,255,0.75); top: 6px; }
   }
   @media (max-width: 760px) and (prefers-reduced-motion: reduce) {
     .slide.active { animation: none; }
