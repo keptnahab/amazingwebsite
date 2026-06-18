@@ -119,9 +119,13 @@ quotes.forEach((q) => { q.hasMore = q.text.length > q.teaser.length * 1.35; });
 
   function renderQuoteBody(q) {
     // mobile only ever shows the short teaser — no read-more there
-    qText.textContent = expanded && q.hasMore && !isMobile() ? q.text : q.teaser;
+    const showFull = expanded && q.hasMore && !isMobile();
+    qText.textContent = showFull ? q.text : q.teaser;
     qMore.hidden = !q.hasMore;
     qMore.textContent = expanded ? "Show less" : "Read more";
+    // a long expanded quote can otherwise grow tall enough to run under the
+    // fixed header — cap it and let the text itself scroll instead
+    quoteEl.classList.toggle("expanded", showFull);
   }
 
   // match the quote column's width to the header logo lockup (desktop only) —
@@ -274,6 +278,14 @@ quotes.forEach((q) => { q.hasMore = q.text.length > q.teaser.length * 1.35; });
   }
   .quote blockquote::before { content: "“"; color: var(--muted-2); margin-right: 0.05em; }
   .quote blockquote::after { content: "”"; color: var(--muted-2); }
+  /* expanded read-more text can run long enough to reach under the fixed
+     header — cap it to the space actually available and let it scroll
+     internally instead of growing past the top of the viewport */
+  .quote.expanded blockquote {
+    max-height: calc(100svh - 235px);
+    overflow-y: auto;
+    padding-right: 0.6rem;
+  }
   .q-more {
     display: block; margin: 0.6rem 0 0; padding: 0;
     background: none; border: 0; cursor: pointer;
@@ -281,6 +293,10 @@ quotes.forEach((q) => { q.hasMore = q.text.length > q.teaser.length * 1.35; });
     color: var(--muted-2); text-decoration: underline;
     text-underline-offset: 2px;
   }
+  /* an unconditional `display` on an author rule beats the UA stylesheet's
+     [hidden]{display:none} even though hidden is true — without this, the
+     button never actually disappears for the quotes with nothing to expand */
+  .q-more[hidden] { display: none; }
   .q-more:hover { color: var(--text); }
   .quote figcaption {
     display: flex; flex-direction: column; gap: 0.1rem;
