@@ -249,14 +249,18 @@ quotes.forEach((q) => { q.hasMore = q.text.length > q.teaser.length * 1.35; });
   .scrim {
     position: absolute; inset: 0;
     background:
-      linear-gradient(180deg, rgba(10,10,12,0.6) 0%, rgba(10,10,12,0) 26%),
-      linear-gradient(0deg, rgba(10,10,12,0.96) 0%, rgba(10,10,12,0.78) 26%, rgba(10,10,12,0.32) 52%, rgba(10,10,12,0) 78%);
+      linear-gradient(180deg, rgba(10,10,12,0.45) 0%, rgba(10,10,12,0) 22%),
+      linear-gradient(0deg, rgba(10,10,12,0.72) 0%, rgba(10,10,12,0.46) 24%, rgba(10,10,12,0.14) 46%, rgba(10,10,12,0) 66%);
   }
 
   .hero-bottom {
     position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
     padding-bottom: 1.8rem;
   }
+  /* the scrim is intentionally light so the photos stay visible — this
+     text-shadow (inherited by all descendants, including the q-name/
+     credit spans rewritten via innerHTML) is the legibility safety net */
+  .quote, .credit { text-shadow: 0 2px 16px rgba(0,0,0,0.75), 0 1px 3px rgba(0,0,0,0.7); }
   .quote { margin: 0; width: 16em; max-width: 60vw; }
   .quote blockquote {
     margin: 0;
@@ -323,12 +327,12 @@ quotes.forEach((q) => { q.hasMore = q.text.length > q.teaser.length * 1.35; });
   /* ---- mobile (<=760px): full-bleed focal pan instead of Ken Burns,
      credit becomes a small vertical caption on the right edge (decoupled
      from the quote — they're unrelated content and shouldn't read as one
-     block), deeper scrim ---- */
+     block) ---- */
   @media (max-width: 760px) {
     .scrim {
       background:
-        linear-gradient(180deg, rgba(10,10,12,0.7) 0%, rgba(10,10,12,0) 22%),
-        linear-gradient(0deg, rgba(10,10,12,0.98) 0%, rgba(10,10,12,0.86) 30%, rgba(10,10,12,0.42) 58%, rgba(10,10,12,0) 80%);
+        linear-gradient(180deg, rgba(10,10,12,0.5) 0%, rgba(10,10,12,0) 20%),
+        linear-gradient(0deg, rgba(10,10,12,0.8) 0%, rgba(10,10,12,0.55) 26%, rgba(10,10,12,0.18) 48%, rgba(10,10,12,0) 68%);
     }
 
     .slide.active {
