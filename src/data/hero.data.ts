@@ -8,7 +8,7 @@ export interface HeroSlideData {
 }
 
 export const heroSlidesData: HeroSlideData[] = [
-  { file: "31-kings-cup.jpg", project: "Kings Cup", client: "Roland Greil" },
+  { file: "31-kings-cup-jeddah.jpg", project: "Kings Cup Jeddah", client: "Roland Greil" },
   { file: "30-hongkong-nye.jpg", project: "Hongkong NYE", client: "Roland Greil" },
   { file: "29-acdc-pwr-up-tour-australia.jpg", project: "AC/DC PWR Up Tour Australia", client: "Woodroffe Basset Design" },
   { file: "28-grand-egyptian-museum-opening.jpg", project: "Grand Egyptian Museum Opening", client: "Roland Greil" },
