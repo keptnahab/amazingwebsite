@@ -19,7 +19,7 @@ const ACRONYMS = new Set(["BR", "NYE", "FC", "CES", "IFA", "CLT", "PWR"]);
 const WORD_OVERRIDES = { ACDC: "AC/DC" };
 
 function titleCase(s) {
-  const lower = new Set(["of", "the", "and", "at", "in", "a"]);
+  const lower = new Set(["of", "the", "and", "at", "in", "a", "to"]);
   return s
     .toLowerCase()
     .split(/\s+/)

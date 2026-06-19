@@ -13,7 +13,7 @@ export const heroSlidesData: HeroSlideData[] = [
   { file: "29-acdc-pwr-up-tour-australia.jpg", project: "AC/DC PWR Up Tour Australia", client: "Woodroffe Basset Design" },
   { file: "28-grand-egyptian-museum-opening.jpg", project: "Grand Egyptian Museum Opening", client: "Roland Greil" },
   { file: "27-madagascar-kids-musical.jpg", project: "Madagascar Kids Musical", client: "Festspielhaus Fuessen" },
-  { file: "26-ozzy-osbourne-bttb.jpg", project: "Ozzy Osbourne Bttb", client: "Woodroffe Basset Design" },
+  { file: "26-ozzy-osbourne-back-to-the-beginning.jpg", project: "Ozzy Osbourne Back to the Beginning", client: "Woodroffe Basset Design" },
   { file: "25-vorwerk-ceremony.jpg", project: "Vorwerk Ceremony", client: "Projektstark" },
   { file: "24-company-aniversary-pitch.jpg", project: "Company Aniversary Pitch", client: "Roland Greil" },
   { file: "23-die-paepstin.jpg", project: "Die Paepstin", client: "Festspielhaus Fuessen" },
