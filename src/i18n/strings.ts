@@ -206,8 +206,8 @@ export const strings = {
         CONCERTS: "Konzerte",
         CORPORATE: "Firmenevents",
         THEATER: "Theater",
-        EVENTS: "Veranstaltungen",
-        CEREMONY: "Zeremonien",
+        EVENTS: "Veranstaltung",
+        CEREMONY: "Stadion Events",
       },
     },
     footer: {
