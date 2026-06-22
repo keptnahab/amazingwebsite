@@ -1,4 +1,7 @@
 ---
+import { Image } from "astro:assets";
+import collectiveLogo from "../assets/collective/360-degree-collective-logo.png";
+
 const oct =
   "59.72,43.49 43.49,59.72 20.51,59.72 4.28,43.49 4.28,20.51 20.51,4.28 43.49,4.28 59.72,20.51";
 
@@ -80,6 +83,26 @@ const cards = [
       Three connected disciplines — available as one seamless package or as standalone
       modules, tailored to each project.
     </p>
+
+    <a
+      class="network reveal press"
+      data-spotlight
+      href="https://www.360-degree-collective.com"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <div class="network-icon">
+        <Image src={collectiveLogo} alt="" width={32} height={32} />
+      </div>
+      <div class="network-copy">
+        <h3 class="network-title">360° Collective</h3>
+        <p class="network-text">
+          Member of an international network of designers, programmers and producers —
+          giving me access to extra hands and expertise to scale a project up, whatever
+          the size.
+        </p>
+      </div>
+    </a>
   </div>
 </section>
 
@@ -130,8 +153,41 @@ const cards = [
     font-size: 1.02rem;
   }
 
+  .network {
+    display: flex;
+    align-items: center;
+    gap: 1.3rem;
+    margin-top: 1.6rem;
+    padding: 1.5rem 1.8rem;
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    text-decoration: none;
+    transition: transform 0.5s var(--ease), border-color 0.5s var(--ease), background 0.5s var(--ease);
+  }
+  .network:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255,255,255,0.2);
+    background: var(--bg-3);
+  }
+  .network-icon {
+    flex: none;
+    width: 48px; height: 48px;
+    display: grid; place-items: center;
+    background: var(--bg-3);
+    border: 1px solid var(--line);
+    border-radius: 50%;
+  }
+  .network-icon :global(img) { width: 24px; height: 24px; object-fit: contain; opacity: 0.92; }
+  .network-title { font-size: 1rem; font-weight: 700; margin: 0 0 0.3rem; }
+  .network-text { color: var(--muted); margin: 0; font-size: 0.92rem; max-width: 60ch; }
+
   @media (max-width: 820px) {
     .cards { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 580px) {
+    .network { flex-direction: column; align-items: flex-start; gap: 1rem; }
   }
 
   @media (max-width: 760px) {
