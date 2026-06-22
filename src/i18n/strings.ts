@@ -202,11 +202,11 @@ export const strings = {
       nextImage: "Nächstes Bild",
       image: "Bild",
       categories: {
-        BROADCAST: "Übertragung",
+        BROADCAST: "Broadcast",
         CONCERTS: "Konzerte",
         CORPORATE: "Firmenevents",
         THEATER: "Theater",
-        EVENTS: "Veranstaltung",
+        EVENTS: "Events",
         CEREMONY: "Stadion Events",
       },
     },
