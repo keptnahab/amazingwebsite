@@ -1,25 +1,19 @@
 ---
 import Logo from "./Logo.astro";
+import { mainNav, legalNav } from "../data/nav.data";
+import { locale, t } from "../i18n/config";
 const year = 2026;
 const cols = [
-  { title: "Explore", links: [
-    { label: "Work", href: "/work" },
-    { label: "About", href: "/#about" },
-    { label: "Services", href: "/#services" },
-    { label: "Contact", href: "/#contact" },
-  ]},
-  { title: "Legal", links: [
-    { label: "Imprint", href: "/imprint" },
-    { label: "Privacy", href: "/privacy" },
-  ]},
+  { title: t.footer.explore, links: mainNav },
+  { title: t.footer.legal, links: legalNav },
 ];
 ---
 
 <footer class="footer">
   <div class="wrap foot-top">
     <div class="foot-brand">
-      <Logo size={30} />
-      <p>Lighting up stages worldwide. Always with intent.</p>
+      <Logo size={30} domain={locale} />
+      <p>{t.footer.tagline}</p>
     </div>
     <div class="foot-cols">
       {cols.map((c) => (
@@ -31,8 +25,8 @@ const cols = [
     </div>
   </div>
   <div class="wrap foot-bottom">
-    <p>© {year} Michael Kühbandner · amazinglighting.design</p>
-    <p>All rights reserved.</p>
+    <p>© {year} {t.footer.copyright}</p>
+    <p>{t.footer.rights}</p>
   </div>
 </footer>
 

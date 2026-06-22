@@ -2,17 +2,58 @@
 import Base from "../layouts/Base.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import { locale, t } from "../i18n/config";
 ---
 
-<Base title="Imprint — amazinglighting.design">
+<Base title={t.meta.imprintTitle}>
   <Header />
   <main class="section">
     <div class="wrap legal">
-      <p class="eyebrow">Legal</p>
-      <h1 class="section-title">Imprint</h1>
+      <p class="eyebrow">{t.legal.eyebrow}</p>
+      <h1 class="section-title">{t.legal.imprintTitle}</h1>
       <hr class="rule" />
-      <p>Placeholder — required legal details (Impressum) will be added before launch, especially for the German tolleslicht.de version (§5 DDG / §18 MStV).</p>
-      <p>Michael Kühbandner · Munich, Germany · info@amazinglighting.design</p>
+
+      {locale === "de" ? (
+        <>
+          <h2>Angaben gemäß § 5 DDG</h2>
+          <p>
+            Michael Kühbandner<br />
+            [TODO: Straße und Hausnummer]<br />
+            [TODO: PLZ und Ort], Deutschland
+          </p>
+
+          <h2>Kontakt</h2>
+          <p>
+            E-Mail: info@amazinglighting.design<br />
+            [TODO: Telefonnummer, falls gewünscht]
+          </p>
+
+          <h2>Umsatzsteuer-ID</h2>
+          <p>
+            [TODO: Umsatzsteuer-Identifikationsnummer gemäß §27a Umsatzsteuergesetz, falls vorhanden]
+          </p>
+
+          <h2>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
+          <p>
+            Michael Kühbandner, Anschrift wie oben.
+          </p>
+
+          <h2>EU-Streitschlichtung</h2>
+          <p>
+            Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:{" "}
+            <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener noreferrer">https://ec.europa.eu/consumers/odr/</a>.
+            Wir sind nicht verpflichtet und nicht bereit, an Streitbeilegungsverfahren vor einer
+            Verbraucherschlichtungsstelle teilzunehmen.
+          </p>
+
+          <p class="note">
+            Hinweis: Dies ist ein Entwurf. Bitte die mit [TODO] markierten Angaben (Anschrift,
+            ggf. USt-ID) ergänzen und vor Veröffentlichung rechtlich prüfen lassen.
+          </p>
+        </>
+      ) : (
+        <p>Michael Kühbandner · Munich, Germany · info@amazinglighting.design</p>
+      )}
     </div>
   </main>
   <Footer />
@@ -21,4 +62,6 @@ import Footer from "../components/Footer.astro";
 <style>
   .legal { max-width: 70ch; }
   .legal p { color: var(--muted); margin: 1rem 0; }
+  .legal h2 { font-size: 1.1rem; margin: 2rem 0 0.4rem; }
+  .legal .note { font-size: 0.85rem; font-style: italic; }
 </style>

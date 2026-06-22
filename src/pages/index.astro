@@ -7,6 +7,7 @@ import Services from "../components/Services.astro";
 import WorkGrid from "../components/WorkGrid.astro";
 import Contact from "../components/Contact.astro";
 import Footer from "../components/Footer.astro";
+import { t } from "../i18n/config";
 ---
 
 <Base>
@@ -15,9 +16,9 @@ import Footer from "../components/Footer.astro";
     <Hero />
     <About />
     <Services />
-    <WorkGrid showControls eyebrow="Selected Work" title="Recent projects." limit={24} />
+    <WorkGrid showControls eyebrow={t.work.eyebrowHome} title={t.work.titleHome} limit={24} />
     <div class="wrap viewall">
-      <a href="/work" class="viewall-link">View all projects <span>→</span></a>
+      <a href="/work" class="viewall-link">{t.work.viewAll} <span>→</span></a>
     </div>
     <Contact />
   </main>

@@ -1,6 +1,7 @@
 ---
 import type { ImageMetadata } from "astro";
 import { heroSlidesData } from "../data/hero.data";
+import { t } from "../i18n/config";
 
 // images are auto-discovered from src/assets/hero/ via glob — see
 // scripts/import-hero.mjs for how to add a new slide. heroSlidesData is
@@ -65,7 +66,7 @@ quotes.forEach((q) => { q.hasMore = q.text.length > q.teaser.length * 1.35; });
   <div class="wrap hero-bottom">
     <figure class="quote" id="quote">
       <blockquote id="qText">{quotes[0].teaser}</blockquote>
-      <button class="q-more" id="qMore" type="button" hidden={!quotes[0].hasMore}>Read more</button>
+      <button class="q-more" id="qMore" type="button" hidden={!quotes[0].hasMore}>{t.hero.readMore}</button>
       <figcaption id="qAttr">
         <span class="q-name">{quotes[0].name}</span>
         <span class="q-meta">{metaOf(quotes[0].role, quotes[0].org)}</span>
@@ -75,16 +76,16 @@ quotes.forEach((q) => { q.hasMore = q.text.length > q.teaser.length * 1.35; });
 
   <p class="credit" id="credit">
     <span class="credit-project">{slides[0].project}</span>
-    <span class="credit-client">Client: {slides[0].client}</span>
+    <span class="credit-client">{t.hero.client}: {slides[0].client}</span>
   </p>
 
-  <a href="/#about" class="scroll-cue" aria-label="Scroll down">
+  <a href="/#about" class="scroll-cue" aria-label={t.hero.scrollDown}>
     <span></span>
   </a>
 </section>
 
 <script
-  define:vars={{ slides, quotes }}
+  define:vars={{ slides, quotes, i18nHero: t.hero }}
 >
   const imgs = [...document.querySelectorAll(".slide")];
   const credit = document.getElementById("credit");
@@ -104,7 +105,7 @@ quotes.forEach((q) => { q.hasMore = q.text.length > q.teaser.length * 1.35; });
     const showFull = expanded && q.hasMore && !isMobile();
     qText.textContent = showFull ? q.text : q.teaser;
     qMore.hidden = !q.hasMore;
-    qMore.textContent = expanded ? "Show less" : "Read more";
+    qMore.textContent = expanded ? i18nHero.showLess : i18nHero.readMore;
     // a long expanded quote can otherwise grow tall enough to run under the
     // fixed header — cap it and let the text itself scroll instead
     quoteEl.classList.toggle("expanded", showFull);
@@ -151,7 +152,7 @@ quotes.forEach((q) => { q.hasMore = q.text.length > q.teaser.length * 1.35; });
     }
     imgs[si].classList.add("active");
     const s = slides[si];
-    credit.innerHTML = `<span class="credit-project">${s.project}</span><span class="credit-client">Client: ${s.client}</span>`;
+    credit.innerHTML = `<span class="credit-project">${s.project}</span><span class="credit-client">${i18nHero.client}: ${s.client}</span>`;
   }
   function showQuote(n) {
     qi = (n + quotes.length) % quotes.length;

@@ -1,39 +1,23 @@
 ---
 import { Image } from "astro:assets";
 import collectiveLogo from "../assets/collective/360-degree-collective-logo.png";
+import { t } from "../i18n/config";
 
 const oct =
   "59.72,43.49 43.49,59.72 20.51,59.72 4.28,43.49 4.28,20.51 20.51,4.28 43.49,4.28 59.72,20.51";
 
-const cards = [
-  {
-    key: "visual",
-    color: "var(--r)",
-    title: "Visual Design",
-    sub: "Lights · Video · CGI",
-    text: "Unconventional creativity and a trained eye, turning an idea into images that communicate.",
-  },
-  {
-    key: "programming",
-    color: "var(--g)",
-    title: "Programming",
-    sub: "Consoles · Media Servers",
-    text: "Lighting desk and media-server programming, plus interactive and generative real-time content.",
-  },
-  {
-    key: "preproduction",
-    color: "var(--b)",
-    title: "Preproduction",
-    sub: "CAD · 3D Previz",
-    text: "Technical drawings and photoreal 3D pre-visualization — the show is solved before load-in.",
-  },
-];
+const colors: Record<string, string> = {
+  visual: "var(--r)",
+  programming: "var(--g)",
+  preproduction: "var(--b)",
+};
+const cards = t.services.cards.map((c) => ({ ...c, color: colors[c.key] }));
 ---
 
 <section class="section services" id="services">
   <div class="wrap">
-    <p class="eyebrow reveal">Services</p>
-    <h2 class="section-title reveal">Three disciplines, one show.</h2>
+    <p class="eyebrow reveal">{t.services.eyebrow}</p>
+    <h2 class="section-title reveal">{t.services.title}</h2>
     <hr class="rule reveal" />
 
     <div class="cards">
@@ -80,8 +64,7 @@ const cards = [
     </div>
 
     <p class="services-note reveal">
-      Three connected disciplines — available as one seamless package or as standalone
-      modules, tailored to each project.
+      {t.services.note}
     </p>
 
     <a
@@ -95,11 +78,9 @@ const cards = [
         <Image src={collectiveLogo} alt="" width={32} height={32} />
       </div>
       <div class="network-copy">
-        <h3 class="network-title">360° Collective</h3>
+        <h3 class="network-title">{t.services.networkTitle}</h3>
         <p class="network-text">
-          Member of an international network of designers, programmers and producers —
-          giving me access to extra hands and expertise to scale a project up, whatever
-          the size.
+          {t.services.networkText}
         </p>
       </div>
     </a>

@@ -1,30 +1,30 @@
 ---
+import { t } from "../i18n/config";
 const email = "info@amazinglighting.design";
 ---
 
 <section class="section contact" id="contact">
   <div class="wrap">
-    <p class="eyebrow reveal">Contact</p>
-    <h2 class="section-title reveal">Let's light it up.</h2>
+    <p class="eyebrow reveal">{t.contact.eyebrow}</p>
+    <h2 class="section-title reveal">{t.contact.title}</h2>
     <hr class="rule reveal" />
 
     <div class="contact-grid">
       <p class="contact-lead reveal">
-        Planning a stadium event, concert tour, corporate show or broadcast production?
-        I work internationally and am available for projects of all scales.
+        {t.contact.lead}
       </p>
 
       <div class="contact-details reveal">
         <a class="detail" href={`mailto:${email}`}>
-          <span class="detail-label">Email</span>
+          <span class="detail-label">{t.contact.email}</span>
           <span class="detail-value">{email}</span>
         </a>
         <div class="detail">
-          <span class="detail-label">Based in</span>
-          <span class="detail-value">Munich, Germany · available worldwide</span>
+          <span class="detail-label">{t.contact.basedIn}</span>
+          <span class="detail-value">{t.contact.location}</span>
         </div>
         <a class="detail" href="https://www.facebook.com/michael.kuehbandner" target="_blank" rel="noopener">
-          <span class="detail-label">Facebook</span>
+          <span class="detail-label">{t.contact.facebook}</span>
           <span class="detail-value">Michael Kühbandner →</span>
         </a>
       </div>

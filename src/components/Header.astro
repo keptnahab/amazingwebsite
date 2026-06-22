@@ -1,22 +1,23 @@
 ---
 import Logo from "./Logo.astro";
-const links = [
-  { label: "Work", href: "/work" },
-  { label: "About", href: "/#about" },
-  { label: "Services", href: "/#services" },
-  { label: "Contact", href: "/#contact" },
-];
+import LangSwitch from "./LangSwitch.astro";
+import { mainNav } from "../data/nav.data";
+import { locale } from "../i18n/config";
+const links = mainNav;
 ---
 
 <header class="site-header" id="siteHeader">
   <div class="wrap bar">
-    <Logo size={28} />
+    <Logo size={28} domain={locale} />
     <nav class="nav" aria-label="Primary">
       {links.map((l) => <a href={l.href} class="link-quiet">{l.label}</a>)}
     </nav>
-    <button class="burger" aria-label="Menu" aria-expanded="false" id="burger">
-      <span></span><span></span>
-    </button>
+    <div class="bar-right">
+      <LangSwitch />
+      <button class="burger" aria-label="Menu" aria-expanded="false" id="burger">
+        <span></span><span></span>
+      </button>
+    </div>
   </div>
 </header>
 <nav class="mobile-nav" id="mobileNav" aria-label="Mobile">
@@ -59,6 +60,12 @@ const links = [
     transition: width 0.3s var(--ease);
   }
   .nav a:hover::after { width: 100%; }
+
+  .bar-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
 
   .burger {
     display: none;

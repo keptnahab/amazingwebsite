@@ -1,17 +1,20 @@
 ---
 import "../styles/global.css";
+import { locale, t, domains, otherLocale } from "../i18n/config";
+
 interface Props {
   title?: string;
   description?: string;
 }
-const {
-  title = "amazinglighting.design — Michael Kühbandner · Lighting Design",
-  description = "Lighting design, programming and previsualization for broadcast, concerts, ceremonies, corporate and theatre. 30+ years, worldwide.",
-} = Astro.props;
+const { title = t.meta.title, description = t.meta.description } = Astro.props;
+
+const path = Astro.url.pathname;
+const canonical = new URL(path, Astro.site);
+const alternateUrl = (loc: typeof locale) => `https://${loc === "de" ? "www." : ""}${domains[loc]}${path}`;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={locale}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -26,6 +29,16 @@ const {
     <meta name="description" content={description} />
     <meta name="theme-color" content="#0a0a0c" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonical.href} />
+    <link rel="alternate" hreflang="en" href={alternateUrl("en")} />
+    <link rel="alternate" hreflang="de" href={alternateUrl("de")} />
+    <link rel="alternate" hreflang="x-default" href={alternateUrl("en")} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical.href} />
+    <meta property="og:locale" content={locale === "de" ? "de_DE" : "en_US"} />
+    <meta property="og:locale:alternate" content={otherLocale === "de" ? "de_DE" : "en_US"} />
 
     <!-- Prototype: Manrope via Google Fonts. Production → self-hosted (@fontsource). -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />

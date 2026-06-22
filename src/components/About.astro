@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import portrait from "../assets/about/portrait.jpg";
+import { t } from "../i18n/config";
 ---
 
 <section class="section about" id="about">
@@ -10,27 +11,18 @@ import portrait from "../assets/about/portrait.jpg";
     </div>
 
     <div class="copy">
-      <p class="eyebrow reveal">About</p>
-      <h2 class="section-title reveal">Light with intent.</h2>
+      <p class="eyebrow reveal">{t.about.eyebrow}</p>
+      <h2 class="section-title reveal">{t.about.title}</h2>
       <hr class="rule reveal" />
       <div class="text reveal">
         <p>
-          I'm a lighting designer with over <strong>30 years</strong> in the entertainment
-          industry — working as designer, director and programmer. My designs are
-          straightforward, on point and precise: they carry the intended message and pull
-          every element on stage into one coherent whole.
+          {t.about.p1Pre}<strong>{t.about.p1Strong}</strong>{t.about.p1Post}
         </p>
         <p>
-          Strong CAD, 3D modelling and previsualization let me bring a creative vision to
-          life in a way that is both practical and visually stunning. Calm and reliable on
-          site, I've lit everything from intimate venues to massive stadiums for
-          internationally known brands and artists.
+          {t.about.p2}
         </p>
         <p>
-          I'm a proud member of the <a href="https://www.360-degree-collective.com" target="_blank" rel="noopener noreferrer">360° Collective</a>,
-          and through this extraordinary network I'm able to draw on a wider pool of talent
-          and resources, letting me offer you creative production at a very high level —
-          from concept to execution, on any scale.
+          {t.about.p3Pre}<a href="https://www.360-degree-collective.com" target="_blank" rel="noopener noreferrer">{t.about.p3Link}</a>{t.about.p3Post}
         </p>
       </div>
     </div>
