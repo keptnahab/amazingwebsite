@@ -182,7 +182,7 @@ export const strings = {
     contact: {
       eyebrow: "Kontakt",
       title: "Lass uns Licht ins Spiel bringen.",
-      lead: "Planst du ein Stadionevent, eine Konzerttour, eine Firmenveranstaltung oder eine Übertragungsproduktion? Ich arbeite international und stehe für Projekte jeder Größenordnung zur Verfügung.",
+      lead: "Planst du ein Stadionevent, eine Konzerttour, eine Firmenveranstaltung oder eine TV/Broadcastproduktion? Ich arbeite international und stehe für Projekte jeder Größenordnung zur Verfügung.",
       email: "E-Mail",
       basedIn: "Standort",
       location: "München, Deutschland · weltweit verfügbar",
@@ -213,7 +213,7 @@ export const strings = {
       },
     },
     footer: {
-      tagline: "Bühnen weltweit in Licht getaucht. Immer mit Haltung.",
+      tagline: "Lichtdesign international — mit Sinn und Verstand.",
       explore: "Entdecken",
       legal: "Rechtliches",
       copyright: "Michael Kühbandner · tolleslicht.de",
