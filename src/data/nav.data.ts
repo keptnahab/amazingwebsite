@@ -1,4 +1,4 @@
-import { t } from "../i18n/config";
+import { t, locale } from "../i18n/config";
 
 export const mainNav = [
   { label: t.nav.work, href: "/work" },
@@ -10,4 +10,5 @@ export const mainNav = [
 export const legalNav = [
   { label: t.nav.imprint, href: "/imprint" },
   { label: t.nav.privacy, href: "/privacy" },
+  { label: t.nav.terms, href: locale === "de" ? "/agb-de.pdf" : "/agb-en.pdf", external: true },
 ];

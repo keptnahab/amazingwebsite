@@ -11,6 +11,7 @@ export const strings = {
       contact: "Contact",
       imprint: "Imprint",
       privacy: "Privacy",
+      terms: "Terms",
     },
     meta: {
       title: "amazinglighting.design — Michael Kühbandner · Lighting Design",
@@ -121,6 +122,7 @@ export const strings = {
       contact: "Kontakt",
       imprint: "Impressum",
       privacy: "Datenschutz",
+      terms: "AGB",
     },
     meta: {
       title: "tolleslicht.de — Michael Kühbandner · Lichtdesign",

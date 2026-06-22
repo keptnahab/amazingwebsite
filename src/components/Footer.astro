@@ -19,7 +19,16 @@ const cols = [
       {cols.map((c) => (
         <nav class="foot-col" aria-label={c.title}>
           <p class="foot-col-title">{c.title}</p>
-          {c.links.map((l) => <a href={l.href} class="link-quiet">{l.label}</a>)}
+          {c.links.map((l) => (
+            <a
+              href={l.href}
+              class="link-quiet"
+              target={"external" in l && l.external ? "_blank" : undefined}
+              rel={"external" in l && l.external ? "noopener" : undefined}
+            >
+              {l.label}
+            </a>
+          ))}
         </nav>
       ))}
     </div>
