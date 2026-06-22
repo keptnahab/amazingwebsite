@@ -138,16 +138,16 @@ export const strings = {
     },
     about: {
       eyebrow: "Über mich",
-      title: "Licht mit Haltung.",
+      title: "Lichtdesign mit Sinn und Verstand.",
       p1Pre: "Ich bin Lichtdesigner mit über ",
       p1Strong: "30 Jahren",
       p1Post:
-        " Erfahrung in der Entertainment-Branche — als Designer, Regisseur und Programmierer. Meine Designs sind klar, präzise und auf den Punkt: Sie transportieren die gewünschte Botschaft und fügen jedes Element auf der Bühne zu einem stimmigen Ganzen zusammen.",
-      p2: "Fundiertes CAD, 3D-Modellierung und Previsualisierung lassen mich eine kreative Vision praxisnah und gleichzeitig visuell beeindruckend umsetzen. Ruhig und verlässlich vor Ort, habe ich von intimen Venues bis zu riesigen Stadien für international bekannte Marken und Künstler Licht gestaltet.",
-      p3Pre: "Ich bin stolzes Mitglied des ",
+        " Erfahrung in der Entertainment-Branche — als Lighting Designer, Lighting Director und Programmierer. Meine Designs sind klar, präzise und auf den Punkt: Sie transportieren die gewünschte Botschaft und fügen jedes Element auf der Bühne zu einem stimmigen Ganzen zusammen.",
+      p2: "Fundierte CAD-Zeichnungen, 3D-Modellierung und Previsualisierung lassen mich eine kreative Vision praxisnah und gleichzeitig visuell beeindruckend umsetzen. Ruhig und verlässlich vor Ort, habe ich von intimen Venues bis zu riesigen Stadien für international bekannte Marken und Künstler Licht und Events gestaltet.",
+      p3Pre: "Ich bin Gründungsmitglied des ",
       p3Link: "360° Collective",
       p3Post:
-        ", und durch dieses außergewöhnliche Netzwerk kann ich auf einen größeren Pool an Talenten und Ressourcen zugreifen — kreative Produktion auf höchstem Niveau, vom Konzept bis zur Umsetzung, in jeder Größenordnung.",
+        ", und durch dieses außergewöhnliche Netzwerk kann ich auf einen beeindruckenden Pool an Talenten und Ressourcen zugreifen — kreative Produktion auf höchstem Niveau, vom Konzept bis zur Umsetzung.",
     },
     services: {
       eyebrow: "Leistungen",

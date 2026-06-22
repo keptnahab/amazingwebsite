@@ -1,7 +1,8 @@
 ---
 import type { ImageMetadata } from "astro";
 import { heroSlidesData } from "../data/hero.data";
-import { t } from "../i18n/config";
+import { testimonialsData } from "../data/testimonials.data";
+import { t, locale } from "../i18n/config";
 
 // images are auto-discovered from src/assets/hero/ via glob — see
 // scripts/import-hero.mjs for how to add a new slide. heroSlidesData is
@@ -20,25 +21,13 @@ const slides = heroSlidesData
   .filter((s): s is { src: string; project: string; client: string } => s !== null);
 
 // testimonials — `teaser` is the short pull-quote shown by default; `text` is
-// the FULL verbatim quote from Site assets/testimonials.rtf, revealed on
-// "Read more" whenever it's genuinely longer than the teaser (a handful of
-// the source quotes are just one short sentence to begin with — for those
-// there's nothing more to reveal, so no "Read more" is shown) — name · role · organisation
-const quotes = [
-  { teaser: "You were a joy to work with, and a machine. Not many people could have stayed this focused for that long.", text: "Thanks you! You were a joy to work with and a machine. Not many people could have stayed as focused as you did for that long and it was fun to get to know you. I've had wonderful comments and a lot of that is down to you so congrats and get some rest. Look forward to doing more in the future.", name: "Terry Cook", role: "Partner / Principal Designer", org: "Woodroffe Basset Design" },
-  { teaser: "A remarkable level of professionalism and dedication — and for persevering whenever challenges arose.", text: "On behalf of Katara Studios Management and myself, I want to express our deepest appreciation and gratitude to each and every one of you. Thank you for believing in our vision, for showcasing a remarkable level of professionalism and dedication, and for persevering when challenges arose.", name: "Mahmoud Hamaky", role: "Executive Producer / Project Director", org: "Katara Studios" },
-  { teaser: "Thank you so much for the beautiful lighting, as well as for your exceptional durability!", text: "Thank you so much for the beautiful lighting as well as for your exceptional durability!", name: "Malte Joergens", role: "Creative Director", org: "adhoc engineering" },
-  { teaser: "Truly amazing lights, you did an awesome job!", text: "Truly amazing lights, you did an awesome job! Thank you!", name: "Kurt Pongratz", role: "TV Director", org: "ORF" },
-  { teaser: "Thank you for your ambition, your professionalism, and the calm sovereignty you exude throughout the production.", text: "Thank you for your ambition, your professionalism and your calm and sovereignty that you exude throughout the production. Thank you so very much, it is so nice that we got to know each other!", name: "Thomas Stammberger", role: "Director", org: "BR" },
-  { teaser: "An essential partner at every stage of the process.", text: "Michael is an essential partner at all stages of our process, from the first designs, through detailing and development, to on-site direction and delivery.", name: "Adam Scott", role: "Founder", org: "Freestate London" },
-  { teaser: "Wow, we would never have expected that. Simply amazing — your expertise and commitment made it all possible.", text: "The unanimous opinion — both from customers and the internal staff — after the event is short and concise: a \"Wow, we would never have expected that. Simply amazing.\" Your expertise and commitment has made this all possible — thanks again!", name: "M. Flossmann", role: "Marketing Communication", org: "OCÉ Printing Systems" },
-  { teaser: "Really crazy on the MA desk, and you have a hugely cool way of working!", text: "Thank you Michi. Was awesome from your side. You're really crazy on the MA Desk and you have a hugely cool way of working! Thank you!", name: "Florian Ploder", role: "CEO", org: "PS Eventconsulting" },
-  { teaser: "The lighting design delivered was amazing — a delight to work with, super professional, friendly, and very reliable.", text: "The lighting design he delivered was amazing! He was a delight to work with – super professional and friendly and very reliable.", name: "Anna Rank", role: "Project Manager", org: "Hassell London" },
-  { teaser: "A great eye for the whole, time and again earning the role of lighting director and programmer.", text: "His great eye for the whole qualified him many times to the role of a lighting director and programmer which he fulfilled always to everybody's content.", name: "Jogi Foerg", role: "Senior Key Account Manager", org: "PRG Germany" },
-  { teaser: "Professional, touching, beautiful — despite the short time, an excellent job reaching people on-site and at home.", text: "Professional, touching, beautiful. Despite the short time, you have done an excellent job reaching out to people - whether on-site or at home before the live event. We thank you very much for your great effort. Thank you for your professionalism. We will recommend you with full conviction!", name: "Felix Finkbeiner", role: "CEO", org: "Plant-for-the-Planet Foundation" },
-  { teaser: "It has always been a pleasure to work with such a refreshing approach to the entertainment design process.", text: "It has always been a pleasure to work with Mr. Kuehbandner's refreshing approach to the entertainment design process.", name: "Patrick Dierson", role: "President", org: "Dierson Design Group" },
-  { teaser: "Deeply grateful for the knowledge shared in an entertaining and professionally unique manner.", text: "We are deeply grateful for the knowledge shared in an equally entertaining and professionally unique manner and can only recommend Michael Kuehbandner and his work to other companies.", name: "Hudson Barnes", role: "President", org: "JSAV Mexico and the Caribbean" },
-];
+// the FULL quote, revealed on "Read more" whenever it's genuinely longer
+// than the teaser (a handful of the source quotes are just one short
+// sentence to begin with — for those there's nothing more to reveal, so no
+// "Read more" is shown) — name · role · organisation. Locale-aware content
+// lives in data/testimonials.data.ts (DE is a translation, no German
+// source quotes exist).
+const quotes = testimonialsData[locale];
 
 const metaOf = (role, org) => (role ? `${role} · ${org}` : org);
 // only worth a "Read more" toggle when the curated short text actually adds
