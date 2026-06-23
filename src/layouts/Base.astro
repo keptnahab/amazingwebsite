@@ -1,5 +1,10 @@
 ---
 import "../styles/global.css";
+import "@fontsource/manrope/400.css";
+import "@fontsource/manrope/500.css";
+import "@fontsource/manrope/600.css";
+import "@fontsource/manrope/700.css";
+import "@fontsource/manrope/800.css";
 import { locale, t, domains, otherLocale } from "../i18n/config";
 
 interface Props {
@@ -40,13 +45,13 @@ const alternateUrl = (loc: typeof locale) => `https://${loc === "de" ? "www." : 
     <meta property="og:locale" content={locale === "de" ? "de_DE" : "en_US"} />
     <meta property="og:locale:alternate" content={otherLocale === "de" ? "de_DE" : "en_US"} />
 
-    <!-- Prototype: Manrope via Google Fonts. Production → self-hosted (@fontsource). -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
+    <!-- GoatCounter — cookie-free pageview analytics, no consent banner required
+         (Art. 6 Abs. 1 lit. f DSGVO). One shared property across both locales. -->
+    <script
+      data-goatcounter="https://amazinglighting.goatcounter.com/count"
+      async
+      src="//gc.zgo.at/count.js"
+    ></script>
   </head>
   <body>
     <slot />

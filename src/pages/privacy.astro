@@ -38,21 +38,25 @@ import { locale, t } from "../i18n/config";
             zusammengeführt.
           </p>
 
-          <h2>4. Keine Cookies, kein Tracking</h2>
+          <h2>4. Keine Cookies</h2>
           <p>
-            Diese Website ist eine rein statische Seite. Es werden keine Cookies gesetzt und
-            keine Analyse- oder Tracking-Dienste (z. B. Google Analytics) eingebunden.
+            Diese Website ist eine rein statische Seite. Es werden keine Cookies gesetzt. Die
+            eingebundene Schriftart ist selbst gehostet — es findet keine Verbindung zu
+            Google Fonts oder anderen externen Schrift-Servern statt.
           </p>
 
-          <h2>5. Eingebundene Schriftarten (Google Fonts)</h2>
+          <h2>5. Reichweitenmessung (GoatCounter)</h2>
           <p>
-            Diese Website bindet die Schriftart „Manrope“ über Google Fonts (Google LLC, 1600
-            Amphitheatre Parkway, Mountain View, CA 94043, USA) ein. Beim Aufruf einer Seite
-            wird dazu eine Verbindung zu Servern von Google hergestellt, wobei die IP-Adresse
-            des Besuchers an Google übertragen werden kann. Rechtsgrundlage ist Art. 6 Abs. 1
-            lit. f DSGVO (berechtigtes Interesse an einer einheitlichen, performanten
-            Darstellung der Schrift). [TODO: Falls die Schrift vor Launch auf
-            Self-Hosting umgestellt wird, diesen Abschnitt entfernen.]
+            Diese Website nutzt den Webanalyse-Dienst GoatCounter (GoatCounter, Arnhem,
+            Niederlande, Server in der EU) zur anonymen Auswertung von Seitenaufrufen — z. B.
+            welche Unterseite wie oft besucht wurde und über welche Seite Besucher gekommen
+            sind. GoatCounter setzt keine Cookies und speichert keine vollständige IP-Adresse
+            oder andere personenbezogene Daten; eine Zuordnung zu einzelnen Besuchern ist nicht
+            möglich. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an
+            einer einfachen, datensparsamen Reichweitenmessung). Weitere Informationen:{" "}
+            <a href="https://www.goatcounter.com/privacy" target="_blank" rel="noopener noreferrer">
+              goatcounter.com/privacy
+            </a>.
           </p>
 
           <h2>6. Kontaktaufnahme per E-Mail</h2>
@@ -69,14 +73,15 @@ import { locale, t } from "../i18n/config";
             personenbezogenen Daten. Wenden Sie sich hierzu an die oben genannte Kontaktadresse.
             Außerdem besteht ein Beschwerderecht bei einer Datenschutz-Aufsichtsbehörde.
           </p>
-
-          <p class="note">
-            Hinweis: Abschnitt 5 (Google Fonts) entfällt, sobald die Schriftart vor Launch auf
-            Self-Hosting umgestellt wird.
-          </p>
         </>
       ) : (
-        <p>Placeholder — the privacy policy (Datenschutzerklärung) will be added before launch. The site ships as a static page with no tracking by default.</p>
+        <p>
+          Placeholder — the full privacy policy will be added before launch. The site ships as
+          a static page, sets no cookies, and self-hosts its fonts (no Google Fonts requests).
+          Page views are measured anonymously via{" "}
+          <a href="https://www.goatcounter.com/privacy" target="_blank" rel="noopener noreferrer">GoatCounter</a>,
+          which stores no cookies and no full IP addresses or other personal data.
+        </p>
       )}
     </div>
   </main>
@@ -87,5 +92,4 @@ import { locale, t } from "../i18n/config";
   .legal { max-width: 70ch; }
   .legal p { color: var(--muted); margin: 1rem 0; }
   .legal h2 { font-size: 1.1rem; margin: 2rem 0 0.4rem; }
-  .legal .note { font-size: 0.85rem; font-style: italic; }
 </style>
