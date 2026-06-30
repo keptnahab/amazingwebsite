@@ -132,12 +132,12 @@ const listSlugs = new Set(list.map((p) => p.slug));
 
   function applyFilter() {
     const q = (search?.value || "").trim().toLowerCase();
-    const isSearching = q.length > 0;
+    const isFiltering = q.length > 0 || activeCat !== "ALL";
     let shown = 0;
     cards.forEach((c) => {
       const isExtra = c.dataset.extra === "true";
-      // Extra cards (beyond the initial limit) are only eligible when searching
-      if (isExtra && !isSearching) {
+      // Extra cards (beyond the initial limit) only appear when filtering or searching
+      if (isExtra && !isFiltering) {
         c.style.display = "none";
         return;
       }
