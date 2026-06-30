@@ -76,7 +76,7 @@ export const projectsData: ProjectData[] = [
     location: "Australian Leg",
     category: "CONCERTS",
     description: "Video Screens Director on this legendary tour production across Australia.",
-    credits: [{ role: "Scope", name: "Video Screens Director" }, { role: "Lighting Design", name: "Terry Cook Woodroffe Basset Design" }, { role: "Video Content", name: "Sam Brickman / Treatment" }, { role: "Lighting Director", name: "Cosmo Wilson" }, { role: "Production Director", name: "Dale „Opie" Skjerseth" }, { role: "Production Manager", name: "Will Keating" }, { role: "Production Coordinator", name: "Ken „TJ" Gordon" }, { role: "Lighting Crew Chief", name: "Alan Fotheringhame" }, { role: "FOH Engineer", name: "Paul „PAB" Boothroyd" }, { role: "Video Director", name: "Johnny Hayes" }, { role: "Video Crew Chief", name: "Ethan Weir" }, { role: "D3 Engineer", name: "Ken Delvo" }],
+    credits: [{ role: "Scope", name: "Video Screens Director" }, { role: "Lighting Design", name: "Terry Cook Woodroffe Basset Design" }, { role: "Video Content", name: "Sam Brickman / Treatment" }, { role: "Lighting Director", name: "Cosmo Wilson" }, { role: "Production Director", name: "Dale 'Opie' Skjerseth" }, { role: "Production Manager", name: "Will Keating" }, { role: "Production Coordinator", name: "Ken 'TJ' Gordon" }, { role: "Lighting Crew Chief", name: "Alan Fotheringhame" }, { role: "FOH Engineer", name: "Paul 'PAB' Boothroyd" }, { role: "Video Director", name: "Johnny Hayes" }, { role: "Video Crew Chief", name: "Ethan Weir" }, { role: "D3 Engineer", name: "Ken Delvo" }],
   },
   {
     order: 60,
