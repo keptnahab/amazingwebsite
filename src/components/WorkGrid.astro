@@ -13,13 +13,14 @@ interface Props {
 const { showControls = false, eyebrow, title, limit, skip = 0 } = Astro.props;
 
 const sorted = [...projects].sort((a, b) => b.order - a.order);
-const list = limit ? sorted.slice(skip, skip + limit) : sorted.slice(skip);
+const all = sorted.slice(skip);            // every project after skip
+const list = limit ? all.slice(0, limit) : all; // initially-visible subset
 
 const categories = ["ALL", "BROADCAST", "CONCERTS", "CORPORATE", "THEATER", "EVENTS", "CEREMONY"];
 const categoryLabel = (c: string) => (c === "ALL" ? t.work.allProjects : t.work.categories[c as keyof typeof t.work.categories]);
 
-// serialisable payload for the modal
-const payload = list.map((p: Project) => ({
+// serialisable payload for the modal — ALL projects so search can open any of them
+const payload = all.map((p: Project) => ({
   slug: p.slug,
   title: p.title,
   year: p.year,
@@ -30,6 +31,8 @@ const payload = list.map((p: Project) => ({
   credits: p.credits,
   images: p.gallery.map((g) => g.src),
 }));
+
+const listSlugs = new Set(list.map((p) => p.slug));
 ---
 
 <section class="section work">
@@ -61,8 +64,8 @@ const payload = list.map((p: Project) => ({
     )}
 
     <div class="grid" id="workGrid">
-      {list.map((p) => (
-        <article class="wcard reveal" data-cat={p.category} data-spotlight data-q={`${p.title} ${p.location} ${p.year} ${p.category}`.toLowerCase()}>
+      {all.map((p) => (
+        <article class="wcard reveal" data-cat={p.category} data-spotlight data-q={`${p.title} ${p.location} ${p.year} ${p.category}`.toLowerCase()} data-extra={listSlugs.has(p.slug) ? undefined : "true"} style={listSlugs.has(p.slug) ? undefined : "display:none"}>
           <button class="wcard-btn press" data-open={p.slug} aria-label={`${t.work.open} ${p.title}`}>
             <span class="wcard-media">
               <Image src={p.cover} alt={p.title} widths={[420, 720]} sizes="(max-width: 820px) 90vw, 30vw" />
@@ -129,8 +132,15 @@ const payload = list.map((p: Project) => ({
 
   function applyFilter() {
     const q = (search?.value || "").trim().toLowerCase();
+    const isSearching = q.length > 0;
     let shown = 0;
     cards.forEach((c) => {
+      const isExtra = c.dataset.extra === "true";
+      // Extra cards (beyond the initial limit) are only eligible when searching
+      if (isExtra && !isSearching) {
+        c.style.display = "none";
+        return;
+      }
       const okCat = activeCat === "ALL" || c.dataset.cat === activeCat;
       const okQ = !q || (c.dataset.q || "").includes(q);
       const show = okCat && okQ;
