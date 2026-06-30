@@ -31,7 +31,7 @@ export const projectsData: ProjectData[] = [
     year: "",
     location: "Jeddah",
     category: "CEREMONY",
-    description: "Lighting design by Roland Greil | @360degreecollective on this ceremony in Jeddah.",
+    description: "Studio Associate on this Opening Ceremony in Jeddah.",
     credits: [{ role: "Producer", name: "Blink experience" }, { role: "Creative Director", name: "Luca Taschini" }, { role: "Head of Production", name: "Micky Lehr" }, { role: "Lighting Design", name: "Roland Greil | @360degreecollective" }, { role: "Art Direction", name: "Giulia Marocchino" }, { role: "Associate LX Designer / LX Programmer", name: "Klaus Kubesch" }, { role: "Show Caller", name: "Charbel Antonio Karam" }, { role: "Tech Vendor", name: "ES" }],
   },
   {
@@ -42,7 +42,7 @@ export const projectsData: ProjectData[] = [
     year: "",
     location: "Opening Ceremony — Rabat Morocco",
     category: "CEREMONY",
-    description: "Studio Associate on this ceremony in Opening Ceremony — Rabat Morocco.",
+    description: "Studio Associate on this Opening Ceremony in Rabat Morocco.",
     credits: [{ role: "Scope", name: "Studio Associate" }, { role: "Producer", name: "Balich Wonder Studio &  Avant Scene" }, { role: "Creative Director", name: "Cnproductiondesign" }, { role: "Head of Production", name: "Steve Myland" }, { role: "Lighting Design", name: "Roland Greil | @360degreecollective" }, { role: "Production Design", name: "Tomasso Biggi" }, { role: "Broadcast Director", name: "Marek Mill | @360degreecollective" }, { role: "Artistic Producer", name: "Paola Doriarossetto" }, { role: "Associate LX Designer / LX Programmer I", name: "Klaus Kubesch" }, { role: "LX Programmer II", name: "Tom Levin Schwenzle" }, { role: "Technical Systems Manager", name: "Nick Whitehead" }, { role: "How Caller", name: "Charbel Antonio Karam" }, { role: "Tech Vendor", name: "Clair Global" }],
   },
   {
@@ -53,7 +53,7 @@ export const projectsData: ProjectData[] = [
     year: "",
     location: "At Al Bait Stadium, Qatar",
     category: "CEREMONY",
-    description: "Studio Associate on this ceremony in At Al Bait Stadium, Qatar.",
+    description: "Studio Associate on this Opening Ceremony in At Al Bait Stadium, Qatar.",
     credits: [{ role: "Scope", name: "Studio Associate" }, { role: "Producer", name: "Katara Studios" }, { role: "Creative Director", name: "Ahmed al Baker" }, { role: "Head of Production", name: "Mahmoud Hamaky" }, { role: "Lighting Design", name: "@Roland Greil | 360 Degree Collective" }, { role: "Production Design & Content Production", name: "Sila Sveta | 360 Degree Collective" }, { role: "Production Designer", name: "Arthur Kondrashenkov" }, { role: "Audio Design", name: "Scott Willsallen - Auditoria | 360 Degree Collective" }, { role: "Show Direction", name: "Tatiana Myrkou" }, { role: "Associate LX Designer", name: "Marcus Bossdorf" }, { role: "Associate LX Designer / Broadcast", name: "Troy Eckerman" }, { role: "LX Programmer I", name: "Klaus Kubesch" }, { role: "LX Programmer II", name: "Grant Hickey" }],
   },
   {
@@ -64,7 +64,7 @@ export const projectsData: ProjectData[] = [
     year: "",
     location: "At Central Square",
     category: "EVENTS",
-    description: "Associate Lighting Design and Programming on this event in At Central Square.",
+    description: "Associate Lighting Design and Programming on this event in Hong Kong.",
     credits: [{ role: "Scope", name: "Associate Lighting Design and Programming" }, { role: "Creative Direction & Executive Production", name: "ARTISTS IN MOTION" }, { role: "Project Lead", name: "Hai Tran" }, { role: "Lighting Design", name: "Roland Greil" }, { role: "Associate Design", name: "Tom Levin Schwenzle" }, { role: "Previz", name: "Alex Scheu" }],
   },
   {
@@ -75,8 +75,8 @@ export const projectsData: ProjectData[] = [
     year: "",
     location: "Australian Leg",
     category: "CONCERTS",
-    description: "Video Screens Director on this live music production in Australian Leg.",
-    credits: [{ role: "Scope", name: "Video Screens Director" }, { role: "Lighting Design", name: "Terry Cook Woodroffe Basset Design" }, { role: "Video Content", name: "Sam Brickman / Treatment" }, { role: "Lighting Director", name: "Cosmo Wilson" }, { role: "Production Director", name: "Dale „Opie“ Skjerseth" }, { role: "Production Manager", name: "Will Keating" }, { role: "Production Coordinator", name: "Ken „TJ“ Gordon" }, { role: "Lighting Crew Chief", name: "Alan Fotheringhame" }, { role: "FOH Engineer", name: "Paul „PAB“ Boothroyd" }, { role: "Video Director", name: "Johnny Hayes" }, { role: "Video Crew Chief", name: "Ethan Weir" }, { role: "D3 Engineer", name: "Ken Delvo" }],
+    description: "Video Screens Director on this legendary tour production across Australia.",
+    credits: [{ role: "Scope", name: "Video Screens Director" }, { role: "Lighting Design", name: "Terry Cook Woodroffe Basset Design" }, { role: "Video Content", name: "Sam Brickman / Treatment" }, { role: "Lighting Director", name: "Cosmo Wilson" }, { role: "Production Director", name: "Dale „Opie" Skjerseth" }, { role: "Production Manager", name: "Will Keating" }, { role: "Production Coordinator", name: "Ken „TJ" Gordon" }, { role: "Lighting Crew Chief", name: "Alan Fotheringhame" }, { role: "FOH Engineer", name: "Paul „PAB" Boothroyd" }, { role: "Video Director", name: "Johnny Hayes" }, { role: "Video Crew Chief", name: "Ethan Weir" }, { role: "D3 Engineer", name: "Ken Delvo" }],
   },
   {
     order: 60,
@@ -86,7 +86,7 @@ export const projectsData: ProjectData[] = [
     year: "",
     location: "Cairo Egypt",
     category: "CEREMONY",
-    description: "Associate Lighting Design on this ceremony in Cairo Egypt.",
+    description: "Associate Lighting Design on this Opening Ceremony in Cairo.",
     credits: [{ role: "Scope", name: "Associate Lighting Design" }, { role: "Lighting Design", name: "Roland Greill" }, { role: "Show Direction", name: "Mazen El Motagawel & Ahmad Al Morsy" }, { role: "Production Design", name: "Mohamed Attia" }, { role: "Lead Associate Designer", name: "Troy Eckerman" }, { role: "Associate Designer Pyramids", name: "Marcus Bossdorf" }, { role: "Associate Designer Gem", name: "Michael Kuehbandner" }, { role: "Design Assistant", name: "Jannick Lippert" }, { role: "Lead LX Programmer", name: "Klaus Kubesch" }, { role: "LX Programmer / Gem", name: "Alex Scheu" }, { role: "LX Programmer / Pyramids", name: "Andre Bress" }, { role: "LX Programmer I/ Pyramids", name: "Not Insta Cool" }, { role: "SFX & Pyro Programmer", name: "Lucas Gerritzen/ Studio 4" }, { role: "Project Manager", name: "Tom Levin Schwenzle" }, { role: "Studio Associate", name: "Michael Kuehbandner" }, { role: "Previz", name: "Bas Knappers | Live Legends" }, { role: "Account Director", name: "Olivier Monod de Froideville" }, { role: "Photocredits", name: "KVANT & LUMASKY" }],
   },
   {
@@ -97,7 +97,7 @@ export const projectsData: ProjectData[] = [
     year: "",
     location: "Rabat Morocco",
     category: "CEREMONY",
-    description: "Associate Lighting Design and Programming for Roland Greil on this ceremony in Rabat Morocco.",
+    description: "Associate Lighting Design and Programming on this Opening Ceremony in Rabat Morocco.",
     credits: [{ role: "Scope", name: "Associate Lighting Design and Programming" }, { role: "Client", name: "Roland Greil" }, { role: "Creative Director", name: "Yann Poincelet" }, { role: "Production", name: "Avantscene" }, { role: "Lighting Design", name: "Roland Greil" }],
   },
   {
@@ -108,7 +108,7 @@ export const projectsData: ProjectData[] = [
     year: "",
     location: "Festspielhaus Fuessen",
     category: "THEATER",
-    description: "Lighting Design and Programming for Festspielhaus Fuessen on this theater production in Festspielhaus Fuessen.",
+    description: "Lighting Design and Programming on this theater production at Festspielhaus Fuessen.",
     credits: [{ role: "Scope", name: "Lighting Design and Programming" }, { role: "Client", name: "Festspielhaus Fuessen" }, { role: "Creative Director", name: "Benjamin Sahler" }, { role: "Choreographer", name: "Stefanie Groening" }, { role: "Lighting Design", name: "Michael Kuehbandner" }],
   },
   {
@@ -119,7 +119,7 @@ export const projectsData: ProjectData[] = [
     year: "2025",
     location: "Bavaria Studios Munich",
     category: "EVENTS",
-    description: "Lighting Design for Bavaria Studios on this event in Bavaria Studios Munich.",
+    description: "Lighting Design for Swiss TV on this TV show in Bavaria Studios Munich.",
     credits: [{ role: "Scope", name: "Lighting Design" }, { role: "Client", name: "Bavaria Studios" }, { role: "Executive Producer", name: "Miriam Martino" }, { role: "Producer", name: "Lars Kämpgen/Alex Stautner" }, { role: "Production Management", name: "Rieke Niederhöfer/Felix Straub" }, { role: "Keylight/showlight Programmer", name: "Alex Scheu" }, { role: "Show Light Operator", name: "Knut Ahlers" }, { role: "Technical Director", name: "Fabian Sutor" }, { role: "Lighting Crew Chief", name: "Sascha Boller" }, { role: "Vendor", name: "BAVARIA STUDIOS" }],
   },
   {
@@ -130,7 +130,7 @@ export const projectsData: ProjectData[] = [
     year: "2025",
     location: "Aston Villa, Birmingham",
     category: "CONCERTS",
-    description: "Video Screens Director for Woodroffe Basset Design on this live music production in Aston Villa, Birmingham.",
+    description: "Video Screens Director for Woodroffe Basset Design on this legendary live music production in Birmingham.",
     credits: [{ role: "Scope", name: "Video Screens Director" }, { role: "Show Producer & Production Director", name: "Jake Berry" }, { role: "Client", name: "Woodroffe Basset Design" }, { role: "Creative Director", name: "Patrick Woodroffe" }, { role: "Lighting and Show Design", name: "Terry Cook" }, { role: "Associate Lighting Designer", name: "John Coman" }, { role: "Lighting Programmer", name: "Joe Bay" }, { role: "Lighting Director", name: "Michael Keller" }, { role: "Video Content", name: "Sam Brickman for Treatment Studio" }, { role: "Screens Director", name: "Michael Kuehbandner" }, { role: "Show Caller", name: "Julia Whittle" }, { role: "Vendor", name: "Neg Earth Lights" }],
   },
   {
@@ -141,7 +141,7 @@ export const projectsData: ProjectData[] = [
     year: "2025",
     location: "Rabat/ Morocco",
     category: "CEREMONY",
-    description: "Studio Associate for Roland Greil on this ceremony in Rabat/ Morocco.",
+    description: "Studio Associate for Roland Greil on this Opening Ceremony in Rabat/ Morocco.",
     credits: [{ role: "Scope", name: "Studio Associate" }, { role: "Client", name: "Roland Greil" }, { role: "Producer/ Client", name: "Avantsceneagency" }, { role: "Lighting Design", name: "Roland Greil | @360degreecollective" }, { role: "Show Caller (&jack of All Trades)", name: "Charbel Karam" }, { role: "Choreographer and Deputy Live Action Director", name: "Luis Florencio" }, { role: "Broadcast Director", name: "Marek Mill| @360degreecollective" }, { role: "Lighting Design Project Managment", name: "Tom Levin Schwenzle" }, { role: "Associate Lighting Designer", name: "Martin Kuhn" }, { role: "Lighting Programmer", name: "Patrick Schmelz" }, { role: "Tech Vendor", name: "M212AV" }],
   },
   {
@@ -152,7 +152,7 @@ export const projectsData: ProjectData[] = [
     year: "2025",
     location: "Andel´s Berlin",
     category: "CORPORATE",
-    description: "Lighting Design and Programming for Projektstark on this corporate event in Andel´s Berlin.",
+    description: "Lighting Design and Programming for Projektstark on this corporate event in Berlin.",
     credits: [{ role: "Scope", name: "Lighting Design and Programming" }, { role: "Client", name: "Projektstark" }, { role: "Creative Director", name: "Reimo Piper" }, { role: "Lighting Design", name: "Michael Kuehbandner" }, { role: "LX Vendor", name: "Ambion/WBLT" }],
   },
   {
@@ -163,7 +163,7 @@ export const projectsData: ProjectData[] = [
     year: "2025",
     location: "Pitch Partner",
     category: "CORPORATE",
-    description: "Associate Lighting Design, Visualization for Roland Greil on this corporate event in Pitch Partner.",
+    description: "Associate Lighting Design and Visualization Services for this corporate event pitch.",
     credits: [{ role: "Scope", name: "Associate Lighting Design, Visualization" }, { role: "Client", name: "Roland Greil" }, { role: "Partner", name: "Avantgarde and 360 Degree Collective" }, { role: "Projectmanagement", name: "Tom Schwenzle" }, { role: "Chief Creative Director", name: "Luke Lewandowski" }, { role: "Senior Business Development", name: "Gizem Altay" }, { role: "Senior Account Manager", name: "Christoph Wagner" }, { role: "Creative Director", name: "Christoph Gottwald" }, { role: "Associate Creative Director", name: "Laura Hundertmark" }],
   },
   {
@@ -174,7 +174,7 @@ export const projectsData: ProjectData[] = [
     year: "2025",
     location: "Festspielhaus Fuessen",
     category: "THEATER",
-    description: "Lighting Design and Programming for Festspielhaus Fuessen on this theater production in Festspielhaus Fuessen.",
+    description: "Lighting Design and Programming on this theater production at Festspielhaus Fuessen.",
     credits: [{ role: "Scope", name: "Lighting Design and Programming" }, { role: "Client", name: "Festspielhaus Fuessen" }, { role: "Creative Director", name: "Benjamin Sahler" }, { role: "Choreographer", name: "Stefanie Groening" }, { role: "Lighting Design", name: "Michael Kuehbandner" }],
   },
   {
@@ -185,7 +185,7 @@ export const projectsData: ProjectData[] = [
     year: "2025",
     location: "Studio Babelsberg",
     category: "CORPORATE",
-    description: "Lighting Design for PROJEKTSTARK on this corporate event in Studio Babelsberg.",
+    description: "Lighting Design for Projektstark on this corporate event in Studio Babelsberg.",
     credits: [{ role: "Scope", name: "Lighting Design" }, { role: "Client", name: "PROJEKTSTARK" }, { role: "Creative Director", name: "Reimo Piper" }, { role: "Lighting Operator", name: "Klaus Kubesch" }, { role: "Lighting Design", name: "Michael Kuehbandner" }, { role: "LX Vendor", name: "PRG" }],
   },
   {
@@ -196,7 +196,7 @@ export const projectsData: ProjectData[] = [
     year: "2025",
     location: "Prinzregenten Theater, Munich",
     category: "BROADCAST",
-    description: "Lighting Design and Programming for 5D SolutionS on this broadcast production in Prinzregenten Theater, Munich.",
+    description: "Lighting Design and Programming for this TV Award Show in Prinzregenten Theater Munich.",
     credits: [{ role: "Scope", name: "Lighting Design and Programming" }, { role: "Client", name: "5D SolutionS" }, { role: "Keylight Op", name: "Markus Neubauer" }, { role: "Mediaserver Op", name: "Klaus Kubesch" }, { role: "Director", name: "Thomas Kornmayer" }, { role: "Lighting Design", name: "Michael Kuehbandner/Markus Mueller" }, { role: "LX Vendor", name: "5D Solutions" }],
   },
   {
@@ -207,7 +207,7 @@ export const projectsData: ProjectData[] = [
     year: "2024",
     location: "Metronom Oberhausen",
     category: "THEATER",
-    description: "Lighting Design and Programming for Festspielhaus Fuessen on this theater production in Metronom Oberhausen.",
+    description: "Lighting Design and Programming on this theater production at Metronom Theater Oberhausen.",
     credits: [{ role: "Scope", name: "Lighting Design and Programming" }, { role: "Client", name: "Festspielhaus Fuessen" }, { role: "Creative Director", name: "Benjamin Sahler" }, { role: "Lighting Design", name: "Michael Kuehbandner" }, { role: "LX Vendor", name: "Mediaspectrum" }],
   },
   {
@@ -229,7 +229,7 @@ export const projectsData: ProjectData[] = [
     year: "2024",
     location: "Across Germany",
     category: "CONCERTS",
-    description: "Studio Associate for Roland Greil on this live music production in Across Germany.",
+    description: "Studio Associate for Roland Greil on this live music production touring across Germany.",
     credits: [{ role: "Scope", name: "Studio Associate" }, { role: "Client", name: "Roland Greil" }, { role: "Lighting Design", name: "Roland Greil" }, { role: "LX Programmer", name: "Klaus Kubesch" }, { role: "Touring Lighting Director", name: "Martin Holstein" }, { role: "Media Server Programmer and Screens Director", name: "Michael Trapster" }, { role: "Production Manager", name: "Pierre Zuta" }, { role: "LX & Set Vendor", name: "Satis&Fy" }],
   },
   {
@@ -251,7 +251,7 @@ export const projectsData: ProjectData[] = [
     year: "2024",
     location: "Brucknerhaus Linz",
     category: "EVENTS",
-    description: "Studio Associate/Associate Design for Roland Greil on this event in Brucknerhaus Linz.",
+    description: "Studio Associate/Associate Design for Roland Greil on this outstanding event in Linz.",
     credits: [{ role: "Scope", name: "Studio Associate/Associate Design" }, { role: "Client", name: "Roland Greil" }, { role: "Lighting Design", name: "Roland Greil" }, { role: "Concept and Visual Design", name: "Bonvehi Arts&Events" }, { role: "Production", name: "All About Events" }, { role: "LX Programmer", name: "Klaus Kubesch" }, { role: "Vendor", name: "CLAIR" }, { role: "Photos Credits", name: "Klangwolke Linz" }],
   },
   {
@@ -262,7 +262,7 @@ export const projectsData: ProjectData[] = [
     year: "2024",
     location: "Uber Arena Berlin",
     category: "EVENTS",
-    description: "Keylight Operator for Whisper.tv on this event in Uber Arena Berlin.",
+    description: "Keylight Operator for David Bishop on this e-sports event at Uber Arena Berlin.",
     credits: [{ role: "Scope", name: "Keylight Operator" }, { role: "Client", name: "Whisper.tv" }, { role: "Lighting Design", name: "David Bishop" }, { role: "Lighting Programmer", name: "Alex Passmore" }, { role: "Production Company", name: "Whisper.tv" }, { role: "Vendor", name: "PRG" }],
   },
   {
@@ -284,7 +284,7 @@ export const projectsData: ProjectData[] = [
     year: "2024",
     location: "Munich",
     category: "BROADCAST",
-    description: "Lighting Design and Programming for BR – Plaza Media on this broadcast production in Munich.",
+    description: "Lighting Design and Programming on this TV Award Show at Prinzregententheater in Munich.",
     credits: [{ role: "Scope", name: "Lighting Design and Programming" }, { role: "Client", name: "BR – Plaza Media" }, { role: "Vendor", name: "Plaza Media" }],
   },
   {
@@ -295,7 +295,7 @@ export const projectsData: ProjectData[] = [
     year: "2024",
     location: "Lusail Stadion Doha",
     category: "CEREMONY",
-    description: "Studio Associate/LX Programmer/Previz for Roland Greil on this ceremony in Lusail Stadion Doha.",
+    description: "Studio Associate/LX Programmer/Previz for Roland Greil on this Opening Ceremony in Lusail Stadion Doha.",
     credits: [{ role: "Scope", name: "Studio Associate/LX Programmer/Previz" }, { role: "Client", name: "Roland Greil" }, { role: "Lighting Design", name: "Roland Greil" }, { role: "Stage and Visual Design", name: "SILA SVETA" }, { role: "Executive Producer", name: "Katara Studios" }, { role: "Photos Credits", name: "Katara Studios" }, { role: "Associate Ld", name: "Troy Eckerman" }, { role: "LX Programmer Keylight", name: "Markus Neubauer" }, { role: "Design Assistant/spot Caller", name: "Tom Levin Schwenzle" }],
   },
   {
@@ -306,7 +306,7 @@ export const projectsData: ProjectData[] = [
     year: "2024",
     location: "Across Germany",
     category: "CONCERTS",
-    description: "Studio Associate/Previz, Video Screens Director for Roland Greil on this live music production in Across Germany.",
+    description: "Studio Associate/Previz, Video Screens Director for Roland Greil on this live music production touring across Germany.",
     credits: [{ role: "Scope", name: "Studio Associate/Previz, Video Screens Director" }, { role: "Client", name: "Roland Greil" }, { role: "Lighting Design", name: "Roland Greil" }, { role: "Stage and Visual Design", name: "Carlo Angelini" }, { role: "Video Content", name: "I AM U" }, { role: "LX Programmer", name: "Klaus Kubesch" }, { role: "Lighting Director", name: "Tom Schwenze" }, { role: "Vendor", name: "TDA" }, { role: "Photos Credits", name: "Feder Music" }],
   },
   {
@@ -317,7 +317,7 @@ export const projectsData: ProjectData[] = [
     year: "2023",
     location: "Galleria Kaufhof – Munich",
     category: "CORPORATE",
-    description: "Associate Lighting Design for Roland Greil Lighting Design on this corporate event in Galleria Kaufhof – Munich.",
+    description: "Associate Lighting Design for Roland Greil Lighting Design on this corporate event in Munich.",
     credits: [{ role: "Scope", name: "Associate Lighting Design" }, { role: "Client", name: "Roland Greil Lighting Design" }, { role: "Technical Production", name: "NIYU" }, { role: "Vendor", name: "Ambion" }],
   },
   {
@@ -328,7 +328,7 @@ export const projectsData: ProjectData[] = [
     year: "2023",
     location: "Across Germany",
     category: "CONCERTS",
-    description: "Studio Associate/Previz for Roland Greil – Lighting Design on this live music production in Across Germany.",
+    description: "Studio Associate/Previz for Roland Greil – Lighting Design on this live music production touring across Germany.",
     credits: [{ role: "Scope", name: "Studio Associate/Previz" }, { role: "Client", name: "Roland Greil – Lighting Design" }, { role: "Production Design", name: "Roland Greil" }, { role: "Lighting Programmer", name: "Klaus Kubesch/Dominik Doehler" }, { role: "Lighting Director", name: "André Bress" }, { role: "Vendor", name: "PRG" }],
   },
   {
@@ -350,7 +350,7 @@ export const projectsData: ProjectData[] = [
     year: "2023",
     location: "ÖVB Arena Bremen – Barclay Arena Hamburg",
     category: "CONCERTS",
-    description: "Lighting Programming for Cirque de Soleil on this live music production in ÖVB Arena Bremen – Barclay Arena Hamburg.",
+    description: "Lighting Programming for Tim Routledge on this live music production.",
     credits: [{ role: "Scope", name: "Lighting Programming" }, { role: "Client", name: "Cirque de Soleil" }, { role: "Lighting Designer", name: "Tim Routledge" }, { role: "Lighting Programmer", name: "Tom Young" }, { role: "Lighting Director", name: "Dave Wolstenholme" }],
   },
   {
@@ -361,7 +361,7 @@ export const projectsData: ProjectData[] = [
     year: "2023",
     location: "Ballhausforum – Munich",
     category: "CORPORATE",
-    description: "Creative Lighting Design and Programming for LIMELIGHT on this corporate event in Ballhausforum – Munich.",
+    description: "Creative Lighting Design and Programming for LIMELIGHT on this corporate event in Ballhausforum, Munich.",
     credits: [{ role: "Scope", name: "Creative Lighting Design and Programming" }, { role: "Client", name: "LIMELIGHT" }, { role: "Lighting Designer", name: "Tom Mayerl" }, { role: "Production Design", name: "Projektstark" }],
   },
   {
@@ -372,7 +372,7 @@ export const projectsData: ProjectData[] = [
     year: "2023",
     location: "Across Germany",
     category: "CONCERTS",
-    description: "Studio Associate/Previz for Roland Greil – Lighting Design on this live music production in Across Germany.",
+    description: "Studio Associate/Previz for Roland Greil – Lighting Design on this live music production touring across Germany.",
     credits: [{ role: "Scope", name: "Studio Associate/Previz" }, { role: "Client", name: "Roland Greil – Lighting Design" }, { role: "Production Design", name: "Carlo Angelini" }, { role: "Lighting Programmer", name: "Klaus Kubesch" }, { role: "Lighting Director", name: "Tom Levin Schwenze" }, { role: "Vendor", name: "TDA | CLAIR" }],
   },
   {
@@ -383,7 +383,7 @@ export const projectsData: ProjectData[] = [
     year: "2022",
     location: "Prinzregenttheater – Munich",
     category: "THEATER",
-    description: "Lighting Design for Daniel Guender on this theater production in Prinzregenttheater – Munich.",
+    description: "Lighting Design for Daniel Guender on this theater production in Prinzregenttheater Munich.",
     credits: [{ role: "Scope", name: "Lighting Design" }, { role: "Client", name: "Daniel Guender" }, { role: "Programmer", name: "Max van de Ra" }, { role: "Producer", name: "Muenchen Musik" }],
   },
   {
@@ -394,7 +394,7 @@ export const projectsData: ProjectData[] = [
     year: "2023",
     location: "Festhalle Frankfurt Main",
     category: "EVENTS",
-    description: "Lighting Programming for Arkin Atacan on this event in Festhalle Frankfurt Main.",
+    description: "Lighting Programming for Arkin Atacan on this corporate event in Festhalle Frankfurt Main.",
     credits: [{ role: "Scope", name: "Lighting Programming" }, { role: "Client", name: "Arkin Atacan" }, { role: "Production Design", name: "Juergen Hassler" }, { role: "Vendor", name: "PRG" }],
   },
   {
@@ -405,7 +405,7 @@ export const projectsData: ProjectData[] = [
     year: "2023",
     location: "Motorworld – Munich",
     category: "CORPORATE",
-    description: "Lighting Programming for LIMELIGHT on this corporate event in Motorworld – Munich.",
+    description: "Lighting Programming for LIMELIGHT on this corporate event in Motorworld Munich.",
     credits: [{ role: "Scope", name: "Lighting Programming" }, { role: "Client", name: "LIMELIGHT" }, { role: "Production Design", name: "Trendhouse" }],
   },
   {
@@ -416,7 +416,7 @@ export const projectsData: ProjectData[] = [
     year: "2022",
     location: "MCC Malta",
     category: "BROADCAST",
-    description: "Associate Lighting Design/Programming for Roland Greil on this broadcast production in MCC Malta.",
+    description: "Associate Lighting Design/Programming for Roland Greil on this TV Award Show in MCC Malta.",
     credits: [{ role: "Scope", name: "Associate Lighting Design/Programming" }, { role: "Client", name: "Roland Greil" }, { role: "Production Design", name: "Florian Wieder" }, { role: "Vendor", name: "Nexos Lighting" }],
   },
   {
@@ -427,7 +427,7 @@ export const projectsData: ProjectData[] = [
     year: "2022",
     location: "ORF Vienna",
     category: "BROADCAST",
-    description: "Associate Lighting Design/Programming for Roland Greil on this broadcast production in ORF Vienna.",
+    description: "Associate Lighting Design/Programming for Roland Greil on this Casting Music TV Show in ORF Vienna.",
     credits: [{ role: "Scope", name: "Associate Lighting Design/Programming" }, { role: "Client", name: "Roland Greil" }, { role: "Production Design", name: "Florian Wieder" }],
   },
   {
@@ -449,7 +449,7 @@ export const projectsData: ProjectData[] = [
     year: "2021",
     location: "Bavaria Studios Gruenwald",
     category: "BROADCAST",
-    description: "Lighting Programming for Jerry Appelt on this broadcast production in Bavaria Studios Gruenwald.",
+    description: "Lighting Programming for Jerry Appelt on this Broadcast TV Production in Bavaria Studios Gruenwald.",
     credits: [{ role: "Scope", name: "Lighting Programming" }, { role: "Client", name: "Jerry Appelt" }, { role: "Set Design", name: "Bella Riecheder" }, { role: "Vendor", name: "Bavaria Studios" }],
   },
   {
@@ -460,7 +460,7 @@ export const projectsData: ProjectData[] = [
     year: "2021",
     location: "Bavaria Studios – Gruenwald",
     category: "CORPORATE",
-    description: "Studio Associate and Previsualization for Roland Greil on this corporate event in Bavaria Studios – Gruenwald.",
+    description: "Studio Associate and Previsualization for Roland Greil on this corporate event in Bavaria Studios Gruenwald.",
     credits: [{ role: "Scope", name: "Studio Associate and Previsualization" }, { role: "Client", name: "Roland Greil" }, { role: "Production Design", name: "Matthias Kublik" }, { role: "Vendor", name: "Bavaria Studios Munich" }],
   },
   {
@@ -471,7 +471,7 @@ export const projectsData: ProjectData[] = [
     year: "2021",
     location: "World Trade Center – Dubai",
     category: "CORPORATE",
-    description: "Lighting design for Jack Morton on this corporate event in World Trade Center – Dubai.",
+    description: "Lighting design for Jack Morton on this corporate event in World Trade Center Dubai.",
     credits: [{ role: "Scope", name: "Lighting design" }, { role: "Client", name: "Jack Morton" }, { role: "Producer", name: "JanPhilipp Sass" }, { role: "Vendor", name: "Snap" }],
   },
   {
@@ -482,7 +482,7 @@ export const projectsData: ProjectData[] = [
     year: "2021",
     location: "Bavaria Studios Gruenwald",
     category: "BROADCAST",
-    description: "Lighting Programming for Bavaria Studios Gruenwald on this broadcast production in Bavaria Studios Gruenwald.",
+    description: "Lighting Programming for Bavaria Studios on this Broadcast TV Production in Bavaria Studios Gruenwald.",
     credits: [{ role: "Scope", name: "Lighting Programming" }, { role: "Client", name: "Bavaria Studios Gruenwald" }, { role: "Set Design", name: "Florian Wieder" }, { role: "Dop", name: "Achim Bendix" }],
   },
   {
@@ -493,7 +493,7 @@ export const projectsData: ProjectData[] = [
     year: "2021",
     location: "Airport Berlin Tempelhof",
     category: "CORPORATE",
-    description: "Lighting Programming for Leyendecker on this corporate event in Airport Berlin Tempelhof.",
+    description: "Lighting Programming for Urs Schretzmeier on this corporate event in Airport Berlin Tempelhof.",
     credits: [{ role: "Scope", name: "Lighting Programming" }, { role: "Client", name: "Leyendecker" }, { role: "Lighting Design", name: "Urs Schretzmeier" }, { role: "Creative Concept", name: "Jangled Nerves" }],
   },
   {
@@ -537,7 +537,7 @@ export const projectsData: ProjectData[] = [
     year: "2021",
     location: "Alte Schildkrötenfabrik – Mannheim",
     category: "BROADCAST",
-    description: "Studio Associate for Roland Greil on this broadcast production in Alte Schildkrötenfabrik – Mannheim.",
+    description: "Studio Associate for Roland Greil on this broadcast production in Alte Schildkrötenfabrik Mannheim.",
     credits: [{ role: "Scope", name: "Studio Associate" }, { role: "Client", name: "Roland Greil" }, { role: "Lighting Design", name: "Roland Greil" }, { role: "Vendor", name: "PRG" }],
   },
   {
@@ -581,7 +581,7 @@ export const projectsData: ProjectData[] = [
     year: "2020",
     location: "Mcm Studios Cologne",
     category: "BROADCAST",
-    description: "Lighting programming and operating for Jerry Appelt on this broadcast production in Mcm Studios Cologne.",
+    description: "Lighting programming and operating for Jerry Appelt on this broadcast production in MCM Studios Cologne.",
     credits: [{ role: "Scope", name: "Lighting programming and operating" }, { role: "Client", name: "Jerry Appelt" }, { role: "Producer", name: "Bavaria Entertainment" }, { role: "Vendor", name: "Cape Cross" }],
   },
   {
@@ -603,7 +603,7 @@ export const projectsData: ProjectData[] = [
     year: "2020",
     location: "Auto China Bejing",
     category: "CORPORATE",
-    description: "CAD and Preprogramming for TLD Planungsgruppe on this corporate event in Auto China Bejing.",
+    description: "CAD and Preprogramming for TLD Planungsgruppe on this corporate event in Beijing.",
     credits: [{ role: "Scope", name: "CAD and Preprogramming" }, { role: "Client", name: "TLD Planungsgruppe" }, { role: "Vendor", name: "PRG China" }],
   },
   {
@@ -658,7 +658,7 @@ export const projectsData: ProjectData[] = [
     year: "2019",
     location: "National Gallery Praque",
     category: "CORPORATE",
-    description: "Lighting design for adhoc engineering on this corporate event in National Gallery Praque.",
+    description: "Lighting design for adhoc engineering on this corporate event in National Gallery Prague.",
     credits: [{ role: "Scope", name: "Lighting design" }, { role: "Client", name: "adhoc engineering" }, { role: "Show Director", name: "Quintons Concept" }, { role: "Creative Director", name: "Jack Morton Worldwide" }, { role: "Lighting Desk and Wysiwyg", name: "Markus Axmann" }],
   },
   {
@@ -702,7 +702,7 @@ export const projectsData: ProjectData[] = [
     year: "2019",
     location: "Germany",
     category: "CONCERTS",
-    description: "Lighting design for Manfred Hertlein on this live music production in Germany.",
+    description: "Lighting design for Manfred Hertlein on this live music production touring across Germany.",
     credits: [{ role: "Scope", name: "Lighting design" }, { role: "Client", name: "Manfred Hertlein" }, { role: "Musical Direction", name: "Matt sinner and Zlatko Kresic" }],
   },
   {
@@ -713,7 +713,7 @@ export const projectsData: ProjectData[] = [
     year: "2008–2011",
     location: "Berlin",
     category: "CORPORATE",
-    description: "Lighting Design for Freestate on this corporate event in Berlin.",
+    description: "Lighting Design for Adam Scott from Freestate on this corporate event in Berlin.",
     credits: [{ role: "Scope", name: "Lighting Design" }, { role: "Client", name: "Freestate" }, { role: "Art Director", name: "Adam Scott" }, { role: "Vendor", name: "Limelight" }],
   },
   {
@@ -724,7 +724,7 @@ export const projectsData: ProjectData[] = [
     year: "2012",
     location: "Las Vegas",
     category: "CORPORATE",
-    description: "Lighting Design for Freestate on this corporate event in Las Vegas.",
+    description: "Lighting Design for Adam Scott from Freestate on this corporate event in Las Vegas.",
     credits: [{ role: "Scope", name: "Lighting Design" }, { role: "Client", name: "Freestate" }, { role: "Art Director", name: "Adam Scott" }, { role: "Vendor", name: "Lightswitch" }],
   },
   {
