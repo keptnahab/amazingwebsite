@@ -12,4 +12,7 @@ export default defineConfig({
     // keep large source photos but ship optimized responsive variants
     responsiveStyles: true,
   },
+  server: {
+    port: process.env.PORT ? Number(process.env.PORT) : 4321,
+  },
 });

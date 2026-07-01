@@ -5,7 +5,7 @@
       "name": "amazinglighting-dev",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev"],
-      "port": 4321
+      "autoPort": true
     }
   ]
 }

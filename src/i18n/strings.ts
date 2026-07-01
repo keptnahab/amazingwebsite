@@ -8,6 +8,7 @@ export const strings = {
       work: "Work",
       about: "About",
       services: "Services",
+      network: "Network",
       contact: "Contact",
       imprint: "Imprint",
       privacy: "Privacy",
@@ -63,10 +64,14 @@ export const strings = {
           text: "Technical drawings and photoreal 3D pre-visualization — the show is solved before load-in.",
         },
       ],
-      note: "Three connected disciplines — available as one seamless package or as standalone modules, tailored to each project.",
+      note: "Three connected disciplines — available as one seamless package or as standalone modules, tailored to each project.",
       networkTitle: "360° Collective",
+      networkSub: "Adding more.",
       networkText:
-        "Member of an international network of designers, programmers and producers — giving me access to extra hands and expertise to scale a project up, whatever the size.",
+        "Member of the 360° Collective — a production house with a team of multidisciplinary experts from diverse backgrounds, letting me scale your project up, whatever the size.",
+      networkClosingIntro:
+        "Through the 360° Collective, it is possible to deliver projects of any scale with bespoke teams of trusted specialists across every production discipline.",
+      networkClosing: "Whatever the scale, the network makes it possible.",
     },
     contact: {
       eyebrow: "Contact",
@@ -119,6 +124,7 @@ export const strings = {
       work: "Arbeiten",
       about: "Über mich",
       services: "Leistungen",
+      network: "Netzwerk",
       contact: "Kontakt",
       imprint: "Impressum",
       privacy: "Datenschutz",
@@ -176,8 +182,12 @@ export const strings = {
       ],
       note: "Drei miteinander verbundene Disziplinen — als nahtloses Gesamtpaket oder als einzelne Module, individuell auf jedes Projekt zugeschnitten.",
       networkTitle: "360° Collective",
+      networkSub: "Mehr Möglichkeiten.",
       networkText:
-        "Mitglied eines internationalen Netzwerks aus Designern, Programmierern und Produzenten — das mir zusätzliche Kapazitäten und Expertise verschafft, um ein Projekt in jeder Größenordnung zu skalieren.",
+        "Mitglied des 360° Collective — ein Produktionshaus mit einem Team multidisziplinärer Experten unterschiedlichster Hintergründe, das es mir ermöglicht, Ihr Projekt in jeder Größenordnung zu skalieren.",
+      networkClosingIntro:
+        "Durch das 360° Collective lassen sich Projekte jeder Größenordnung mit maßgeschneiderten Teams aus vertrauenswürdigen Spezialisten aller Produktionsdisziplinen realisieren.",
+      networkClosing: "Egal wie groß die Aufgabe — das Netzwerk macht es möglich.",
     },
     contact: {
       eyebrow: "Kontakt",

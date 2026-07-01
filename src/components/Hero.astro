@@ -246,7 +246,9 @@ quotes.forEach((q) => { q.hasMore = q.text.length > q.teaser.length * 1.35; });
     max-height: calc(100svh - 250px);
     overflow-y: auto;
     padding-right: 0.6rem;
+    scrollbar-width: none;
   }
+  .quote blockquote::-webkit-scrollbar { display: none; }
   .quote blockquote::before { content: "“"; color: var(--muted-2); margin-right: 0.05em; }
   .quote blockquote::after { content: "”"; color: var(--muted-2); }
   .q-more {
@@ -286,11 +288,7 @@ quotes.forEach((q) => { q.hasMore = q.text.length > q.teaser.length * 1.35; });
   :global(.credit-client) { color: var(--muted-2); font-size: 0.85rem; letter-spacing: 0.02em; }
 
   .scroll-cue {
-    position: absolute; left: 50%; bottom: 1.5rem; z-index: 2;
-    transform: translateX(-50%);
-    width: 22px; height: 34px; border: 1px solid rgba(255,255,255,0.4);
-    border-radius: 12px; display: none;
-    transition: opacity 0.3s var(--ease);
+    display: none;
   }
   .scroll-cue span {
     position: absolute; left: 50%; top: 7px; width: 3px; height: 7px;
@@ -299,7 +297,6 @@ quotes.forEach((q) => { q.hasMore = q.text.length > q.teaser.length * 1.35; });
   }
   @keyframes cue { 0%{opacity:0;transform:translate(-50%,0)} 30%{opacity:1} 100%{opacity:0;transform:translate(-50%,10px)} }
 
-  @media (min-width: 900px) { .scroll-cue { display: block; } }
   @media (prefers-reduced-motion: reduce) {
     .slide.active { animation: none; }
     .scroll-cue span { animation: none; }
@@ -348,12 +345,6 @@ quotes.forEach((q) => { q.hasMore = q.text.length > q.teaser.length * 1.35; });
     :global(.credit-project) { font-size: 0.8rem; }
     :global(.credit-client) { font-size: 0.76rem; color: var(--muted); }
 
-    .scroll-cue {
-      display: block; bottom: 1.2rem;
-      width: 18px; height: 28px;
-      border-color: rgba(255,255,255,0.28);
-    }
-    .scroll-cue span { background: rgba(255,255,255,0.75); top: 6px; }
   }
   @media (max-width: 760px) and (prefers-reduced-motion: reduce) {
     .slide.active { animation: none; }

@@ -66,24 +66,42 @@ const cards = t.services.cards.map((c) => ({ ...c, color: colors[c.key] }));
     <p class="services-note reveal">
       {t.services.note}
     </p>
+  </div>
+</section>
+
+<section class="section network" id="network">
+  <div class="wrap">
+    <p class="eyebrow reveal">{t.nav.network}</p>
+    <h3 class="section-title reveal">{t.services.networkSub}</h3>
+    <hr class="rule reveal" />
 
     <a
-      class="network reveal press"
+      class="card network reveal press"
       data-spotlight
       href="https://www.360-degree-collective.com"
       target="_blank"
       rel="noopener noreferrer"
     >
-      <div class="network-icon">
-        <Image src={collectiveLogo} alt="" width={32} height={32} />
+      <div class="icon">
+        <div class="oct-wrap">
+          <svg viewBox="0 0 64 64" width="56" height="56" aria-hidden="true">
+            <polygon points={oct} fill="#0a0a0c" stroke="#fff" stroke-width="2" class="oct" />
+          </svg>
+          <div class="network-logo">
+            <Image src={collectiveLogo} alt="" width={22} height={22} />
+          </div>
+        </div>
       </div>
-      <div class="network-copy">
-        <h3 class="network-title">{t.services.networkTitle}</h3>
-        <p class="network-text">
-          {t.services.networkText}
-        </p>
-      </div>
+      <h3 class="card-title">{t.services.networkTitle}</h3>
+      <p class="card-text">{t.services.networkText}</p>
     </a>
+
+    <p class="services-note reveal">
+      {t.services.networkClosingIntro}
+    </p>
+    <p class="services-note reveal">
+      {t.services.networkClosing}
+    </p>
   </div>
 </section>
 
@@ -128,47 +146,39 @@ const cards = t.services.cards.map((c) => ({ ...c, color: colors[c.key] }));
   .card-text { color: var(--muted); margin: 0; font-size: 0.98rem; }
 
   .services-note {
-    margin: clamp(2.4rem, 5vw, 3.4rem) 0 0;
+    margin: clamp(1.4rem, 3vw, 1.8rem) 0 0;
     color: var(--muted-2);
-    max-width: 60ch;
     font-size: 1.02rem;
   }
 
   .network {
-    display: flex;
-    align-items: center;
-    gap: 1.3rem;
-    margin-top: 1.6rem;
-    padding: 1.5rem 1.8rem;
-    background: var(--bg-2);
-    border: 1px solid var(--line);
-    border-radius: 6px;
+    display: block;
+    margin-top: clamp(2rem, 5vw, 3.2rem);
     text-decoration: none;
-    transition: transform 0.5s var(--ease), border-color 0.5s var(--ease), background 0.5s var(--ease);
+  }
+  .network .card-title {
+    margin-bottom: 1rem;
   }
   .network:hover {
-    transform: translateY(-4px);
-    border-color: rgba(255,255,255,0.2);
+    transform: translateY(-6px);
+    border-color: rgba(255, 255, 255, 0.3);
     background: var(--bg-3);
   }
-  .network-icon {
-    flex: none;
-    width: 48px; height: 48px;
-    display: grid; place-items: center;
-    background: var(--bg-3);
-    border: 1px solid var(--line);
-    border-radius: 50%;
+  .oct-wrap {
+    position: relative;
+    width: 56px;
+    height: 56px;
   }
-  .network-icon :global(img) { width: 24px; height: 24px; object-fit: contain; opacity: 0.92; }
-  .network-title { font-size: 1rem; font-weight: 700; margin: 0 0 0.3rem; }
-  .network-text { color: var(--muted); margin: 0; font-size: 0.92rem; max-width: 60ch; }
+  .network-logo {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+  }
+  .network-logo :global(img) { width: 22px; height: 22px; object-fit: contain; opacity: 0.94; }
 
   @media (max-width: 820px) {
     .cards { grid-template-columns: 1fr; }
-  }
-
-  @media (max-width: 580px) {
-    .network { flex-direction: column; align-items: flex-start; gap: 1rem; }
   }
 
   @media (max-width: 760px) {
@@ -178,5 +188,6 @@ const cards = t.services.cards.map((c) => ({ ...c, color: colors[c.key] }));
     .card.live { transform: translateY(-6px); border-color: color-mix(in srgb, var(--c) 55%, var(--line)); background: var(--bg-3); }
     .card.live .oct { transform: rotate(22.5deg); filter: drop-shadow(0 0 14px color-mix(in srgb, var(--c) 70%, transparent)); }
     .card.live .glyph { transform: scale(1.08); }
+    .network.live { transform: translateY(-6px); border-color: rgba(255, 255, 255, 0.3); background: var(--bg-3); }
   }
 </style>
