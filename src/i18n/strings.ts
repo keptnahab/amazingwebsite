@@ -121,9 +121,9 @@ export const strings = {
   },
   de: {
     nav: {
-      work: "Arbeiten",
+      work: "Work",
       about: "Über mich",
-      services: "Leistungen",
+      services: "Services",
       network: "Netzwerk",
       contact: "Kontakt",
       imprint: "Impressum",
@@ -134,7 +134,7 @@ export const strings = {
       title: "tolleslicht.de — Michael Kühbandner · Lichtdesign",
       description:
         "Lichtdesign, Programmierung und Previsualisierung für Übertragung, Konzerte, Zeremonien, Firmenevents und Theater. 30+ Jahre Erfahrung, weltweit.",
-      workTitle: "Arbeiten — tolleslicht.de",
+      workTitle: "Work — tolleslicht.de",
       imprintTitle: "Impressum — tolleslicht.de",
       privacyTitle: "Datenschutz — tolleslicht.de",
     },
@@ -158,7 +158,7 @@ export const strings = {
         ", und durch dieses außergewöhnliche Netzwerk kann ich auf einen beeindruckenden Pool an Talenten und Ressourcen zugreifen — kreative Produktion auf höchstem Niveau, vom Konzept bis zur Umsetzung.",
     },
     services: {
-      eyebrow: "Leistungen",
+      eyebrow: "Services",
       title: "Drei Disziplinen, eine Show.",
       cards: [
         {
@@ -199,9 +199,9 @@ export const strings = {
       facebook: "Facebook",
     },
     work: {
-      eyebrowHome: "Ausgewählte Arbeiten",
+      eyebrowHome: "Selected Work",
       titleHome: "Aktuelle Projekte.",
-      eyebrowPage: "Arbeiten",
+      eyebrowPage: "Work",
       titlePage: "Alle Projekte.",
       viewAll: "Alle Projekte ansehen",
       searchPlaceholder: "Projekte, Kunden, Spielstätten suchen…",
