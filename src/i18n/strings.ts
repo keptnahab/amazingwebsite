@@ -191,7 +191,7 @@ export const strings = {
     },
     contact: {
       eyebrow: "Kontakt",
-      title: "Lass uns Licht ins Spiel bringen.",
+      title: "Licht aus, Spot an!",
       lead: "Planst du ein Stadionevent, eine Konzerttour, eine Firmenveranstaltung oder eine TV/Broadcastproduktion? Ich arbeite international und stehe für Projekte jeder Größenordnung zur Verfügung.",
       email: "E-Mail",
       basedIn: "Standort",
