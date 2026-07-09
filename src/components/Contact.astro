@@ -1,6 +1,7 @@
 ---
 import { t, locale } from "../i18n/config";
-const email = locale === "de" ? "info@tolleslicht.de" : "info@amazinglighting.design";
+const emailUser = "info";
+const emailDomain = locale === "de" ? "tolleslicht.de" : "amazinglighting.design";
 ---
 
 <section class="section contact" id="contact">
@@ -15,9 +16,9 @@ const email = locale === "de" ? "info@tolleslicht.de" : "info@amazinglighting.de
       </p>
 
       <div class="contact-details reveal">
-        <a class="detail" href={`mailto:${email}`}>
+        <a class="detail js-email" data-u={emailUser} data-d={emailDomain} href="#">
           <span class="detail-label">{t.contact.email}</span>
-          <span class="detail-value">{email}</span>
+          <span class="detail-value" set:html={`${emailUser}&#64;${emailDomain}`}></span>
         </a>
         <div class="detail">
           <span class="detail-label">{t.contact.basedIn}</span>
@@ -31,6 +32,13 @@ const email = locale === "de" ? "info@tolleslicht.de" : "info@amazinglighting.de
     </div>
   </div>
 </section>
+
+<script>
+  document.querySelectorAll('a.js-email').forEach(a => {
+    const el = a as HTMLAnchorElement & { dataset: { u?: string; d?: string } };
+    el.href = 'mailto:' + el.dataset.u + '@' + el.dataset.d;
+  });
+</script>
 
 <style>
   .contact-grid {

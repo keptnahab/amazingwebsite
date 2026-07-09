@@ -19,7 +19,7 @@ import { locale, t } from "../i18n/config";
           <p>
             M. Kuehbandner<br />
             Lochhauser Str. 82, 82178 Puchheim, Deutschland<br />
-            E-Mail: info@tolleslicht.de
+            E-Mail: <a class="js-email legal-email" data-u="info" data-d="tolleslicht.de" href="#" set:html={"info&#64;tolleslicht.de"}></a>
           </p>
 
           <h2>2. Hosting</h2>
@@ -88,8 +88,16 @@ import { locale, t } from "../i18n/config";
   <Footer />
 </Base>
 
+<script>
+  document.querySelectorAll('a.js-email').forEach(a => {
+    const el = a as HTMLAnchorElement & { dataset: { u?: string; d?: string } };
+    el.href = 'mailto:' + el.dataset.u + '@' + el.dataset.d;
+  });
+</script>
+
 <style>
   .legal { max-width: 70ch; }
   .legal p { color: var(--muted); margin: 1rem 0; }
   .legal h2 { font-size: 1.1rem; margin: 2rem 0 0.4rem; }
+  .legal-email { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
 </style>
