@@ -45,13 +45,16 @@ const alternateUrl = (loc: typeof locale) => `https://${loc === "de" ? "www." : 
     <meta property="og:locale" content={locale === "de" ? "de_DE" : "en_US"} />
     <meta property="og:locale:alternate" content={otherLocale === "de" ? "de_DE" : "en_US"} />
 
-    <!-- GoatCounter — cookie-free pageview analytics, no consent banner required
-         (Art. 6 Abs. 1 lit. f DSGVO). One shared property across both locales. -->
-    <script
-      data-goatcounter="https://amazinglighting.goatcounter.com/count"
-      async
-      src="//gc.zgo.at/count.js"
-    ></script>
+    {locale === "en" && <>
+      <script is:inline>var sc_project=13335378; var sc_invisible=1; var sc_security="80092550";</script>
+      <script is:inline src="https://www.statcounter.com/counter/counter.js" async></script>
+      <noscript><div class="statcounter"><a title="Web Analytics" href="https://statcounter.com/" target="_blank"><img class="statcounter" src="https://c.statcounter.com/13335378/0/80092550/1/" alt="Web Analytics" referrerpolicy="no-referrer-when-downgrade" /></a></div></noscript>
+    </>}
+    {locale === "de" && <>
+      <script is:inline>var sc_project=13335380; var sc_invisible=1; var sc_security="bf1bbe5e";</script>
+      <script is:inline src="https://www.statcounter.com/counter/counter.js" async></script>
+      <noscript><div class="statcounter"><a title="Web Analytics" href="https://statcounter.com/" target="_blank"><img class="statcounter" src="https://c.statcounter.com/13335380/0/bf1bbe5e/1/" alt="Web Analytics" referrerpolicy="no-referrer-when-downgrade" /></a></div></noscript>
+    </>}
   </head>
   <body>
     <slot />
