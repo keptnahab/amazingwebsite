@@ -164,6 +164,7 @@ const cards = t.services.cards.map((c) => ({ ...c, color: colors[c.key] }));
     border-color: rgba(255, 255, 255, 0.3);
     background: var(--bg-3);
   }
+  .network:hover .oct { transform: none; filter: none; }
   .oct-wrap {
     position: relative;
     width: 56px;
@@ -189,5 +190,6 @@ const cards = t.services.cards.map((c) => ({ ...c, color: colors[c.key] }));
     .card.live .oct { transform: rotate(22.5deg); filter: drop-shadow(0 0 14px color-mix(in srgb, var(--c) 70%, transparent)); }
     .card.live .glyph { transform: scale(1.08); }
     .network.live { transform: translateY(-6px); border-color: rgba(255, 255, 255, 0.3); background: var(--bg-3); }
+    .network.live .oct { transform: none; filter: none; }
   }
 </style>
