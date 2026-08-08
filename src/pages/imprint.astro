@@ -16,11 +16,11 @@ import { locale, t } from "../i18n/config";
       {locale === "de" ? (
         <>
           <h2>Angaben gemäß § 5 DDG</h2>
-          <p>
-            M. Kuehbandner<br />
-            Lochhauser Str. 82<br />
-            82178 Puchheim, Deutschland
-          </p>
+          <p class="js-address"
+            data-a1="TS4gS3VlaGJhbmRuZXI="
+            data-a2="TG9jaGhhdXNlciBTdHIuIDgy"
+            data-a3="ODIxNzggUHVjaGhlaW0sIERldXRzY2hsYW5k"
+          ></p>
 
           <h2>Kontakt</h2>
           <p>
@@ -49,11 +49,11 @@ import { locale, t } from "../i18n/config";
       ) : (
         <>
           <h2>Information pursuant to § 5 DDG</h2>
-          <p>
-            M. Kuehbandner<br />
-            Lochhauser Str. 82<br />
-            82178 Puchheim, Germany
-          </p>
+          <p class="js-address"
+            data-a1="TS4gS3VlaGJhbmRuZXI="
+            data-a2="TG9jaGhhdXNlciBTdHIuIDgy"
+            data-a3="ODIxNzggUHVjaGhlaW0sIEdlcm1hbnk="
+          ></p>
 
           <h2>Contact</h2>
           <p>
@@ -88,6 +88,13 @@ import { locale, t } from "../i18n/config";
   document.querySelectorAll('a.js-email').forEach(a => {
     const el = a as HTMLAnchorElement & { dataset: { u?: string; d?: string } };
     el.href = 'mailto:' + el.dataset.u + '@' + el.dataset.d;
+  });
+  document.querySelectorAll('p.js-address').forEach(p => {
+    const el = p as HTMLElement;
+    const lines = [el.dataset.a1, el.dataset.a2, el.dataset.a3]
+      .filter(Boolean)
+      .map(s => atob(s!));
+    el.innerHTML = lines.join('<br>');
   });
 </script>
 
