@@ -126,16 +126,14 @@ const cards = t.services.cards.map((c) => ({ ...c, color: colors[c.key] }));
   }
 
   .icon { margin-bottom: 1.5rem; }
-  .oct {
-    transform-origin: 32px 32px;
+  .icon > svg {
     transition: transform 0.6s var(--ease), filter 0.6s var(--ease);
+    transform-origin: center;
   }
-  .glyph { transform-origin: 32px 32px; transition: transform 0.6s var(--ease); }
-  .card:hover .oct {
+  .card:hover .icon > svg {
     transform: rotate(22.5deg);
     filter: drop-shadow(0 0 14px color-mix(in srgb, var(--c) 70%, transparent));
   }
-  .card:hover .glyph { transform: scale(1.08); }
 
   .card-title { font-size: 1.4rem; font-weight: 700; }
   .card-sub {
@@ -164,7 +162,6 @@ const cards = t.services.cards.map((c) => ({ ...c, color: colors[c.key] }));
     border-color: rgba(255, 255, 255, 0.3);
     background: var(--bg-3);
   }
-  .network:hover .oct { transform: none; filter: none; }
   .oct-wrap {
     position: relative;
     width: 56px;
@@ -187,9 +184,7 @@ const cards = t.services.cards.map((c) => ({ ...c, color: colors[c.key] }));
     /* scroll-wake spotlight replaces :hover — the octagon ignites and the
        card lifts as it crosses screen-center, one at a time down the stack */
     .card.live { transform: translateY(-6px); border-color: color-mix(in srgb, var(--c) 55%, var(--line)); background: var(--bg-3); }
-    .card.live .oct { transform: rotate(22.5deg); filter: drop-shadow(0 0 14px color-mix(in srgb, var(--c) 70%, transparent)); }
-    .card.live .glyph { transform: scale(1.08); }
+    .card.live .icon > svg { transform: rotate(22.5deg); filter: drop-shadow(0 0 14px color-mix(in srgb, var(--c) 70%, transparent)); }
     .network.live { transform: translateY(-6px); border-color: rgba(255, 255, 255, 0.3); background: var(--bg-3); }
-    .network.live .oct { transform: none; filter: none; }
   }
 </style>
