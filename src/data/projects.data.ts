@@ -118,7 +118,7 @@ export const projectsData: ProjectData[] = [
     title: "Wer Will Wochenende",
     year: "2025",
     location: "Bavaria Studios Munich",
-    category: "EVENTS",
+    category: "BROADCAST",
     description: "Lighting Design for Swiss TV on this TV show in Bavaria Studios Munich.",
     credits: [{ role: "Scope", name: "Lighting Design" }, { role: "Client", name: "Bavaria Studios" }, { role: "Executive Producer", name: "Miriam Martino" }, { role: "Producer", name: "Lars Kämpgen/Alex Stautner" }, { role: "Production Management", name: "Rieke Niederhöfer/Felix Straub" }, { role: "Keylight/showlight Programmer", name: "Alex Scheu" }, { role: "Show Light Operator", name: "Knut Ahlers" }, { role: "Technical Director", name: "Fabian Sutor" }, { role: "Lighting Crew Chief", name: "Sascha Boller" }, { role: "Vendor", name: "BAVARIA STUDIOS" }],
   },
