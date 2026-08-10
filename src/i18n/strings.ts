@@ -111,7 +111,7 @@ export const strings = {
       },
     },
     footer: {
-      tagline: "Lighting up stages worldwide. Every beam has a reason.",
+      tagline: "Every beam has a reason.",
       explore: "Explore",
       legal: "Legal",
       copyright: "Michael Kühbandner · amazinglighting.design",
@@ -231,7 +231,7 @@ export const strings = {
       },
     },
     footer: {
-      tagline: "Lichtdesign international — nichts auf der Bühne ist Zufall.",
+      tagline: "Nichts auf der Bühne ist Zufall.",
       explore: "Entdecken",
       legal: "Rechtliches",
       copyright: "Michael Kühbandner · tolleslicht.de",
