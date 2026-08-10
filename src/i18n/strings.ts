@@ -148,7 +148,7 @@ export const strings = {
     },
     about: {
       eyebrow: "Über mich",
-      title: "Nichts auf der Bühne ist Zufall.",
+      title: "Licht mit Sinn und Verstand.",
       p1Pre: "Ich bin Lichtdesigner mit über ",
       p1Strong: "30 Jahren",
       p1Post:
@@ -231,7 +231,7 @@ export const strings = {
       },
     },
     footer: {
-      tagline: "Nichts auf der Bühne ist Zufall.",
+      tagline: "Licht mit Sinn und Verstand.",
       explore: "Entdecken",
       legal: "Rechtliches",
       copyright: "Michael Kühbandner · tolleslicht.de",

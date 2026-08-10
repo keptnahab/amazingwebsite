@@ -34,7 +34,9 @@ import { t } from "../i18n/config";
     display: grid;
     grid-template-columns: 0.85fr 1fr;
     gap: clamp(2rem, 6vw, 5rem);
-    align-items: center;
+    /* portrait and copy share a top edge — centered, the photo overhung the
+       text by ~30px at both ends and read as unaligned */
+    align-items: start;
   }
   .photo {
     position: relative;
