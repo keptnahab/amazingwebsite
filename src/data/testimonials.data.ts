@@ -1,9 +1,10 @@
 /**
- * Hero testimonial quotes. `teaser` is the short pull-quote shown by
- * default; `text` is the full quote, revealed on "Read more" when it's
- * genuinely longer than the teaser. German quotes are translations of the
- * English originals (Site assets/testimonials.rtf has no German source) —
- * roles/orgs stay as given (mostly proper nouns / English job titles).
+ * Client testimonial quotes (rendered by Testimonials.astro, the section
+ * below About). `text` is the full quote, shown on desktop; `teaser` is the
+ * short pull-quote shown on mobile, where the full one would eat the
+ * screen. German quotes are translations of the English originals (Site
+ * assets/testimonials.rtf has no German source) — roles/orgs stay as given
+ * (mostly proper nouns / English job titles).
  */
 export interface Testimonial {
   teaser: string;

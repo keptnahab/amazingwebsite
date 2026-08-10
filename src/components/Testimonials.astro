@@ -1,0 +1,207 @@
+---
+import { testimonialsData } from "../data/testimonials.data";
+import { t, locale } from "../i18n/config";
+
+// Client voices. Desktop shows the FULL quote (`text`), mobile the short
+// `teaser` — both are rendered and CSS picks one, so there's no viewport
+// guess at build time and no flash on load. Locale-aware content lives in
+// data/testimonials.data.ts (DE is a translation, no German source quotes
+// exist). This section used to sit inside the hero — moved out so the hero
+// carries images and the project credit only.
+const quotes = testimonialsData[locale];
+
+const metaOf = (role: string, org: string) => (role ? `${role} · ${org}` : org);
+const pad = (n: number) => String(n).padStart(2, "0");
+---
+
+<section class="section voices" id="voices">
+  <div class="wrap">
+    <p class="eyebrow reveal">{t.testimonials.eyebrow}</p>
+    <h2 class="section-title reveal">{t.testimonials.title}</h2>
+    <hr class="rule reveal" />
+
+    <div class="stage reveal">
+      <figure class="quote" id="vQuote">
+        <blockquote>
+          <span class="v-full" id="vFull">{quotes[0].text}</span>
+          <span class="v-short" id="vShort">{quotes[0].teaser}</span>
+        </blockquote>
+        <figcaption>
+          <span class="v-name" id="vName">{quotes[0].name}</span>
+          <span class="v-meta" id="vMeta">{metaOf(quotes[0].role, quotes[0].org)}</span>
+        </figcaption>
+      </figure>
+
+      <div class="controls">
+        <button class="nav" id="vPrev" type="button" aria-label={t.testimonials.previous}>
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><polyline points="14,5 7,12 14,19" /></svg>
+        </button>
+        <button class="nav" id="vNext" type="button" aria-label={t.testimonials.next}>
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><polyline points="10,5 17,12 10,19" /></svg>
+        </button>
+        <p class="counter"><span id="vIndex">{pad(1)}</span> <span class="sep">/</span> {pad(quotes.length)}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script define:vars={{ quotes }}>
+  const quoteEl = document.getElementById("vQuote");
+  const fullEl = document.getElementById("vFull");
+  const shortEl = document.getElementById("vShort");
+  const nameEl = document.getElementById("vName");
+  const metaEl = document.getElementById("vMeta");
+  const indexEl = document.getElementById("vIndex");
+  const stage = document.querySelector(".voices .stage");
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  let qi = 0;
+  let timer = null;
+
+  // transition: the old quote lifts out and defocuses, the new one racks
+  // back into focus from slightly below — attribution follows a beat later
+  // (see the .out / .enter rules). Blur + rise, no sliding carousel.
+  function show(n) {
+    qi = (n + quotes.length) % quotes.length;
+    quoteEl.classList.add("out");
+    setTimeout(() => {
+      const q = quotes[qi];
+      // both variants are always filled — CSS decides which one is visible
+      // (full quote on desktop, short teaser on mobile)
+      fullEl.textContent = q.text;
+      shortEl.textContent = q.teaser;
+      nameEl.textContent = q.name;
+      metaEl.textContent = q.role ? `${q.role} · ${q.org}` : q.org;
+      indexEl.textContent = String(qi + 1).padStart(2, "0");
+
+      // jump to the start state with transitions off, then release it a
+      // frame later so the ease-in actually animates instead of snapping
+      quoteEl.classList.remove("out");
+      quoteEl.classList.add("enter");
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => quoteEl.classList.remove("enter"));
+      });
+    }, 420);
+  }
+
+  // rotates continuously: 6s per quote, 8s for the long ones so they're
+  // actually readable. What counts as long depends on what's on screen —
+  // desktop reads the full text, mobile the much shorter teaser — so the
+  // dwell time is measured against the visible variant, not the data.
+  const isMobile = () => window.matchMedia("(max-width: 760px)").matches;
+  const dwell = (q) => ((isMobile() ? q.teaser : q.text).length > 180 ? 8000 : 6000);
+
+  // setTimeout, not setInterval — each quote schedules the next one with
+  // its own dwell time. A manual step reschedules, so that quote still gets
+  // its full time before the rotation resumes.
+  function stop() { if (timer) { clearTimeout(timer); timer = null; } }
+  function start() {
+    if (reduce) return;
+    stop();
+    timer = setTimeout(() => { show(qi + 1); start(); }, dwell(quotes[qi]));
+  }
+
+  document.getElementById("vPrev").addEventListener("click", () => { show(qi - 1); start(); });
+  document.getElementById("vNext").addEventListener("click", () => { show(qi + 1); start(); });
+
+  // only run the rotation while the section is actually on screen
+  const io = new IntersectionObserver(
+    ([e]) => (e.isIntersecting ? start() : stop()),
+    { threshold: 0.15 }
+  );
+  io.observe(stage);
+</script>
+
+<style>
+  .stage {
+    display: grid;
+    gap: clamp(1.6rem, 3vw, 2.4rem);
+    max-width: 62ch;
+    /* the quote needs room to breathe under the title — roughly the same
+       air the section leaves below the controls */
+    margin-top: clamp(2.5rem, 6vw, 4.5rem);
+  }
+
+  .quote { margin: 0; }
+  /* rack focus: the outgoing quote lifts and defocuses, the incoming one
+     settles in from just below and sharpens — the attribution trails it by
+     a beat, which is what keeps it from reading as a slideshow */
+  .quote blockquote,
+  .quote figcaption {
+    transition:
+      opacity 0.5s var(--ease),
+      transform 0.5s var(--ease),
+      filter 0.5s var(--ease);
+  }
+  .quote figcaption { transition-delay: 0.09s; }
+  .quote.out blockquote,
+  .quote.out figcaption {
+    opacity: 0;
+    transform: translateY(-8px);
+    filter: blur(4px);
+  }
+  /* start state for the incoming quote — transitions off so it snaps here
+     before the class is dropped and it eases back to rest */
+  .quote.enter blockquote,
+  .quote.enter figcaption {
+    opacity: 0;
+    transform: translateY(14px);
+    filter: blur(7px);
+    transition: none;
+  }
+  /* the quotes vary a lot in length — reserve room for a mid-length one so
+     the section below doesn't jump on every rotation */
+  .quote blockquote {
+    margin: 0;
+    min-height: 5.5em;
+    font-size: clamp(1.2rem, 1.9vw, 1.6rem);
+    font-weight: 600;
+    line-height: 1.24;
+    letter-spacing: -0.03em;
+    text-wrap: pretty;
+  }
+  .quote blockquote::before { content: "“"; color: var(--muted-2); margin-right: 0.05em; }
+  .quote blockquote::after { content: "”"; color: var(--muted-2); }
+
+  /* full quote on desktop, short teaser on mobile — both are in the DOM and
+     kept in sync by the script, so the swap is a pure media-query decision */
+  .v-short { display: none; }
+
+  .quote figcaption {
+    display: flex; flex-direction: column; gap: 0.1rem;
+    margin-top: 1.3rem;
+  }
+  .v-name { font-weight: 600; font-size: 0.98rem; }
+  .v-meta { color: var(--muted-2); font-size: 0.85rem; letter-spacing: 0.02em; }
+
+  .controls { display: flex; align-items: center; gap: 0.7rem; }
+  .nav {
+    display: grid; place-items: center;
+    width: 40px; height: 40px; padding: 0;
+    background: none; cursor: pointer;
+    border: 1px solid var(--line); border-radius: 50%;
+    color: var(--muted);
+    transition: color 0.25s var(--ease), border-color 0.25s var(--ease);
+  }
+  .nav svg { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .nav:hover { color: var(--text); border-color: var(--text); }
+  .counter {
+    margin: 0 0 0 0.5rem;
+    font-size: 0.8rem; font-variant-numeric: tabular-nums;
+    letter-spacing: 0.12em; color: var(--muted-2);
+  }
+  .counter .sep { opacity: 0.5; }
+
+  @media (max-width: 760px) {
+    /* mobile shows the short teaser instead of the full quote */
+    .v-full { display: none; }
+    .v-short { display: inline; }
+    .quote blockquote { font-size: clamp(1.15rem, 5vw, 1.5rem); line-height: 1.28; min-height: 4.6em; }
+    .nav { width: 44px; height: 44px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .quote blockquote,
+    .quote figcaption { transition: none; }
+  }
+</style>

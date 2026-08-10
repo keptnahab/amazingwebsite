@@ -25,12 +25,10 @@ export const strings = {
     hero: {
       scrollDown: "Scroll down",
       client: "Client",
-      readMore: "Read more",
-      showLess: "Show less",
     },
     about: {
       eyebrow: "About",
-      title: "Light with intent.",
+      title: "Every beam has a reason.",
       p1Pre: "I'm a lighting designer with over ",
       p1Strong: "30 years",
       p1Post:
@@ -40,6 +38,12 @@ export const strings = {
       p3Link: "360° Collective",
       p3Post:
         ", and through this extraordinary network I'm able to draw on a wider pool of talent and resources, letting me offer you creative production at a very high level — from concept to execution, on any scale.",
+    },
+    testimonials: {
+      eyebrow: "Client voices",
+      title: "What they say.",
+      previous: "Previous quote",
+      next: "Next quote",
     },
     services: {
       eyebrow: "Services",
@@ -107,7 +111,7 @@ export const strings = {
       },
     },
     footer: {
-      tagline: "Lighting up stages worldwide. Always with intent.",
+      tagline: "Lighting up stages worldwide. Every beam has a reason.",
       explore: "Explore",
       legal: "Legal",
       copyright: "Michael Kühbandner · amazinglighting.design",
@@ -141,12 +145,10 @@ export const strings = {
     hero: {
       scrollDown: "Nach unten scrollen",
       client: "Kunde",
-      readMore: "Mehr lesen",
-      showLess: "Weniger anzeigen",
     },
     about: {
       eyebrow: "Über mich",
-      title: "Lichtdesign mit Sinn und Verstand.",
+      title: "Nichts auf der Bühne ist Zufall.",
       p1Pre: "Ich bin Lichtdesigner mit über ",
       p1Strong: "30 Jahren",
       p1Post:
@@ -156,6 +158,12 @@ export const strings = {
       p3Link: "360° Collective",
       p3Post:
         ", und durch dieses außergewöhnliche Netzwerk kann ich auf einen beeindruckenden Pool an Talenten und Ressourcen zugreifen — kreative Produktion auf höchstem Niveau, vom Konzept bis zur Umsetzung.",
+    },
+    testimonials: {
+      eyebrow: "Kundenstimmen",
+      title: "Was andere sagen.",
+      previous: "Vorheriges Zitat",
+      next: "Nächstes Zitat",
     },
     services: {
       eyebrow: "Services",
@@ -223,7 +231,7 @@ export const strings = {
       },
     },
     footer: {
-      tagline: "Lichtdesign international — mit Sinn und Verstand.",
+      tagline: "Lichtdesign international — nichts auf der Bühne ist Zufall.",
       explore: "Entdecken",
       legal: "Rechtliches",
       copyright: "Michael Kühbandner · tolleslicht.de",

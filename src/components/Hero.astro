@@ -1,8 +1,7 @@
 ---
 import type { ImageMetadata } from "astro";
 import { heroSlidesData } from "../data/hero.data";
-import { testimonialsData } from "../data/testimonials.data";
-import { t, locale } from "../i18n/config";
+import { t } from "../i18n/config";
 
 // images are auto-discovered from src/assets/hero/ via glob — see
 // scripts/import-hero.mjs for how to add a new slide. heroSlidesData is
@@ -20,19 +19,9 @@ const slides = heroSlidesData
   })
   .filter((s): s is { src: string; project: string; client: string } => s !== null);
 
-// testimonials — `teaser` is the short pull-quote shown by default; `text` is
-// the FULL quote, revealed on "Read more" whenever it's genuinely longer
-// than the teaser (a handful of the source quotes are just one short
-// sentence to begin with — for those there's nothing more to reveal, so no
-// "Read more" is shown) — name · role · organisation. Locale-aware content
-// lives in data/testimonials.data.ts (DE is a translation, no German
-// source quotes exist).
-const quotes = testimonialsData[locale];
-
-const metaOf = (role, org) => (role ? `${role} · ${org}` : org);
-// only worth a "Read more" toggle when the curated short text actually adds
-// meaningfully more than the teaser — a trailing "Thank you!" doesn't count
-quotes.forEach((q) => { q.hasMore = q.text.length > q.teaser.length * 1.35; });
+// the hero deliberately carries images + project credit only — the client
+// testimonials that used to sit here live in Testimonials.astro, the
+// section below About
 ---
 
 <section class="hero" id="top">
@@ -52,17 +41,6 @@ quotes.forEach((q) => { q.hasMore = q.text.length > q.teaser.length * 1.35; });
     <div class="scrim"></div>
   </div>
 
-  <div class="wrap hero-bottom">
-    <figure class="quote" id="quote">
-      <blockquote id="qText">{quotes[0].teaser}</blockquote>
-      <button class="q-more" id="qMore" type="button" hidden={!quotes[0].hasMore}>{t.hero.readMore}</button>
-      <figcaption id="qAttr">
-        <span class="q-name">{quotes[0].name}</span>
-        <span class="q-meta">{metaOf(quotes[0].role, quotes[0].org)}</span>
-      </figcaption>
-    </figure>
-  </div>
-
   <p class="credit" id="credit">
     <span class="credit-project">{slides[0].project}</span>
     <span class="credit-client">{t.hero.client}: {slides[0].client}</span>
@@ -74,37 +52,14 @@ quotes.forEach((q) => { q.hasMore = q.text.length > q.teaser.length * 1.35; });
 </section>
 
 <script
-  define:vars={{ slides, quotes, i18nHero: t.hero }}
+  define:vars={{ slides, i18nHero: t.hero }}
 >
   const imgs = [...document.querySelectorAll(".slide")];
   const credit = document.getElementById("credit");
-  const qText = document.getElementById("qText");
-  const qAttr = document.getElementById("qAttr");
-  const quoteEl = document.getElementById("quote");
   const cue = document.querySelector(".scroll-cue");
-  let qMore = document.getElementById("qMore");
   let si = 0;
-  let qi = 0;
-  let expanded = false;
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const isMobile = () => window.matchMedia("(max-width: 760px)").matches;
-
-  function renderQuoteBody(q) {
-    // mobile only ever shows the short teaser — no read-more there
-    const showFull = expanded && q.hasMore && !isMobile();
-    qText.textContent = showFull ? q.text : q.teaser;
-    qMore.hidden = !q.hasMore;
-    qMore.textContent = expanded ? i18nHero.showLess : i18nHero.readMore;
-    quoteEl.classList.toggle("expanded", showFull);
-  }
-
-  // mobile never shows the expanded state (read-more is disabled there) —
-  // force-collapse if a desktop-expanded quote is resized down past the
-  // mobile breakpoint, so it doesn't stay stuck "open"
-  function collapseOnMobile() {
-    if (isMobile() && expanded) { expanded = false; renderQuoteBody(quotes[qi]); }
-  }
-  window.addEventListener("resize", collapseOnMobile);
 
   function showSlide(n) {
     const prev = si;
@@ -134,40 +89,6 @@ quotes.forEach((q) => { q.hasMore = q.text.length > q.teaser.length * 1.35; });
     const s = slides[si];
     credit.innerHTML = `<span class="credit-project">${s.project}</span><span class="credit-client">${i18nHero.client}: ${s.client}</span>`;
   }
-  function showQuote(n) {
-    qi = (n + quotes.length) % quotes.length;
-    expanded = false;
-    quoteEl.classList.add("fade");
-    setTimeout(() => {
-      const q = quotes[qi];
-      renderQuoteBody(q);
-      const meta = q.role ? `${q.role} · ${q.org}` : q.org;
-      qAttr.innerHTML = `<span class="q-name">${q.name}</span><span class="q-meta">${meta}</span>`;
-      quoteEl.classList.remove("fade");
-      positionCue();
-    }, 1200);
-  }
-
-  if (qMore) qMore.addEventListener("click", () => {
-    if (isMobile()) return; // no read-more interaction on mobile
-    expanded = !expanded;
-    renderQuoteBody(quotes[qi]);
-  });
-
-  // the quote's height varies a lot by testimonial — pin the scroll cue a
-  // fixed gap above its current top edge so it never overlaps the text,
-  // instead of a fixed bottom offset that only works for short quotes
-  function positionCue() {
-    if (!cue || !isMobile()) return;
-    const hero = document.querySelector(".hero");
-    const heroBottom = hero.getBoundingClientRect().bottom;
-    const quoteTop = quoteEl.getBoundingClientRect().top;
-    cue.style.bottom = `${heroBottom - quoteTop + 24}px`;
-  }
-  positionCue();
-  window.addEventListener("resize", positionCue);
-  window.addEventListener("load", positionCue);
-
   if (cue) {
     window.addEventListener("scroll", () => {
       if (!isMobile()) return;
@@ -187,7 +108,6 @@ quotes.forEach((q) => { q.hasMore = q.text.length > q.teaser.length * 1.35; });
         setInterval(() => showSlide(si + 1), 8500);
       });
     }
-    setInterval(() => showQuote(qi + 1), 10000);
   }
 </script>
 
@@ -215,65 +135,15 @@ quotes.forEach((q) => { q.hasMore = q.text.length > q.teaser.length * 1.35; });
     from { transform: scale(1.06); }
     to   { transform: scale(1.14); }
   }
+  /* the bottom half used to carry a testimonial and needed a heavy lift —
+     with only the project credit left down there, the scrim can stay light
+     and give the photos back */
   .scrim {
     position: absolute; inset: 0;
     background:
       linear-gradient(180deg, rgba(10,10,12,0.45) 0%, rgba(10,10,12,0) 22%),
-      linear-gradient(0deg, rgba(10,10,12,0.72) 0%, rgba(10,10,12,0.46) 24%, rgba(10,10,12,0.14) 46%, rgba(10,10,12,0) 66%);
+      linear-gradient(0deg, rgba(10,10,12,0.55) 0%, rgba(10,10,12,0.28) 16%, rgba(10,10,12,0.08) 32%, rgba(10,10,12,0) 48%);
   }
-
-  .hero-bottom {
-    position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
-    padding-bottom: 1.8rem;
-  }
-  /* the scrim is intentionally light so the photos stay visible — this
-     text-shadow (inherited by all descendants, including the q-name/
-     credit spans rewritten via innerHTML) is the legibility safety net */
-  .quote, .credit { text-shadow: 0 2px 16px rgba(0,0,0,0.75), 0 1px 3px rgba(0,0,0,0.7); }
-  .quote { margin: 0; width: clamp(24em, 38vw, 38em); max-width: 64vw; }
-  .quote blockquote {
-    margin: 0;
-    font-size: clamp(1.1rem, 1.9vw, 1.6rem);
-    font-weight: 600;
-    line-height: 1.18;
-    letter-spacing: -0.03em;
-    text-wrap: balance;
-    /* any quote — teaser or expanded — can run long enough at narrow-ish
-       desktop widths or with longer translations to reach under the fixed
-       header; cap it to the space actually available below the header and
-       above the figcaption/read-more, and let it scroll internally instead
-       of growing past the top of the viewport */
-    max-height: calc(100svh - 250px);
-    overflow-y: auto;
-    padding-right: 0.6rem;
-    scrollbar-width: none;
-  }
-  .quote blockquote::-webkit-scrollbar { display: none; }
-  .quote blockquote::before { content: "“"; color: var(--muted-2); margin-right: 0.05em; }
-  .quote blockquote::after { content: "”"; color: var(--muted-2); }
-  .q-more {
-    display: block; margin: 0.6rem 0 0; padding: 0;
-    background: none; border: 0; cursor: pointer;
-    font-size: 0.78rem; font-weight: 600; letter-spacing: 0.04em;
-    color: var(--muted-2); text-decoration: underline;
-    text-underline-offset: 2px;
-  }
-  /* an unconditional `display` on an author rule beats the UA stylesheet's
-     [hidden]{display:none} even though hidden is true — without this, the
-     button never actually disappears for the quotes with nothing to expand */
-  .q-more[hidden] { display: none; }
-  .q-more:hover { color: var(--text); }
-  .quote figcaption {
-    display: flex; flex-direction: column; gap: 0.1rem;
-    margin-top: 1.2rem;
-  }
-  /* :global — q-name/q-meta are rewritten via innerHTML on every quote
-     rotation, so they never carry Astro's scoped data-cid attribute; a
-     plain scoped rule would only style the first (SSR-rendered) quote */
-  :global(.q-name) { font-weight: 600; font-size: 0.98rem; }
-  :global(.q-meta) { color: var(--muted-2); font-size: 0.85rem; letter-spacing: 0.02em; }
-  .quote { transition: opacity 1.3s ease-in-out; }
-  .quote.fade { opacity: 0; }
 
   .credit {
     position: absolute; z-index: 2;
@@ -281,6 +151,10 @@ quotes.forEach((q) => { q.hasMore = q.text.length > q.teaser.length * 1.35; });
     margin: 0;
     display: flex; flex-direction: column; gap: 0.1rem;
     letter-spacing: 0.03em; text-align: right;
+    /* the scrim is intentionally light so the photos stay visible — this
+       text-shadow (inherited by the credit spans, which are rewritten via
+       innerHTML on every slide) is the legibility safety net */
+    text-shadow: 0 2px 16px rgba(0,0,0,0.75), 0 1px 3px rgba(0,0,0,0.7);
   }
   /* :global — same reason: credit-project/-client are rewritten via
      innerHTML on every slide change */
@@ -289,6 +163,8 @@ quotes.forEach((q) => { q.hasMore = q.text.length > q.teaser.length * 1.35; });
 
   .scroll-cue {
     display: none;
+    position: absolute; left: 50%; bottom: 2rem; z-index: 2;
+    width: 22px; height: 34px; transform: translateX(-50%);
   }
   .scroll-cue span {
     position: absolute; left: 50%; top: 7px; width: 3px; height: 7px;
@@ -303,14 +179,12 @@ quotes.forEach((q) => { q.hasMore = q.text.length > q.teaser.length * 1.35; });
   }
 
   /* ---- mobile (<=760px): full-bleed focal pan instead of Ken Burns,
-     credit becomes a small vertical caption on the right edge (decoupled
-     from the quote — they're unrelated content and shouldn't read as one
-     block) ---- */
+     credit becomes a small vertical caption on the right edge ---- */
   @media (max-width: 760px) {
     .scrim {
       background:
         linear-gradient(180deg, rgba(10,10,12,0.5) 0%, rgba(10,10,12,0) 20%),
-        linear-gradient(0deg, rgba(10,10,12,0.8) 0%, rgba(10,10,12,0.55) 26%, rgba(10,10,12,0.18) 48%, rgba(10,10,12,0) 68%);
+        linear-gradient(0deg, rgba(10,10,12,0.6) 0%, rgba(10,10,12,0.3) 14%, rgba(10,10,12,0.08) 28%, rgba(10,10,12,0) 42%);
     }
 
     .slide.active {
@@ -321,14 +195,8 @@ quotes.forEach((q) => { q.hasMore = q.text.length > q.teaser.length * 1.35; });
       to   { object-position: calc(var(--focal, 50%) + 7%) center; transform: scale(1.04); }
     }
 
-    .quote { width: auto; max-width: 100%; }
-    .q-more { display: none !important; }
-    .quote blockquote { font-size: clamp(1.1rem, 4.8vw, 1.4rem); line-height: 1.26; }
-    :global(.q-name) { font-size: 0.9rem; }
-    :global(.q-meta) { font-size: 0.78rem; }
-
     /* vertical caption, right edge, vertically centered — a quiet film/
-       photo-credit treatment, deliberately separate from the quote */
+       photo-credit treatment */
     .credit {
       top: 50%; right: 0.5rem; bottom: auto;
       transform: translateY(-50%);

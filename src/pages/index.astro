@@ -3,6 +3,7 @@ import Base from "../layouts/Base.astro";
 import Header from "../components/Header.astro";
 import Hero from "../components/Hero.astro";
 import About from "../components/About.astro";
+import Testimonials from "../components/Testimonials.astro";
 import Services from "../components/Services.astro";
 import WorkGrid from "../components/WorkGrid.astro";
 import Contact from "../components/Contact.astro";
@@ -15,6 +16,7 @@ import { t } from "../i18n/config";
   <main>
     <Hero />
     <About />
+    <Testimonials />
     <Services />
     <WorkGrid showControls eyebrow={t.work.eyebrowHome} title={t.work.titleHome} limit={24} />
     <div class="wrap viewall">
