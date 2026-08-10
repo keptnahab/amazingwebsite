@@ -34,9 +34,11 @@ import { t } from "../i18n/config";
     display: grid;
     grid-template-columns: 0.85fr 1fr;
     gap: clamp(2rem, 6vw, 5rem);
-    /* portrait and copy share a top edge — centered, the photo overhung the
-       text by ~30px at both ends and read as unaligned */
-    align-items: start;
+    /* portrait and copy close flush at BOTH edges — the copy sets the row
+       height (the air below the title/rule and the looser paragraphs get it
+       within a few px of the photo's natural height), and the portrait
+       covers whatever is left over */
+    align-items: stretch;
   }
   .photo {
     position: relative;
@@ -53,7 +55,17 @@ import { t } from "../i18n/config";
   }
   .photo:hover :global(img) { filter: grayscale(0.55) contrast(1.05); transform: scale(1.03); }
 
-  .text p { color: var(--muted); max-width: 54ch; margin: 0 0 1.1rem; }
+  /* more air under the title and under the rule, and looser paragraphs —
+     this is what brings the copy column up to the portrait's height so the
+     two can close flush top and bottom */
+  .copy .rule { margin: 2.2rem 0 2.8rem; }
+  .text p {
+    color: var(--muted);
+    max-width: 54ch;
+    margin: 0 0 1.6rem;
+    line-height: 1.75;
+  }
+  .text p:last-child { margin-bottom: 0; }
   .text strong { color: var(--text); font-weight: 600; }
 
   @media (max-width: 820px) {

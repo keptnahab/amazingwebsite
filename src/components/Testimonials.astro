@@ -15,10 +15,12 @@ const pad = (n: number) => String(n).padStart(2, "0");
 ---
 
 <section class="section voices" id="voices">
-  <div class="wrap">
-    <p class="eyebrow reveal">{t.testimonials.eyebrow}</p>
-    <h2 class="section-title reveal">{t.testimonials.title}</h2>
-    <hr class="rule reveal" />
+  <div class="wrap layout">
+    <div class="intro">
+      <p class="eyebrow reveal">{t.testimonials.eyebrow}</p>
+      <h2 class="section-title reveal">{t.testimonials.title}</h2>
+      <hr class="rule reveal" />
+    </div>
 
     <div class="stage reveal">
       <figure class="quote" id="vQuote">
@@ -113,13 +115,26 @@ const pad = (n: number) => String(n).padStart(2, "0");
 </script>
 
 <style>
+  /* two columns: title block plus controls hold the left, the quote sits in
+     the optical centre and runs into the right half. Left-aligned in one
+     column, the quote hugged the edge and left the whole right side as dead
+     black — this splits the weight across the section instead. */
+  .layout {
+    display: grid;
+    grid-template-columns: 0.85fr 1fr;
+    column-gap: clamp(2rem, 6vw, 5rem);
+    /* the two columns are deliberately staggered: title block at the top of
+       the section, quote (with its controls under it) low and to the right.
+       Both sitting at the same height left the top and bottom of the section
+       as dead black — this spreads the weight across the area diagonally. */
+    align-items: start;
+    min-height: clamp(20rem, 30vw, 28rem);
+  }
   .stage {
     display: grid;
     gap: clamp(1.6rem, 3vw, 2.4rem);
-    max-width: 62ch;
-    /* the quote needs room to breathe under the title — roughly the same
-       air the section leaves below the controls */
-    margin-top: clamp(2.5rem, 6vw, 4.5rem);
+    align-self: end;
+    max-width: 46ch;
   }
 
   .quote { margin: 0; }
@@ -191,6 +206,12 @@ const pad = (n: number) => String(n).padStart(2, "0");
     letter-spacing: 0.12em; color: var(--muted-2);
   }
   .counter .sep { opacity: 0.5; }
+
+  /* one column below 900px — title, then quote, then controls */
+  @media (max-width: 900px) {
+    .layout { grid-template-columns: 1fr; min-height: 0; }
+    .stage { max-width: 62ch; margin-top: clamp(2.5rem, 6vw, 4rem); }
+  }
 
   @media (max-width: 760px) {
     /* mobile shows the short teaser instead of the full quote */
