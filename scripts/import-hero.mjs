@@ -75,6 +75,8 @@ function main() {
   lines.push("  file: string;");
   lines.push("  project: string;");
   lines.push("  client: string;");
+  lines.push("  projectSlug?: string;");
+  lines.push("  scope?: string;");
   lines.push("}");
   lines.push("");
   lines.push("export const heroSlidesData: HeroSlideData[] = [");

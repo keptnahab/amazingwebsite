@@ -32,7 +32,7 @@ export const projectsData: ProjectData[] = [
     location: "Jeddah",
     category: "CEREMONY",
     description: "Studio Associate on this Opening Ceremony in Jeddah.",
-    credits: [{ role: "Producer", name: "Blink experience" }, { role: "Creative Director", name: "Luca Taschini" }, { role: "Head of Production", name: "Micky Lehr" }, { role: "Lighting Design", name: "Roland Greil | @360degreecollective" }, { role: "Art Direction", name: "Giulia Marocchino" }, { role: "Associate LX Designer / LX Programmer", name: "Klaus Kubesch" }, { role: "Show Caller", name: "Charbel Antonio Karam" }, { role: "Tech Vendor", name: "ES" }],
+    credits: [{ role: "Scope", name: "Studio Associate" }, { role: "Producer", name: "Blink experience" }, { role: "Creative Director", name: "Luca Taschini" }, { role: "Head of Production", name: "Micky Lehr" }, { role: "Lighting Design", name: "Roland Greil | @360degreecollective" }, { role: "Art Direction", name: "Giulia Marocchino" }, { role: "Associate LX Designer / LX Programmer", name: "Klaus Kubesch" }, { role: "Show Caller", name: "Charbel Antonio Karam" }, { role: "Tech Vendor", name: "ES" }],
   },
   {
     order: 64,
